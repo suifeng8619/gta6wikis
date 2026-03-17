@@ -1,0 +1,357 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+
+const allCharacters = await getCollection('characters');
+
+// Sort alphabetically by title
+allCharacters.sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const protagonists = allCharacters.filter((c) => c.data.role === 'protagonist');
+const supporting = allCharacters.filter((c) => c.data.role === 'supporting' || c.data.role === 'antagonist');
+const npcs = allCharacters.filter((c) => c.data.role === 'npc');
+
+const roleLabel: Record<string, string> = {
+  protagonist: 'Protagonist',
+  supporting: 'Supporting',
+  antagonist: 'Antagonist',
+  npc: 'NPC',
+};
+
+const pageTitle = 'GTA 6 Characters - Complete Character List | GTA6 Wikis';
+const pageDescription =
+  'Complete list of all GTA 6 characters including protagonists Lucia and Jason, supporting cast, antagonists, and NPCs in Grand Theft Auto VI.';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="page-container">
+    <Breadcrumb items={[{ label: 'Characters' }]} />
+
+    <header class="page-header">
+      <h1 class="page-title">GTA 6 Characters</h1>
+      <p class="page-subtitle">
+        Complete character database for Grand Theft Auto VI — protagonists, supporting cast, and NPCs.
+      </p>
+      <div class="page-stats">
+        <span class="stat-badge">{allCharacters.length} Characters</span>
+        <span class="stat-badge">{protagonists.length} Protagonists</span>
+        <span class="stat-badge">{supporting.length} Supporting</span>
+        <span class="stat-badge">{npcs.length} NPCs</span>
+      </div>
+    </header>
+
+    {protagonists.length > 0 && (
+      <section class="character-section">
+        <h2 class="section-title">
+          <span class="section-title__accent">Protagonists</span>
+        </h2>
+        <div class="card-grid card-grid--large">
+          {protagonists.map((char) => (
+            <a href={`/characters/${char.id}/`} class="character-card character-card--featured">
+              <div class="character-card__avatar character-card__avatar--lg">
+                <span class="avatar-initials">{char.data.title.charAt(0)}</span>
+                <span class="role-badge role-badge--protagonist">Protagonist</span>
+              </div>
+              <div class="character-card__body">
+                <h3 class="character-card__name">{char.data.title}</h3>
+                <p class="character-card__full-name">{char.data.fullName}</p>
+                <p class="character-card__desc">{char.data.description}</p>
+                <div class="character-card__meta">
+                  <span class="meta-tag">{char.data.gender}</span>
+                  <span class="meta-tag">{char.data.nationality}</span>
+                  <span class="meta-tag">{char.data.status}</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {supporting.length > 0 && (
+      <section class="character-section">
+        <h2 class="section-title">
+          <span class="section-title__accent">Supporting Characters</span>
+        </h2>
+        <div class="card-grid">
+          {supporting.map((char) => (
+            <a href={`/characters/${char.id}/`} class="character-card">
+              <div class="character-card__avatar">
+                <span class="avatar-initials">{char.data.title.charAt(0)}</span>
+                <span class={`role-badge role-badge--${char.data.role}`}>
+                  {roleLabel[char.data.role]}
+                </span>
+              </div>
+              <div class="character-card__body">
+                <h3 class="character-card__name">{char.data.title}</h3>
+                <p class="character-card__desc">{char.data.description}</p>
+                <div class="character-card__meta">
+                  <span class="meta-tag">{char.data.gender}</span>
+                  <span class="meta-tag">{char.data.status}</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {npcs.length > 0 && (
+      <section class="character-section">
+        <h2 class="section-title">
+          <span class="section-title__accent">NPCs</span>
+        </h2>
+        <div class="card-grid">
+          {npcs.map((char) => (
+            <a href={`/characters/${char.id}/`} class="character-card">
+              <div class="character-card__avatar">
+                <span class="avatar-initials">{char.data.title.charAt(0)}</span>
+                <span class="role-badge role-badge--npc">NPC</span>
+              </div>
+              <div class="character-card__body">
+                <h3 class="character-card__name">{char.data.title}</h3>
+                <p class="character-card__desc">{char.data.description}</p>
+                <div class="character-card__meta">
+                  <span class="meta-tag">{char.data.affiliation}</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  .page-header {
+    padding: 32px 0 40px;
+    border-bottom: 1px solid var(--border-default);
+    margin-bottom: 48px;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    color: var(--text-primary);
+    margin: 0 0 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin: 0 0 20px;
+    max-width: 600px;
+  }
+
+  .page-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .stat-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-default);
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .character-section {
+    margin-bottom: 56px;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-default);
+  }
+
+  .section-title__accent {
+    color: var(--color-primary);
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .card-grid--large {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  }
+
+  .character-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .character-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 94, 77, 0.12);
+  }
+
+  .character-card--featured {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .character-card__avatar {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    background: var(--bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0 16px 16px;
+    border-radius: 8px;
+  }
+
+  .character-card__avatar--lg {
+    width: 80px;
+    height: 80px;
+    min-width: 80px;
+  }
+
+  .avatar-initials {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    color: var(--color-primary);
+    line-height: 1;
+  }
+
+  .role-badge {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.625rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 4px;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .role-badge--protagonist {
+    background: var(--color-primary);
+    color: #fff;
+  }
+
+  .role-badge--supporting {
+    background: var(--color-secondary);
+    color: #1A0F0C;
+  }
+
+  .role-badge--antagonist {
+    background: var(--color-accent-alt);
+    color: #fff;
+  }
+
+  .role-badge--npc {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-default);
+    color: var(--text-secondary);
+  }
+
+  .character-card__body {
+    padding: 16px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .character-card__name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .character-card__full-name {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin: 0 0 8px;
+  }
+
+  .character-card__desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0 0 12px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .character-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .meta-tag {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-default);
+    border-radius: 4px;
+    color: var(--text-muted);
+    text-transform: capitalize;
+  }
+
+  @media (max-width: 768px) {
+    .card-grid--large {
+      grid-template-columns: 1fr;
+    }
+
+    .character-card--featured {
+      flex-direction: column;
+    }
+
+    .character-card--featured .character-card__avatar {
+      margin: 16px auto 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

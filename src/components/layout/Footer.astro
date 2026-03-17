@@ -1,0 +1,290 @@
+---
+const quickLinks = [
+  { label: 'Characters', href: '/characters/' },
+  { label: 'Map & Locations', href: '/map/' },
+  { label: 'Vehicles', href: '/vehicles/' },
+  { label: 'Weapons', href: '/weapons/' },
+  { label: 'Radio Stations', href: '/radio/' },
+  { label: 'Guides & Tips', href: '/guides/' },
+];
+
+const socialLinks = [
+  {
+    label: 'Reddit',
+    href: 'https://reddit.com/r/GTA6',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0zm5.01 4.744c.688 0 1.25.561 1.25 1.249a1.25 1.25 0 0 1-2.498.056l-2.597-.547-.8 3.747c1.824.07 3.48.632 4.674 1.488.308-.309.73-.491 1.207-.491.968 0 1.754.786 1.754 1.754 0 .716-.435 1.333-1.01 1.614a3.111 3.111 0 0 1 .042.52c0 2.694-3.13 4.87-7.004 4.87-3.874 0-7.004-2.176-7.004-4.87 0-.183.015-.366.043-.534A1.748 1.748 0 0 1 4.028 12c0-.968.786-1.754 1.754-1.754.463 0 .898.196 1.207.49 1.207-.883 2.878-1.43 4.744-1.487l.885-4.182a.342.342 0 0 1 .14-.197.35.35 0 0 1 .238-.042l2.906.617a1.214 1.214 0 0 1 1.108-.701zM9.25 12C8.561 12 8 12.562 8 13.25c0 .687.561 1.248 1.25 1.248.687 0 1.248-.561 1.248-1.249 0-.688-.561-1.249-1.249-1.249zm5.5 0c-.687 0-1.248.561-1.248 1.25 0 .687.561 1.248 1.249 1.248.688 0 1.249-.561 1.249-1.249 0-.687-.562-1.249-1.25-1.249zm-5.466 3.99a.327.327 0 0 0-.231.094.33.33 0 0 0 0 .463c.842.842 2.484.913 2.961.913.477 0 2.105-.056 2.961-.913a.361.361 0 0 0 .029-.463.33.33 0 0 0-.464 0c-.547.533-1.684.73-2.512.73-.828 0-1.979-.196-2.512-.73a.326.326 0 0 0-.232-.095z"/></svg>`,
+  },
+  {
+    label: 'YouTube',
+    href: 'https://youtube.com',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>`,
+  },
+  {
+    label: 'X (Twitter)',
+    href: 'https://x.com',
+    icon: `<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>`,
+  },
+];
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer" role="contentinfo">
+  <div class="footer__inner">
+    <!-- Three column layout -->
+    <div class="footer__columns">
+      <!-- About Column -->
+      <div class="footer__col footer__col--about">
+        <a href="/" class="footer__logo" aria-label="GTA6 Wikis - Home">
+          GTA6 WIKIS
+        </a>
+        <p class="footer__desc">
+          The most comprehensive fan-made wiki for Grand Theft Auto VI. Covering characters, map locations, vehicles, weapons, radio stations, and in-depth guides.
+        </p>
+        <p class="footer__disclaimer">
+          Fan site. Not affiliated with Rockstar Games or Take-Two Interactive.
+        </p>
+      </div>
+
+      <!-- Quick Links Column -->
+      <div class="footer__col">
+        <h3 class="footer__heading">Quick Links</h3>
+        <ul class="footer__links" role="list">
+          {quickLinks.map((link) => (
+            <li>
+              <a href={link.href} class="footer__link">{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Social Column -->
+      <div class="footer__col">
+        <h3 class="footer__heading">Community</h3>
+        <p class="footer__social-desc">Follow GTA 6 news and join the community:</p>
+        <div class="footer__social" role="list" aria-label="Social media links">
+          {socialLinks.map((social) => (
+            <a
+              href={social.href}
+              class="footer__social-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.label}
+              role="listitem"
+              set:html={social.icon}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer__bottom">
+      <p class="footer__copyright">
+        &copy; {currentYear} GTA6 Wikis. Not affiliated with Rockstar Games.
+      </p>
+      <nav class="footer__legal" aria-label="Legal links">
+        <a href="/privacy/" class="footer__legal-link">Privacy Policy</a>
+        <span aria-hidden="true">·</span>
+        <a href="/terms/" class="footer__legal-link">Terms of Use</a>
+        <span aria-hidden="true">·</span>
+        <a href="/contact/" class="footer__legal-link">Contact</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-default);
+    margin-top: auto;
+  }
+
+  .footer__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 24px 24px;
+  }
+
+  .footer__columns {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 48px;
+    margin-bottom: 40px;
+  }
+
+  /* Logo */
+  .footer__logo {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: 0.06em;
+    background: linear-gradient(135deg, #FF5E4D 0%, #FFB84D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-decoration: none;
+    margin-bottom: 16px;
+  }
+
+  .footer__logo:hover {
+    background: linear-gradient(135deg, #FF2D78 0%, #FF5E4D 40%, #FFB84D 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+
+  .footer__desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0 0 12px;
+  }
+
+  .footer__disclaimer {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Heading */
+  .footer__heading {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin: 0 0 16px;
+  }
+
+  /* Links */
+  .footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer__link {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .footer__link::before {
+    content: '›';
+    color: #FF5E4D;
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  .footer__link:hover {
+    color: #FF5E4D;
+  }
+
+  /* Social */
+  .footer__social-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0 0 16px;
+    line-height: 1.5;
+  }
+
+  .footer__social {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .footer__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--bg-tertiary);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    border: 1px solid var(--border-default);
+  }
+
+  .footer__social-link:hover {
+    color: #FF5E4D;
+    background: rgba(255, 94, 77, 0.1);
+    border-color: rgba(255, 94, 77, 0.3);
+    transform: translateY(-2px);
+  }
+
+  /* Bottom bar */
+  .footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-default);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer__copyright {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .footer__legal {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  .footer__legal-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .footer__legal-link:hover {
+    color: #FF5E4D;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .footer__columns {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .footer__col--about {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer__inner {
+      padding: 32px 16px 20px;
+    }
+
+    .footer__columns {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    .footer__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

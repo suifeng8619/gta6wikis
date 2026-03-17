@@ -1,0 +1,3 @@
+/wiki/* /:splat 301
+/gta6/* /gta-6/:splat 301
+/characters/lucia-caminos/ /characters/lucia-caminos/ 200

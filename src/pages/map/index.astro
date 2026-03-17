@@ -1,0 +1,335 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+
+const allLocations = await getCollection('locations');
+allLocations.sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const viceCity = allLocations.filter((l) => l.data.region === 'vice-city');
+const leonidaState = allLocations.filter((l) => l.data.region === 'leonida-state');
+const leonidaKeys = allLocations.filter((l) => l.data.region === 'leonida-keys');
+const other = allLocations.filter((l) => l.data.region === 'other');
+
+const pageTitle = 'GTA 6 Map - All Locations in Leonida & Vice City | GTA6 Wikis';
+const pageDescription =
+  'Explore every confirmed location in GTA 6 — Vice City districts, Leonida State regions, Leonida Keys, and more in Grand Theft Auto VI.';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="page-container">
+    <Breadcrumb items={[{ label: 'Map' }]} />
+
+    <header class="page-header">
+      <h1 class="page-title">GTA 6 Map</h1>
+      <p class="page-subtitle">
+        All confirmed locations in Grand Theft Auto VI — Vice City, Leonida State, and beyond.
+      </p>
+      <div class="page-stats">
+        <span class="stat-badge">{allLocations.length} Locations</span>
+        <span class="stat-badge">{viceCity.length} Vice City</span>
+        <span class="stat-badge">{leonidaState.length} Leonida State</span>
+        <span class="stat-badge">{leonidaKeys.length} Leonida Keys</span>
+      </div>
+    </header>
+
+    {viceCity.length > 0 && (
+      <section class="location-section">
+        <h2 class="section-title">
+          <span class="section-accent section-accent--vice">Vice City Districts</span>
+        </h2>
+        <div class="card-grid">
+          {viceCity.map((loc) => (
+            <a href={`/map/${loc.id}/`} class="location-card">
+              <div class="location-card__region-bar location-card__region-bar--vice" />
+              <div class="location-card__body">
+                <h3 class="location-card__name">{loc.data.title}</h3>
+                {loc.data.district && (
+                  <p class="location-card__district">{loc.data.district}</p>
+                )}
+                <p class="location-card__desc">{loc.data.description}</p>
+                <div class="location-card__footer">
+                  <span class="location-meta">
+                    <span class="location-meta__icon" aria-hidden="true">&#9790;</span>
+                    {loc.data.realWorldCounterpart}
+                  </span>
+                  <span class="location-area">{loc.data.area}</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {leonidaState.length > 0 && (
+      <section class="location-section">
+        <h2 class="section-title">
+          <span class="section-accent section-accent--leonida">Leonida State</span>
+        </h2>
+        <div class="card-grid">
+          {leonidaState.map((loc) => (
+            <a href={`/map/${loc.id}/`} class="location-card">
+              <div class="location-card__region-bar location-card__region-bar--leonida" />
+              <div class="location-card__body">
+                <h3 class="location-card__name">{loc.data.title}</h3>
+                {loc.data.district && (
+                  <p class="location-card__district">{loc.data.district}</p>
+                )}
+                <p class="location-card__desc">{loc.data.description}</p>
+                <div class="location-card__footer">
+                  <span class="location-meta">
+                    <span class="location-meta__icon" aria-hidden="true">&#9790;</span>
+                    {loc.data.realWorldCounterpart}
+                  </span>
+                  <span class="location-area">{loc.data.area}</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {leonidaKeys.length > 0 && (
+      <section class="location-section">
+        <h2 class="section-title">
+          <span class="section-accent section-accent--keys">Leonida Keys</span>
+        </h2>
+        <div class="card-grid">
+          {leonidaKeys.map((loc) => (
+            <a href={`/map/${loc.id}/`} class="location-card">
+              <div class="location-card__region-bar location-card__region-bar--keys" />
+              <div class="location-card__body">
+                <h3 class="location-card__name">{loc.data.title}</h3>
+                {loc.data.district && (
+                  <p class="location-card__district">{loc.data.district}</p>
+                )}
+                <p class="location-card__desc">{loc.data.description}</p>
+                <div class="location-card__footer">
+                  <span class="location-meta">
+                    <span class="location-meta__icon" aria-hidden="true">&#9790;</span>
+                    {loc.data.realWorldCounterpart}
+                  </span>
+                  <span class="location-area">{loc.data.area}</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {other.length > 0 && (
+      <section class="location-section">
+        <h2 class="section-title">
+          <span class="section-accent">Other Locations</span>
+        </h2>
+        <div class="card-grid">
+          {other.map((loc) => (
+            <a href={`/map/${loc.id}/`} class="location-card">
+              <div class="location-card__region-bar" />
+              <div class="location-card__body">
+                <h3 class="location-card__name">{loc.data.title}</h3>
+                <p class="location-card__desc">{loc.data.description}</p>
+                <div class="location-card__footer">
+                  <span class="location-meta">{loc.data.realWorldCounterpart}</span>
+                </div>
+              </div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  .page-header {
+    padding: 32px 0 40px;
+    border-bottom: 1px solid var(--border-default);
+    margin-bottom: 48px;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    color: var(--text-primary);
+    margin: 0 0 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin: 0 0 20px;
+    max-width: 600px;
+  }
+
+  .page-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .stat-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-default);
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .location-section {
+    margin-bottom: 56px;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-default);
+  }
+
+  .section-accent {
+    color: var(--color-primary);
+  }
+
+  .section-accent--vice {
+    color: var(--color-primary);
+  }
+
+  .section-accent--leonida {
+    color: var(--color-secondary-dark);
+  }
+
+  .section-accent--keys {
+    color: var(--color-accent-warm);
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+
+  .location-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .location-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 94, 77, 0.12);
+  }
+
+  .location-card__region-bar {
+    height: 4px;
+    background: var(--border-strong);
+  }
+
+  .location-card__region-bar--vice {
+    background: var(--gradient-sunset);
+  }
+
+  .location-card__region-bar--leonida {
+    background: var(--color-secondary);
+  }
+
+  .location-card__region-bar--keys {
+    background: var(--color-accent);
+  }
+
+  .location-card__body {
+    padding: 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .location-card__name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 4px;
+  }
+
+  .location-card__district {
+    font-size: 0.8125rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+
+  .location-card__desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0 0 14px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .location-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .location-meta {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .location-meta__icon {
+    font-size: 0.875rem;
+    opacity: 0.6;
+  }
+
+  .location-area {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    padding: 2px 8px;
+    background: var(--bg-secondary);
+    border-radius: 4px;
+  }
+
+  @media (max-width: 480px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

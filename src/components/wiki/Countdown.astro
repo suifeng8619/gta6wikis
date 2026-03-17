@@ -1,0 +1,189 @@
+---
+/**
+ * Countdown.astro — GTA6 发售倒计时
+ *
+ * 目标日期：2026-11-19
+ * 使用 Bebas Neue 显示，gradient-sunset 背景
+ *
+ * Usage:
+ * <Countdown />
+ */
+
+interface Props {
+  targetDate?: string;  // ISO 格式，默认 2026-11-19
+  label?: string;
+}
+
+const { targetDate = '2026-11-19T00:00:00', label = 'GTA VI 距离发售' } = Astro.props;
+
+// 生成唯一 ID，避免多个倒计时冲突
+const instanceId = `countdown-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+<div class="countdown" id={instanceId} aria-label={label} role="timer" aria-live="off">
+  <p class="countdown__label">{label}</p>
+
+  <div class="countdown__units" aria-hidden="true">
+    <div class="countdown__unit">
+      <span class="countdown__num" data-unit="days">--</span>
+      <span class="countdown__unit-label">天</span>
+    </div>
+    <div class="countdown__sep" aria-hidden="true">:</div>
+    <div class="countdown__unit">
+      <span class="countdown__num" data-unit="hours">--</span>
+      <span class="countdown__unit-label">时</span>
+    </div>
+    <div class="countdown__sep" aria-hidden="true">:</div>
+    <div class="countdown__unit">
+      <span class="countdown__num" data-unit="minutes">--</span>
+      <span class="countdown__unit-label">分</span>
+    </div>
+    <div class="countdown__sep" aria-hidden="true">:</div>
+    <div class="countdown__unit">
+      <span class="countdown__num" data-unit="seconds">--</span>
+      <span class="countdown__unit-label">秒</span>
+    </div>
+  </div>
+
+  <!-- 无 JS 回退 -->
+  <noscript>
+    <p class="countdown__noscript">请启用 JavaScript 查看实时倒计时</p>
+  </noscript>
+</div>
+
+<script define:vars={{ instanceId, targetDate }}>
+  (function () {
+    const container = document.getElementById(instanceId);
+    if (!container) return;
+
+    const target = new Date(targetDate).getTime();
+
+    function pad(n) {
+      return String(Math.floor(n)).padStart(2, '0');
+    }
+
+    function update() {
+      const now = Date.now();
+      const diff = target - now;
+
+      if (diff <= 0) {
+        // 已发售
+        container.querySelector('[data-unit="days"]').textContent = '00';
+        container.querySelector('[data-unit="hours"]').textContent = '00';
+        container.querySelector('[data-unit="minutes"]').textContent = '00';
+        container.querySelector('[data-unit="seconds"]').textContent = '00';
+        const label = container.querySelector('.countdown__label');
+        if (label) label.textContent = 'GTA VI 已正式发售！';
+        return;
+      }
+
+      const totalSeconds = diff / 1000;
+      const days    = Math.floor(totalSeconds / 86400);
+      const hours   = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = Math.floor(totalSeconds % 60);
+
+      container.querySelector('[data-unit="days"]').textContent = pad(days);
+      container.querySelector('[data-unit="hours"]').textContent = pad(hours);
+      container.querySelector('[data-unit="minutes"]').textContent = pad(minutes);
+      container.querySelector('[data-unit="seconds"]').textContent = pad(seconds);
+
+      requestAnimationFrame(function () {
+        setTimeout(update, 1000);
+      });
+    }
+
+    update();
+  })();
+</script>
+
+<style>
+  .countdown {
+    background: linear-gradient(135deg, #FF2D78 0%, #FF5E4D 30%, #FF7A2D 60%, #FFB84D 100%);
+    border-radius: 12px;
+    padding: 28px 32px;
+    text-align: center;
+    color: #FFFFFF;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 装饰光效 */
+  .countdown::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(255, 255, 255, 0.12) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .countdown__label {
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.9;
+    margin: 0 0 16px 0;
+  }
+
+  .countdown__units {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .countdown__unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .countdown__num {
+    font-family: 'Bebas Neue', 'Impact', 'Arial Black', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1;
+    letter-spacing: 0.04em;
+    color: #FFFFFF;
+    min-width: 2ch;
+    display: block;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  }
+
+  .countdown__unit-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.8;
+  }
+
+  .countdown__sep {
+    font-family: 'Bebas Neue', 'Impact', 'Arial Black', sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1;
+    opacity: 0.6;
+    margin-bottom: 20px;
+    /* 与数字底部对齐：抵消 label 的高度 */
+    align-self: flex-start;
+    margin-top: 4px;
+  }
+
+  .countdown__noscript {
+    font-size: 0.875rem;
+    opacity: 0.8;
+    margin: 8px 0 0 0;
+  }
+
+  @media (max-width: 480px) {
+    .countdown {
+      padding: 20px 16px;
+    }
+    .countdown__units {
+      gap: 4px;
+    }
+  }
+</style>

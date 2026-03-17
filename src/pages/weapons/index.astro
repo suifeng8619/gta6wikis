@@ -1,0 +1,381 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import CategoryNav from '../../components/wiki/CategoryNav.astro';
+
+const allWeapons = await getCollection('weapons');
+allWeapons.sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const filterParam = Astro.url.searchParams.get('type') ?? 'all';
+
+const typeLabels: Record<string, string> = {
+  pistol: 'Pistols',
+  smg: 'SMGs',
+  'assault-rifle': 'Assault Rifles',
+  shotgun: 'Shotguns',
+  'sniper-rifle': 'Snipers',
+  lmg: 'LMGs',
+  melee: 'Melee',
+  throwable: 'Throwables',
+  heavy: 'Heavy',
+  special: 'Special',
+};
+
+const typeIcons: Record<string, string> = {
+  pistol: '🔫',
+  smg: '🔫',
+  'assault-rifle': '🔫',
+  shotgun: '🔫',
+  'sniper-rifle': '🔭',
+  lmg: '🔫',
+  melee: '🗡️',
+  throwable: '💥',
+  heavy: '💣',
+  special: '⚡',
+};
+
+const categoryCounts: Record<string, number> = {};
+for (const w of allWeapons) {
+  const t = w.data.type;
+  categoryCounts[t] = (categoryCounts[t] ?? 0) + 1;
+}
+
+const navTypes = [
+  { key: 'all', label: 'All' },
+  { key: 'pistol', label: 'Pistols' },
+  { key: 'smg', label: 'SMGs' },
+  { key: 'assault-rifle', label: 'Assault Rifles' },
+  { key: 'shotgun', label: 'Shotguns' },
+  { key: 'sniper-rifle', label: 'Snipers' },
+  { key: 'lmg', label: 'LMGs' },
+  { key: 'melee', label: 'Melee' },
+  { key: 'throwable', label: 'Throwables' },
+  { key: 'heavy', label: 'Heavy' },
+];
+
+const navCategories = navTypes
+  .filter((t) => t.key === 'all' || categoryCounts[t.key] > 0)
+  .map((t) => ({
+    name: t.label,
+    href: t.key === 'all' ? '/weapons/' : `/weapons/?type=${t.key}`,
+    count: t.key === 'all' ? allWeapons.length : categoryCounts[t.key],
+  }));
+
+const filtered =
+  filterParam === 'all' ? allWeapons : allWeapons.filter((w) => w.data.type === filterParam);
+
+const currentLabel =
+  filterParam === 'all'
+    ? 'All'
+    : navTypes.find((t) => t.key === filterParam)?.label ?? 'All';
+
+const pageTitle = 'GTA 6 Weapons - Complete Weapon List | GTA6 Wikis';
+const pageDescription =
+  'Complete list of all weapons in GTA 6 — pistols, assault rifles, shotguns, snipers, melee weapons, throwables and heavy weapons.';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="page-container">
+    <Breadcrumb items={[{ label: 'Weapons' }]} />
+
+    <header class="page-header">
+      <h1 class="page-title">GTA 6 Weapons</h1>
+      <p class="page-subtitle">
+        Every weapon in Grand Theft Auto VI — stats, categories, and real-world counterparts.
+      </p>
+    </header>
+
+    <div class="filter-bar">
+      <CategoryNav
+        categories={navCategories}
+        current={currentLabel}
+        label="Weapon Categories"
+      />
+    </div>
+
+    <div class="results-info">
+      <span class="results-count">{filtered.length} weapons</span>
+      {filterParam !== 'all' && (
+        <a href="/weapons/" class="clear-filter">Clear filter ×</a>
+      )}
+    </div>
+
+    <div class="card-grid">
+      {filtered.map((weapon) => (
+        <a href={`/weapons/${weapon.id}/`} class="weapon-card">
+          <div class="weapon-card__icon-wrap">
+            <span class="weapon-icon" aria-hidden="true">
+              {typeIcons[weapon.data.type] ?? '🔫'}
+            </span>
+            <span class="type-badge">{typeLabels[weapon.data.type] ?? weapon.data.type}</span>
+          </div>
+          <div class="weapon-card__body">
+            <h3 class="weapon-card__name">{weapon.data.title}</h3>
+            <p class="weapon-card__desc">{weapon.data.description}</p>
+            {(weapon.data.damage !== undefined || weapon.data.accuracy !== undefined) && (
+              <div class="stat-bars">
+                {weapon.data.damage !== undefined && (
+                  <div class="stat-bar">
+                    <span class="stat-bar__label">Damage</span>
+                    <div class="stat-bar__track">
+                      <div class="stat-bar__fill stat-bar__fill--damage" style={`width: ${weapon.data.damage}%`} />
+                    </div>
+                    <span class="stat-bar__val">{weapon.data.damage}</span>
+                  </div>
+                )}
+                {weapon.data.accuracy !== undefined && (
+                  <div class="stat-bar">
+                    <span class="stat-bar__label">Accuracy</span>
+                    <div class="stat-bar__track">
+                      <div class="stat-bar__fill" style={`width: ${weapon.data.accuracy}%`} />
+                    </div>
+                    <span class="stat-bar__val">{weapon.data.accuracy}</span>
+                  </div>
+                )}
+                {weapon.data.fireRate !== undefined && (
+                  <div class="stat-bar">
+                    <span class="stat-bar__label">Fire Rate</span>
+                    <div class="stat-bar__track">
+                      <div class="stat-bar__fill stat-bar__fill--rate" style={`width: ${weapon.data.fireRate}%`} />
+                    </div>
+                    <span class="stat-bar__val">{weapon.data.fireRate}</span>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {filtered.length === 0 && (
+      <div class="empty-state">
+        <p>No weapons found for this category.</p>
+        <a href="/weapons/" class="btn-reset">Show all weapons</a>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  .page-header {
+    padding: 32px 0 28px;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    color: var(--text-primary);
+    margin: 0 0 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 600px;
+  }
+
+  .filter-bar {
+    padding: 20px 0;
+    border-top: 1px solid var(--border-default);
+    border-bottom: 1px solid var(--border-default);
+    margin-bottom: 24px;
+  }
+
+  .results-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .results-count {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .clear-filter {
+    font-size: 0.8125rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    padding: 2px 8px;
+    border: 1px solid var(--color-primary);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .clear-filter:hover {
+    background: var(--color-primary);
+    color: #fff;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .weapon-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .weapon-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 94, 77, 0.12);
+  }
+
+  .weapon-card__icon-wrap {
+    position: relative;
+    width: 72px;
+    min-width: 72px;
+    height: 100%;
+    min-height: 80px;
+    background: var(--bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 8px;
+  }
+
+  .weapon-icon {
+    font-size: 1.75rem;
+    line-height: 1;
+  }
+
+  .type-badge {
+    font-size: 0.5625rem;
+    font-weight: 700;
+    padding: 2px 4px;
+    background: var(--color-accent-warm);
+    color: #fff;
+    border-radius: 3px;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    word-break: break-word;
+    max-width: 60px;
+    text-align: center;
+  }
+
+  .weapon-card__body {
+    padding: 12px 14px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .weapon-card__name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 4px;
+  }
+
+  .weapon-card__desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0 0 10px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .stat-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .stat-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .stat-bar__label {
+    font-size: 0.625rem;
+    color: var(--text-muted);
+    width: 52px;
+    flex-shrink: 0;
+  }
+
+  .stat-bar__track {
+    flex: 1;
+    height: 3px;
+    background: var(--bg-tertiary);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .stat-bar__fill {
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: 2px;
+  }
+
+  .stat-bar__fill--damage {
+    background: var(--color-accent-alt);
+  }
+
+  .stat-bar__fill--rate {
+    background: var(--color-secondary);
+  }
+
+  .stat-bar__val {
+    font-size: 0.625rem;
+    color: var(--text-muted);
+    width: 20px;
+    text-align: right;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+  }
+
+  .btn-reset {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 8px 20px;
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: background 0.2s ease;
+  }
+
+  .btn-reset:hover {
+    background: var(--color-primary-dark);
+  }
+
+  @media (max-width: 480px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

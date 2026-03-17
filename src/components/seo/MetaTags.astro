@@ -1,0 +1,59 @@
+---
+/**
+ * MetaTags.astro — SEO meta tags for every page.
+ *
+ * Usage:
+ *   <MetaTags
+ *     title="Lucia"
+ *     description="Lucia is one of the two playable protagonists in GTA 6."
+ *     canonicalUrl="https://gta6wikis.com/characters/lucia/"
+ *     ogImage="https://gta6wikis.com/og/lucia.png"
+ *     ogType="article"
+ *     twitterCard="summary_large_image"
+ *   />
+ */
+
+import { SITE_NAME, DEFAULT_DESCRIPTION, SITE_URL } from '../../utils/seo';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl?: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  twitterCard?: 'summary' | 'summary_large_image';
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = DEFAULT_DESCRIPTION,
+  canonicalUrl = SITE_URL + '/',
+  ogImage = `${SITE_URL}/images/og-default.jpg`,
+  ogType = 'website',
+  twitterCard = 'summary_large_image',
+  noindex = false,
+} = Astro.props;
+
+const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
+---
+
+<!-- Primary -->
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+{noindex && <meta name="robots" content="noindex" />}
+
+<!-- Open Graph -->
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content={SITE_NAME} />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content={twitterCard} />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />

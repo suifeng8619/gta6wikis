@@ -1,0 +1,167 @@
+---
+/**
+ * JsonLd.astro — Injects schema.org JSON-LD structured data.
+ *
+ * Usage:
+ *   // WebSite (homepage)
+ *   <JsonLd type="WebSite" data={{}} />
+ *
+ *   // Article
+ *   <JsonLd type="Article" data={{
+ *     headline: "How to find all weapons",
+ *     description: "...",
+ *     image: "https://gta6wikis.com/og/weapons.png",
+ *     datePublished: "2025-01-01",
+ *     dateModified: "2025-06-01",
+ *     url: "https://gta6wikis.com/guides/weapons/",
+ *   }} />
+ *
+ *   // Person (character)
+ *   <JsonLd type="Person" data={{
+ *     name: "Lucia",
+ *     description: "Lucia is one of the two playable protagonists...",
+ *     url: "https://gta6wikis.com/characters/lucia/",
+ *     image: "https://gta6wikis.com/images/lucia.webp",
+ *   }} />
+ *
+ *   // FAQPage
+ *   <JsonLd type="FAQPage" data={{
+ *     questions: [
+ *       { question: "When does GTA 6 release?", answer: "..." },
+ *     ],
+ *   }} />
+ *
+ *   // BreadcrumbList
+ *   <JsonLd type="BreadcrumbList" data={{
+ *     items: [
+ *       { name: "Home", url: "https://gta6wikis.com/" },
+ *       { name: "Characters", url: "https://gta6wikis.com/characters/" },
+ *     ],
+ *   }} />
+ *
+ *   // HowTo
+ *   <JsonLd type="HowTo" data={{
+ *     name: "How to unlock all weapons in GTA 6",
+ *     description: "...",
+ *     steps: [{ name: "Step 1", text: "..." }],
+ *   }} />
+ */
+
+import { SITE_NAME, SITE_URL } from '../../utils/seo';
+
+type SchemaType = 'WebSite' | 'Article' | 'Person' | 'FAQPage' | 'BreadcrumbList' | 'HowTo';
+
+interface Props {
+  type: SchemaType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: Record<string, any>;
+}
+
+const { type, data } = Astro.props;
+
+function buildSchema(type: SchemaType, data: Record<string, any>): object {
+  switch (type) {
+    case 'WebSite':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: SITE_NAME,
+        url: SITE_URL,
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: `${SITE_URL}/search/?q={search_term_string}`,
+          'query-input': 'required name=search_term_string',
+        },
+      };
+
+    case 'Article':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: data.headline ?? '',
+        description: data.description ?? '',
+        ...(data.image ? { image: data.image } : {}),
+        datePublished: data.datePublished ?? '',
+        dateModified: data.dateModified ?? data.datePublished ?? '',
+        ...(data.url ? { url: data.url } : {}),
+        author: {
+          '@type': 'Organization',
+          name: SITE_NAME,
+          url: SITE_URL,
+        },
+        publisher: {
+          '@type': 'Organization',
+          name: SITE_NAME,
+          url: SITE_URL,
+        },
+      };
+
+    case 'Person':
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: data.name ?? '',
+        description: data.description ?? '',
+        url: data.url ?? '',
+        ...(data.image ? { image: data.image } : {}),
+        memberOf: {
+          '@type': 'Organization',
+          name: 'GTA VI',
+        },
+      };
+
+    case 'FAQPage': {
+      const questions: Array<{ question: string; answer: string }> =
+        data.questions ?? [];
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: questions.map((q) => ({
+          '@type': 'Question',
+          name: q.question,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: q.answer,
+          },
+        })),
+      };
+    }
+
+    case 'BreadcrumbList': {
+      const items: Array<{ name: string; url: string }> = data.items ?? [];
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: items.map((item, index) => ({
+          '@type': 'ListItem',
+          position: index + 1,
+          name: item.name,
+          item: item.url,
+        })),
+      };
+    }
+
+    case 'HowTo': {
+      const steps: Array<{ name: string; text: string }> = data.steps ?? [];
+      return {
+        '@context': 'https://schema.org',
+        '@type': 'HowTo',
+        name: data.name ?? '',
+        description: data.description ?? '',
+        step: steps.map((s) => ({
+          '@type': 'HowToStep',
+          name: s.name,
+          text: s.text,
+        })),
+      };
+    }
+
+    default:
+      return { '@context': 'https://schema.org', '@type': type, ...data };
+  }
+}
+
+const schema = buildSchema(type, data);
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

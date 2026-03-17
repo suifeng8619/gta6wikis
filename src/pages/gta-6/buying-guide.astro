@@ -1,0 +1,683 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import AlertBox from '../../components/wiki/AlertBox.astro';
+---
+
+<BaseLayout
+  title="GTA 6 Buying Guide - Editions, Prices & Pre-Order | GTA6 Wikis"
+  description="Complete GTA 6 buying guide — Standard, Deluxe and Collector's editions compared, platform prices, pre-order info, and estimated PC system requirements."
+  canonicalUrl="https://gta6wikis.com/gta-6/buying-guide/"
+>
+  <div class="page-wrapper">
+    <div class="container">
+      <Breadcrumb items={[
+        { label: 'GTA 6', href: '/gta-6/' },
+        { label: 'Buying Guide' }
+      ]} />
+    </div>
+
+    <header class="page-header">
+      <div class="container">
+        <h1 class="page-header__title">GTA 6 Buying Guide</h1>
+        <p class="page-header__desc">Everything you need to know before purchasing GTA 6 — editions, prices, platforms, pre-order status, and PC requirements.</p>
+      </div>
+    </header>
+
+    <div class="container main-content">
+
+      <AlertBox type="warning" title="Prices Not Yet Official">
+        All edition names, prices, and included content on this page are industry estimates based on Rockstar's past releases and analyst research. Rockstar Games has not officially confirmed any pricing or edition details. Official information will be announced when pre-orders open.
+      </AlertBox>
+
+      <!-- Editions comparison -->
+      <section id="editions" class="section" aria-labelledby="editions-heading">
+        <h2 class="section__title" id="editions-heading">Edition Comparison</h2>
+        <div class="editions-grid">
+
+          <article class="edition-card" aria-labelledby="standard-title">
+            <div class="edition-card__header">
+              <h3 class="edition-card__title" id="standard-title">Standard Edition</h3>
+              <div class="edition-card__price">
+                <span class="price-usd">$69.99</span>
+                <span class="price-gbp">£69.99</span>
+              </div>
+            </div>
+            <ul class="edition-card__includes">
+              <li>Full Story Mode</li>
+              <li>GTA Online 2 access</li>
+              <li>Hundreds of hours of content</li>
+              <li>No extra in-game currency</li>
+              <li>No early access bonus</li>
+            </ul>
+            <div class="edition-card__verdict">
+              <strong>Best for:</strong> Players who want the full game on a standard budget or are primarily single-player focused.
+            </div>
+          </article>
+
+          <article class="edition-card edition-card--featured" aria-labelledby="deluxe-title">
+            <div class="edition-card__badge">Popular</div>
+            <div class="edition-card__header">
+              <h3 class="edition-card__title" id="deluxe-title">Deluxe Edition</h3>
+              <div class="edition-card__price">
+                <span class="price-usd">$89.99–$100</span>
+                <span class="price-gbp">£89.99</span>
+              </div>
+            </div>
+            <ul class="edition-card__includes">
+              <li>Everything in Standard Edition</li>
+              <li>Exclusive in-game bonus items</li>
+              <li>Extra GTA$ in-game currency (est. 2,000–5,000)</li>
+              <li>Exclusive vehicle or weapon</li>
+              <li>Exclusive character outfits</li>
+              <li>GTA Online 2 early access (est. 3 days)</li>
+            </ul>
+            <div class="edition-card__verdict">
+              <strong>Best for:</strong> Players planning to invest in GTA Online 2 or wanting extra in-game currency and exclusive cosmetics.
+            </div>
+          </article>
+
+          <article class="edition-card" aria-labelledby="collectors-title">
+            <div class="edition-card__header">
+              <h3 class="edition-card__title" id="collectors-title">Collector's / Ultimate Edition</h3>
+              <div class="edition-card__price">
+                <span class="price-usd">$129.99–$150+</span>
+                <span class="price-gbp">£109.99+</span>
+              </div>
+            </div>
+            <ul class="edition-card__includes">
+              <li>Everything in Deluxe Edition</li>
+              <li>Premium physical box</li>
+              <li>Game manual and physical map</li>
+              <li>Character figure or collectible</li>
+              <li>Exclusive art collection</li>
+              <li>Maximum GTA$ bonus</li>
+              <li>VIP Online treatment</li>
+              <li>Exclusive online character skin</li>
+              <li>GTA Online 2 earliest access (est. 5 days)</li>
+            </ul>
+            <div class="edition-card__verdict">
+              <strong>Best for:</strong> Dedicated GTA fans who want physical collectibles, the most in-game currency, and earliest access to GTA Online 2.
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- Price by region -->
+      <section id="pricing" class="section" aria-labelledby="pricing-heading">
+        <h2 class="section__title" id="pricing-heading">Prices by Region</h2>
+        <div class="table-wrapper" role="region" aria-label="Regional pricing" tabindex="0">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col">Region</th>
+                <th scope="col">Standard</th>
+                <th scope="col">Deluxe</th>
+                <th scope="col">Collector's</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>United States (USD)</strong></td>
+                <td>$69.99</td>
+                <td>$89.99–$100</td>
+                <td>$109.99–$150+</td>
+              </tr>
+              <tr>
+                <td><strong>United Kingdom (GBP)</strong></td>
+                <td>£69.99</td>
+                <td>£89.99</td>
+                <td>£109.99</td>
+              </tr>
+              <tr>
+                <td><strong>China / CNY</strong></td>
+                <td colspan="3">Official pricing not announced. Estimated 550–700 CNY for Standard Edition based on GTA V history (unofficial estimate only).</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note-text">All prices are based on industry analyst estimates. Rockstar will confirm official pricing when pre-orders open.</p>
+      </section>
+
+      <!-- Pre-order -->
+      <section id="preorder" class="section" aria-labelledby="preorder-heading">
+        <h2 class="section__title" id="preorder-heading">Pre-Order Information</h2>
+        <AlertBox type="info" title="Pre-Orders Not Yet Open">
+          As of March 2026, pre-orders have not opened. Rockstar has not announced when they will be available.
+        </AlertBox>
+        <h3 class="subsection-h3">Expected Pre-Order Bonuses</h3>
+        <ul class="detail-list">
+          <li>Extra GTA$ in-game currency (estimated 2,000–10,000 depending on edition)</li>
+          <li>Exclusive vehicle</li>
+          <li>Exclusive weapon</li>
+          <li>Exclusive character outfit or cosmetic option</li>
+          <li>GTA Online 2 early access (estimated 3–5 days for Deluxe and above)</li>
+          <li>Possible exclusive single-player mission (unconfirmed)</li>
+        </ul>
+        <h3 class="subsection-h3">Where to Pre-Order</h3>
+        <div class="retailer-grid">
+          <div class="retailer-card">
+            <h4 class="retailer-card__name">PlayStation Store</h4>
+            <p>PS5 digital pre-order. Instant download on launch day. Automatic cloud backup.</p>
+          </div>
+          <div class="retailer-card">
+            <h4 class="retailer-card__name">Xbox Store</h4>
+            <p>Xbox Series X|S digital pre-order. Check for potential Xbox Game Pass inclusion (low probability at launch).</p>
+          </div>
+          <div class="retailer-card">
+            <h4 class="retailer-card__name">Physical Retailers (US)</h4>
+            <p>GameStop, Best Buy, Amazon, Walmart, Target. Collector's Edition physical box likely only available here.</p>
+          </div>
+          <div class="retailer-card">
+            <h4 class="retailer-card__name">Physical Retailers (UK/EU)</h4>
+            <p>GAME UK, Argos, Media Markt, Saturn.</p>
+          </div>
+          <div class="retailer-card">
+            <h4 class="retailer-card__name">Steam (PC only)</h4>
+            <p>Available when the PC version releases, expected 2027–2028.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Platform guide -->
+      <section id="platforms" class="section" aria-labelledby="platforms-heading">
+        <h2 class="section__title" id="platforms-heading">Which Platform Should You Buy?</h2>
+        <div class="table-wrapper" role="region" aria-label="Platform comparison" tabindex="0">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col">Platform</th>
+                <th scope="col">Resolution</th>
+                <th scope="col">Frame Rate</th>
+                <th scope="col">Exclusive Features</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>PS5</strong></td>
+                <td>4K (Performance) / 4K (Fidelity)</td>
+                <td>60fps / 30fps</td>
+                <td>DualSense adaptive triggers, haptic feedback, 3D audio</td>
+              </tr>
+              <tr>
+                <td><strong>Xbox Series X</strong></td>
+                <td>4K (Game Mode) / 4K (Fidelity)</td>
+                <td>60fps / 30fps</td>
+                <td>Balance of performance and visual fidelity</td>
+              </tr>
+              <tr>
+                <td><strong>Xbox Series S</strong></td>
+                <td>1440p</td>
+                <td>60fps</td>
+                <td>Full game content; reduced textures and lighting effects</td>
+              </tr>
+              <tr>
+                <td><strong>PC</strong></td>
+                <td>Up to 4K+ (hardware dependent)</td>
+                <td>120+ fps possible</td>
+                <td>Mouse/keyboard, potential mod support, higher frame rates</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="buy-recs">
+          <div class="buy-rec">
+            <h3 class="buy-rec__title">Buy Digital if...</h3>
+            <ul class="buy-rec__list">
+              <li>You want instant access on launch day</li>
+              <li>You have sufficient storage space (200GB+)</li>
+              <li>You don't plan to resell or share the game</li>
+            </ul>
+          </div>
+          <div class="buy-rec">
+            <h3 class="buy-rec__title">Buy Physical if...</h3>
+            <ul class="buy-rec__list">
+              <li>You want to resell or lend the game</li>
+              <li>You value collector's edition physical items</li>
+              <li>You prefer not to depend on digital storefronts</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- PC requirements -->
+      <section id="pc-requirements" class="section" aria-labelledby="pc-heading">
+        <h2 class="section__title" id="pc-heading">Estimated PC System Requirements</h2>
+        <AlertBox type="warning" title="PC Version Not Confirmed">
+          No official PC release date or system requirements have been announced. The specifications below are estimates based on Rockstar's past PC releases, technical analysis of the trailers, and analyst projections.
+        </AlertBox>
+        <div class="specs-grid">
+          <div class="spec-tier">
+            <h3 class="spec-tier__title">Minimum</h3>
+            <p class="spec-tier__target">Target: 1440p, 60fps, High Settings</p>
+            <dl class="spec-list">
+              <dt>CPU</dt>
+              <dd>6-core (e.g., AMD Ryzen 5 3600)</dd>
+              <dt>GPU</dt>
+              <dd>RTX 3060 / RX 6600 XT</dd>
+              <dt>RAM</dt>
+              <dd>16GB</dd>
+              <dt>Storage</dt>
+              <dd>150–200GB NVMe SSD</dd>
+              <dt>OS</dt>
+              <dd>Windows 10/11 64-bit</dd>
+            </dl>
+          </div>
+          <div class="spec-tier spec-tier--recommended">
+            <h3 class="spec-tier__title">Recommended</h3>
+            <p class="spec-tier__target">Target: 4K, 60fps, Ultra Settings</p>
+            <dl class="spec-list">
+              <dt>CPU</dt>
+              <dd>8-core (Intel i7-12700K / AMD Ryzen 7 7800X3D)</dd>
+              <dt>GPU</dt>
+              <dd>RTX 3080 / RTX 4080 / RX 6800 XT or better</dd>
+              <dt>RAM</dt>
+              <dd>32GB</dd>
+              <dt>Storage</dt>
+              <dd>200GB+ NVMe SSD (strongly recommended)</dd>
+              <dt>OS</dt>
+              <dd>Windows 10/11 64-bit</dd>
+            </dl>
+          </div>
+        </div>
+        <p class="note-text">These are estimates only. Official PC system requirements will be announced by Rockstar before the PC version's release.</p>
+      </section>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-wrapper {
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .page-header {
+    background: linear-gradient(160deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    border-bottom: 1px solid var(--border-color);
+    padding: 2.5rem 0;
+  }
+
+  .page-header__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    color: var(--text-primary);
+    margin: 0 0 0.5rem;
+    letter-spacing: 0.04em;
+  }
+
+  .page-header__desc {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+    max-width: 640px;
+  }
+
+  .main-content {
+    padding: 2rem 0 3rem;
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 3rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .section:last-child {
+    border-bottom: none;
+  }
+
+  .section__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+    color: var(--text-primary);
+    margin: 0 0 1.25rem;
+  }
+
+  .section p {
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+    font-size: 0.925rem;
+  }
+
+  .subsection-h3 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 1.5rem 0 0.75rem;
+  }
+
+  /* Editions grid */
+  .editions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 0.5rem;
+  }
+
+  .edition-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .edition-card--featured {
+    border-color: var(--color-accent);
+  }
+
+  .edition-card__badge {
+    position: absolute;
+    top: -1px;
+    right: 1.25rem;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 0 0 6px 6px;
+  }
+
+  .edition-card__header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .edition-card__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .edition-card__price {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+  }
+
+  .price-usd {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.75rem;
+    color: var(--color-accent);
+    line-height: 1;
+  }
+
+  .price-gbp {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  .edition-card__includes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    flex: 1;
+  }
+
+  .edition-card__includes li {
+    font-size: 0.825rem;
+    color: var(--text-secondary);
+    padding-left: 1.1rem;
+    position: relative;
+    line-height: 1.4;
+  }
+
+  .edition-card__includes li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-size: 0.75rem;
+    top: 0.1em;
+  }
+
+  .edition-card__verdict {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .edition-card__verdict strong {
+    color: var(--text-secondary);
+  }
+
+  /* Tables */
+  .table-wrapper {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 0.75rem;
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .data-table th {
+    background: var(--bg-secondary);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .data-table td {
+    padding: 0.875rem 1rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+
+  .data-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .data-table td strong {
+    color: var(--text-primary);
+  }
+
+  .note-text {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.6;
+    margin-top: 0.5rem;
+  }
+
+  /* Retailer grid */
+  .retailer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 0.75rem 0;
+  }
+
+  .retailer-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem 1.1rem;
+  }
+
+  .retailer-card__name {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.4rem;
+  }
+
+  .retailer-card p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Buy recs */
+  .buy-recs {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .buy-rec {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+  }
+
+  .buy-rec__title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.75rem;
+  }
+
+  .buy-rec__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .buy-rec__list li {
+    font-size: 0.825rem;
+    color: var(--text-secondary);
+    padding-left: 1rem;
+    position: relative;
+    line-height: 1.45;
+  }
+
+  .buy-rec__list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-size: 0.75rem;
+  }
+
+  /* Detail list */
+  .detail-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .detail-list li {
+    position: relative;
+    padding-left: 1.25rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .detail-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    top: 0.05em;
+  }
+
+  /* PC specs */
+  .specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin: 1.25rem 0 0.75rem;
+  }
+
+  .spec-tier {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .spec-tier--recommended {
+    border-color: var(--color-accent);
+  }
+
+  .spec-tier__title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.25rem;
+  }
+
+  .spec-tier__target {
+    font-size: 0.775rem;
+    color: var(--color-accent);
+    margin: 0 0 1rem;
+    font-weight: 600;
+  }
+
+  .spec-list {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.4rem 0.875rem;
+    margin: 0;
+  }
+
+  .spec-list dt {
+    font-size: 0.775rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding-top: 0.05rem;
+  }
+
+  .spec-list dd {
+    font-size: 0.825rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 600px) {
+    .editions-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

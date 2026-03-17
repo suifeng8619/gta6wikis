@@ -1,0 +1,372 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import CategoryNav from '../../components/wiki/CategoryNav.astro';
+
+const allVehicles = await getCollection('vehicles');
+allVehicles.sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+// Category filter from URL
+const filterParam = Astro.url.searchParams.get('type') ?? 'all';
+
+// Type display label map
+const typeLabels: Record<string, string> = {
+  supercar: 'Supercars',
+  sports: 'Sports',
+  muscle: 'Muscle',
+  sedan: 'Sedan',
+  suv: 'SUV',
+  compact: 'Compact',
+  motorcycle: 'Motorcycles',
+  boat: 'Boats',
+  plane: 'Aircraft',
+  helicopter: 'Aircraft',
+  emergency: 'Emergency',
+  commercial: 'Commercial',
+  military: 'Military',
+  special: 'Special',
+  'public-transport': 'Public Transport',
+};
+
+// Counts per category key
+const categoryCounts: Record<string, number> = {};
+for (const v of allVehicles) {
+  const t = v.data.type;
+  categoryCounts[t] = (categoryCounts[t] ?? 0) + 1;
+}
+
+// Build nav categories
+const navTypes = [
+  { key: 'all', label: 'All' },
+  { key: 'supercar', label: 'Supercars' },
+  { key: 'muscle', label: 'Muscle' },
+  { key: 'sports', label: 'Sports' },
+  { key: 'suv', label: 'SUV' },
+  { key: 'motorcycle', label: 'Motorcycles' },
+  { key: 'boat', label: 'Boats' },
+  { key: 'plane', label: 'Aircraft' },
+  { key: 'emergency', label: 'Emergency' },
+  { key: 'commercial', label: 'Commercial' },
+];
+
+const navCategories = navTypes
+  .filter((t) => t.key === 'all' || categoryCounts[t.key] > 0)
+  .map((t) => ({
+    name: t.label,
+    href: t.key === 'all' ? '/vehicles/' : `/vehicles/?type=${t.key}`,
+    count: t.key === 'all' ? allVehicles.length : categoryCounts[t.key],
+  }));
+
+// Merge plane and helicopter under Aircraft nav
+const aircraftTypes = ['plane', 'helicopter'];
+
+function matchesFilter(type: string, filter: string): boolean {
+  if (filter === 'all') return true;
+  if (filter === 'plane') return aircraftTypes.includes(type);
+  return type === filter;
+}
+
+const filtered = filterParam === 'all'
+  ? allVehicles
+  : allVehicles.filter((v) => matchesFilter(v.data.type, filterParam));
+
+const currentLabel =
+  filterParam === 'all'
+    ? 'All'
+    : navTypes.find((t) => t.key === filterParam)?.label ?? 'All';
+
+const pageTitle = 'GTA 6 Vehicles - Complete Vehicle Database | GTA6 Wikis';
+const pageDescription =
+  'Browse every vehicle confirmed for GTA 6 — supercars, muscle cars, motorcycles, boats, aircraft, emergency vehicles and more.';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="page-container">
+    <Breadcrumb items={[{ label: 'Vehicles' }]} />
+
+    <header class="page-header">
+      <h1 class="page-title">GTA 6 Vehicles</h1>
+      <p class="page-subtitle">
+        Every confirmed vehicle in Grand Theft Auto VI — from supercars to aircraft.
+      </p>
+    </header>
+
+    <div class="filter-bar">
+      <CategoryNav
+        categories={navCategories}
+        current={currentLabel}
+        label="Vehicle Categories"
+      />
+    </div>
+
+    <div class="results-info">
+      <span class="results-count">{filtered.length} vehicles</span>
+      {filterParam !== 'all' && (
+        <a href="/vehicles/" class="clear-filter">Clear filter ×</a>
+      )}
+    </div>
+
+    <div class="card-grid">
+      {filtered.map((vehicle) => (
+        <a href={`/vehicles/${vehicle.id}/`} class="vehicle-card">
+          <div class="vehicle-card__thumb">
+            <span class="vehicle-icon">&#9652;</span>
+            <span class="type-badge">{typeLabels[vehicle.data.type] ?? vehicle.data.type}</span>
+          </div>
+          <div class="vehicle-card__body">
+            <h3 class="vehicle-card__name">{vehicle.data.title}</h3>
+            <p class="vehicle-card__maker">{vehicle.data.manufacturer}</p>
+            <p class="vehicle-card__desc">{vehicle.data.description}</p>
+            {(vehicle.data.speed !== undefined || vehicle.data.handling !== undefined) && (
+              <div class="stat-bars">
+                {vehicle.data.speed !== undefined && (
+                  <div class="stat-bar">
+                    <span class="stat-bar__label">Speed</span>
+                    <div class="stat-bar__track">
+                      <div class="stat-bar__fill" style={`width: ${vehicle.data.speed}%`} />
+                    </div>
+                    <span class="stat-bar__val">{vehicle.data.speed}</span>
+                  </div>
+                )}
+                {vehicle.data.handling !== undefined && (
+                  <div class="stat-bar">
+                    <span class="stat-bar__label">Handling</span>
+                    <div class="stat-bar__track">
+                      <div class="stat-bar__fill" style={`width: ${vehicle.data.handling}%`} />
+                    </div>
+                    <span class="stat-bar__val">{vehicle.data.handling}</span>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {filtered.length === 0 && (
+      <div class="empty-state">
+        <p>No vehicles found for this category.</p>
+        <a href="/vehicles/" class="btn-reset">Show all vehicles</a>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  .page-header {
+    padding: 32px 0 28px;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    color: var(--text-primary);
+    margin: 0 0 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin: 0;
+    max-width: 600px;
+  }
+
+  .filter-bar {
+    padding: 20px 0;
+    border-top: 1px solid var(--border-default);
+    border-bottom: 1px solid var(--border-default);
+    margin-bottom: 24px;
+  }
+
+  .results-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .results-count {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .clear-filter {
+    font-size: 0.8125rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    padding: 2px 8px;
+    border: 1px solid var(--color-primary);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+  }
+
+  .clear-filter:hover {
+    background: var(--color-primary);
+    color: #fff;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .vehicle-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .vehicle-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 94, 77, 0.12);
+  }
+
+  .vehicle-card__thumb {
+    position: relative;
+    height: 100px;
+    background: var(--bg-tertiary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vehicle-icon {
+    font-size: 2.5rem;
+    opacity: 0.25;
+    color: var(--text-primary);
+  }
+
+  .type-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .vehicle-card__body {
+    padding: 14px 16px 16px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .vehicle-card__name {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 2px;
+  }
+
+  .vehicle-card__maker {
+    font-size: 0.8125rem;
+    color: var(--color-secondary-dark);
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+
+  .vehicle-card__desc {
+    font-size: 0.8125rem;
+    color: var(--text-muted);
+    margin: 0 0 12px;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .stat-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .stat-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .stat-bar__label {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    width: 52px;
+    flex-shrink: 0;
+  }
+
+  .stat-bar__track {
+    flex: 1;
+    height: 4px;
+    background: var(--bg-tertiary);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .stat-bar__fill {
+    height: 100%;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+  }
+
+  .stat-bar__val {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    width: 24px;
+    text-align: right;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-muted);
+  }
+
+  .btn-reset {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 8px 20px;
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: background 0.2s ease;
+  }
+
+  .btn-reset:hover {
+    background: var(--color-primary-dark);
+  }
+
+  @media (max-width: 480px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

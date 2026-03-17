@@ -1,0 +1,969 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+import Countdown from '../components/wiki/Countdown.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+
+const pageTitle = 'GTA 6 Wiki | The Complete Grand Theft Auto VI Encyclopedia';
+const pageDesc =
+  'The most comprehensive GTA 6 wiki featuring characters, vehicles, weapons, map locations, radio stations, and more. Everything about Grand Theft Auto VI.';
+
+const navCards = [
+  {
+    icon: '🎭',
+    label: 'Characters',
+    href: '/characters/',
+    desc: 'Lucia, Jason, and the complete cast of Leonida',
+    count: '20+ entries',
+    color: '#FF5E4D',
+  },
+  {
+    icon: '🗺️',
+    label: 'Map & Locations',
+    href: '/map/',
+    desc: 'Leonida state, Vice City, and all key locations',
+    count: '50+ locations',
+    color: '#FFB84D',
+  },
+  {
+    icon: '🚗',
+    label: 'Vehicles',
+    href: '/vehicles/',
+    desc: 'Cars, motorcycles, boats, and aircraft',
+    count: '100+ vehicles',
+    color: '#FF7A2D',
+  },
+  {
+    icon: '🔫',
+    label: 'Weapons',
+    href: '/weapons/',
+    desc: 'Full arsenal — pistols, rifles, explosives, melee',
+    count: '60+ weapons',
+    color: '#FF2D78',
+  },
+  {
+    icon: '📻',
+    label: 'Radio Stations',
+    href: '/radio/',
+    desc: 'All stations and their complete track listings',
+    count: '10+ stations',
+    color: '#39FF7A',
+  },
+  {
+    icon: '🎮',
+    label: 'GTA Series',
+    href: '/series/',
+    desc: 'History and evolution of the GTA franchise',
+    count: '6 mainline games',
+    color: '#FFB84D',
+  },
+];
+
+const keyFacts = [
+  { label: 'Release Date', value: 'Nov 19, 2026' },
+  { label: 'Platforms', value: 'PS5 · Xbox Series X|S' },
+  { label: 'Setting', value: 'Leonida · Vice City' },
+  { label: 'Protagonists', value: 'Lucia & Jason' },
+];
+
+const newsPlaceholders = [
+  {
+    tag: 'Official',
+    date: 'TBD',
+    title: 'GTA VI Release Date Confirmed: November 19, 2026',
+    excerpt:
+      'Rockstar Games officially confirms Grand Theft Auto VI will launch on PlayStation 5 and Xbox Series X|S on November 19, 2026.',
+  },
+  {
+    tag: 'Trailer',
+    date: 'TBD',
+    title: 'Trailer 2 Breakdown: New Locations and Characters',
+    excerpt:
+      'A deep dive into everything shown in the second official GTA VI trailer — new locations, vehicle reveals, and story details.',
+  },
+  {
+    tag: 'Update',
+    date: 'TBD',
+    title: 'Everything We Know About the Leonida Map',
+    excerpt:
+      'Comprehensive overview of the confirmed Leonida state map, including Vice City and the surrounding open-world regions.',
+  },
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDesc}
+>
+  <JsonLd type="WebSite" data={{}} />
+
+  <!-- ============================================================
+       HERO SECTION
+  ============================================================ -->
+  <section class="hero" aria-label="GTA 6 Wiki Hero">
+    <!-- Background grid + glow -->
+    <div class="hero__bg" aria-hidden="true">
+      <div class="hero__grid"></div>
+      <div class="hero__glow hero__glow--1"></div>
+      <div class="hero__glow hero__glow--2"></div>
+      <div class="hero__glow hero__glow--3"></div>
+    </div>
+
+    <div class="hero__inner">
+      <!-- Badge -->
+      <div class="hero__badge" aria-label="Grand Theft Auto VI">
+        <span class="hero__badge-dot" aria-hidden="true"></span>
+        Grand Theft Auto VI · Coming Nov 19, 2026
+      </div>
+
+      <!-- Main title -->
+      <h1 class="hero__title">
+        <span class="hero__title-line">GTA 6</span>
+        <span class="hero__title-line hero__title-gradient">WIKI</span>
+      </h1>
+
+      <!-- Subtitle -->
+      <p class="hero__subtitle">
+        The Most Comprehensive Grand Theft Auto VI Encyclopedia
+      </p>
+
+      <!-- Countdown -->
+      <div class="hero__countdown">
+        <Countdown targetDate="2026-11-19T00:00:00" label="Days Until GTA VI Launches" />
+      </div>
+
+      <!-- CTA Buttons -->
+      <div class="hero__actions">
+        <a href="/characters/" class="btn btn--primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="5"/><path d="M3 21v-2a8 8 0 0 1 16 0v2"/></svg>
+          Explore Characters
+        </a>
+        <a href="/map/" class="btn btn--outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/><line x1="9" y1="3" x2="9" y2="18"/><line x1="15" y1="6" x2="15" y2="21"/></svg>
+          View the Map
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       QUICK NAV CARDS
+  ============================================================ -->
+  <section class="nav-section" aria-labelledby="nav-heading">
+    <div class="section-inner">
+      <div class="section-header">
+        <h2 id="nav-heading" class="section-title">Browse the Wiki</h2>
+        <p class="section-subtitle">Everything you need to know about Grand Theft Auto VI</p>
+      </div>
+
+      <div class="nav-grid" role="list">
+        {navCards.map((card) => (
+          <a
+            href={card.href}
+            class="nav-card"
+            style={`--card-accent: ${card.color}`}
+            role="listitem"
+            aria-label={`${card.label}: ${card.desc}`}
+          >
+            <div class="nav-card__header">
+              <div class="nav-card__icon" aria-hidden="true">{card.icon}</div>
+              <span class="nav-card__count">{card.count}</span>
+            </div>
+            <h3 class="nav-card__title">{card.label}</h3>
+            <p class="nav-card__desc">{card.desc}</p>
+            <div class="nav-card__footer">
+              <span class="nav-card__cta">Explore</span>
+              <svg
+                class="nav-card__arrow"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       GAME OVERVIEW
+  ============================================================ -->
+  <section class="overview-section" aria-labelledby="overview-heading">
+    <div class="section-inner">
+      <div class="overview-layout">
+        <!-- Text content -->
+        <div class="overview-content">
+          <div class="section-label">About the Game</div>
+          <h2 id="overview-heading" class="section-title">About Grand Theft Auto VI</h2>
+
+          <p class="overview-text">
+            Grand Theft Auto VI is the upcoming installment in Rockstar Games' landmark open-world crime franchise. Set in the fictional state of <strong>Leonida</strong> — inspired by Florida — the game returns to the iconic city of Vice City alongside a sprawling open countryside. It is the first GTA title to feature a female playable protagonist.
+          </p>
+          <p class="overview-text">
+            Players take on the roles of <strong>Lucia</strong> and <strong>Jason</strong>, two criminals navigating the criminal underworld of Leonida. The game promises the most expansive open world in the series to date, with a dynamic economy, enhanced NPC behaviors, and a narrative-driven experience across both protagonists' interconnected stories.
+          </p>
+          <p class="overview-text">
+            Confirmed for <strong>PlayStation 5</strong> and <strong>Xbox Series X|S</strong> with a release date of <strong>November 19, 2026</strong>, GTA VI builds on three decades of franchise history with next-generation visuals and the deepest simulation systems Rockstar has ever built.
+          </p>
+        </div>
+
+        <!-- Key facts sidebar -->
+        <div class="overview-sidebar">
+          <div class="facts-card">
+            <h3 class="facts-card__title">Key Facts</h3>
+            <dl class="facts-list">
+              {keyFacts.map((fact) => (
+                <div class="facts-item">
+                  <dt class="facts-item__label">{fact.label}</dt>
+                  <dd class="facts-item__value">{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          <div class="dev-card">
+            <div class="dev-card__icon" aria-hidden="true">🎮</div>
+            <p class="dev-card__text">
+              Developed by <strong>Rockstar Games</strong><br />
+              Published by <strong>Take-Two Interactive</strong>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       LATEST NEWS
+  ============================================================ -->
+  <section class="news-section" aria-labelledby="news-heading">
+    <div class="section-inner">
+      <div class="section-header section-header--row">
+        <div>
+          <div class="section-label">Stay Updated</div>
+          <h2 id="news-heading" class="section-title">Latest News &amp; Updates</h2>
+        </div>
+        <a href="/news/" class="btn btn--ghost" aria-label="View all GTA 6 news">
+          View all
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+        </a>
+      </div>
+
+      <div class="news-grid">
+        {newsPlaceholders.map((item) => (
+          <article class="news-card">
+            <div class="news-card__meta">
+              <span class="news-card__tag">{item.tag}</span>
+              <time class="news-card__date" datetime="2026">{item.date}</time>
+            </div>
+            <h3 class="news-card__title">{item.title}</h3>
+            <p class="news-card__excerpt">{item.excerpt}</p>
+            <div class="news-card__footer">
+              <span class="news-card__read">Read more</span>
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       DISCLAIMER STRIP
+  ============================================================ -->
+  <div class="disclaimer" role="note">
+    <div class="section-inner">
+      <p class="disclaimer__text">
+        GTA6 Wikis is an independent fan encyclopedia. All content is based on official trailers, announcements, and community research. Not affiliated with Rockstar Games or Take-Two Interactive.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* ============================================================
+     SHARED UTILITIES
+  ============================================================ */
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #FF5E4D;
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 42px);
+    letter-spacing: 0.03em;
+    color: var(--text-primary);
+    margin: 0 0 8px;
+    line-height: 1.1;
+  }
+
+  .section-subtitle {
+    font-size: 15px;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .section-header {
+    margin-bottom: 36px;
+  }
+
+  .section-header--row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* ============================================================
+     BUTTONS
+  ============================================================ */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+    cursor: pointer;
+  }
+
+  .btn--primary {
+    background: linear-gradient(135deg, #FF5E4D, #FF7A2D);
+    color: #fff;
+  }
+
+  .btn--primary:hover {
+    background: linear-gradient(135deg, #E03E2D, #FF5E4D);
+    color: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 24px rgba(255, 94, 77, 0.4);
+  }
+
+  .btn--outline {
+    background: transparent;
+    color: var(--text-primary);
+    border-color: var(--border-strong);
+  }
+
+  .btn--outline:hover {
+    color: #FF5E4D;
+    border-color: #FF5E4D;
+    background: rgba(255, 94, 77, 0.06);
+    transform: translateY(-1px);
+  }
+
+  .btn--ghost {
+    background: transparent;
+    color: var(--text-secondary);
+    border-color: var(--border-default);
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .btn--ghost:hover {
+    color: #FF5E4D;
+    border-color: #FF5E4D;
+    background: rgba(255, 94, 77, 0.06);
+  }
+
+  /* ============================================================
+     HERO
+  ============================================================ */
+  .hero {
+    position: relative;
+    min-height: 620px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 110px 24px 80px;
+    overflow: hidden;
+  }
+
+  /* Background elements */
+  .hero__bg {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero__grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255, 94, 77, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 94, 77, 0.06) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, #000 40%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, #000 40%, transparent 100%);
+  }
+
+  .hero__glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+  }
+
+  .hero__glow--1 {
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255, 94, 77, 0.18), transparent 70%);
+    top: -150px;
+    right: -100px;
+  }
+
+  .hero__glow--2 {
+    width: 450px;
+    height: 450px;
+    background: radial-gradient(circle, rgba(255, 184, 77, 0.14), transparent 70%);
+    bottom: -80px;
+    left: -80px;
+  }
+
+  .hero__glow--3 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(57, 255, 122, 0.08), transparent 70%);
+    top: 30%;
+    left: 10%;
+  }
+
+  :global(.dark) .hero__glow--1 { background: radial-gradient(circle, rgba(255, 94, 77, 0.28), transparent 70%); }
+  :global(.dark) .hero__glow--2 { background: radial-gradient(circle, rgba(255, 184, 77, 0.22), transparent 70%); }
+  :global(.dark) .hero__glow--3 { background: radial-gradient(circle, rgba(57, 255, 122, 0.14), transparent 70%); }
+
+  /* Hero inner content */
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #FF5E4D;
+    background: rgba(255, 94, 77, 0.08);
+    border: 1px solid rgba(255, 94, 77, 0.22);
+    padding: 5px 14px 5px 10px;
+    border-radius: 9999px;
+    margin-bottom: 28px;
+  }
+
+  .hero__badge-dot {
+    width: 7px;
+    height: 7px;
+    background: #39FF7A;
+    border-radius: 50%;
+    animation: pulse-dot 2s infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.8); }
+  }
+
+  .hero__title {
+    font-family: var(--font-display);
+    font-size: clamp(64px, 12vw, 120px);
+    line-height: 0.95;
+    letter-spacing: 0.04em;
+    color: var(--text-primary);
+    margin: 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero__title-line {
+    display: block;
+  }
+
+  .hero__title-gradient {
+    background: linear-gradient(135deg, #FF2D78 0%, #FF5E4D 30%, #FF7A2D 60%, #FFB84D 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero__subtitle {
+    font-size: clamp(15px, 2.2vw, 19px);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0 auto 36px;
+    max-width: 560px;
+  }
+
+  .hero__countdown {
+    margin-bottom: 36px;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ============================================================
+     NAV CARDS
+  ============================================================ */
+  .nav-section {
+    padding: 64px 0;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-default);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .nav-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .nav-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--card-accent, #FF5E4D);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+
+  .nav-card:hover {
+    border-color: var(--card-accent, #FF5E4D);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.08);
+  }
+
+  :global(.dark) .nav-card:hover {
+    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .nav-card:hover::after {
+    transform: scaleX(1);
+  }
+
+  .nav-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+
+  .nav-card__icon {
+    font-size: 26px;
+    line-height: 1;
+  }
+
+  .nav-card__count {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+    background: var(--bg-tertiary);
+    padding: 2px 8px;
+    border-radius: 9999px;
+  }
+
+  .nav-card__title {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .nav-card__desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+    flex: 1;
+  }
+
+  .nav-card__footer {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+  }
+
+  .nav-card__cta {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--card-accent, #FF5E4D);
+    transition: color 0.2s ease;
+  }
+
+  .nav-card__arrow {
+    color: var(--card-accent, #FF5E4D);
+    transition: transform 0.2s ease;
+  }
+
+  .nav-card:hover .nav-card__arrow {
+    transform: translateX(3px);
+  }
+
+  /* ============================================================
+     OVERVIEW
+  ============================================================ */
+  .overview-section {
+    padding: 80px 0;
+  }
+
+  .overview-layout {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .overview-content .section-title {
+    margin-bottom: 24px;
+  }
+
+  .overview-text {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin: 0 0 16px;
+  }
+
+  .overview-text:last-child {
+    margin-bottom: 0;
+  }
+
+  .overview-text strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  /* Facts card */
+  .facts-card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 16px;
+  }
+
+  .facts-card__title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .facts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 0;
+  }
+
+  .facts-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .facts-item__label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+  }
+
+  .facts-item__value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* Dev card */
+  .dev-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-default);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+
+  .dev-card__icon {
+    font-size: 24px;
+    flex-shrink: 0;
+  }
+
+  .dev-card__text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  .dev-card__text strong {
+    color: var(--text-primary);
+  }
+
+  /* ============================================================
+     NEWS
+  ============================================================ */
+  .news-section {
+    padding: 80px 0;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-default);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .news-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 12px;
+    padding: 22px;
+    transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: default;
+  }
+
+  .news-card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  :global(.dark) .news-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  }
+
+  .news-card__meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .news-card__tag {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #FF5E4D;
+    background: rgba(255, 94, 77, 0.1);
+    border: 1px solid rgba(255, 94, 77, 0.2);
+    padding: 2px 8px;
+    border-radius: 9999px;
+  }
+
+  .news-card__date {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .news-card__title {
+    font-family: var(--font-heading);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0 0 10px;
+  }
+
+  .news-card__excerpt {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+  }
+
+  .news-card__footer {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-default);
+  }
+
+  .news-card__read {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+  }
+
+  .news-card__footer svg {
+    color: var(--text-muted);
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+
+  .news-card:hover .news-card__read,
+  .news-card:hover .news-card__footer svg {
+    color: #FF5E4D;
+  }
+
+  .news-card:hover .news-card__footer svg {
+    transform: translateX(3px);
+  }
+
+  /* ============================================================
+     DISCLAIMER
+  ============================================================ */
+  .disclaimer {
+    padding: 16px 0;
+    border-top: 1px solid var(--border-default);
+  }
+
+  .disclaimer__text {
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* ============================================================
+     RESPONSIVE
+  ============================================================ */
+  @media (max-width: 1024px) {
+    .nav-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .overview-layout {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .overview-sidebar {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .facts-card {
+      margin-bottom: 0;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      min-height: 500px;
+      padding: 100px 20px 64px;
+    }
+
+    .nav-section,
+    .overview-section,
+    .news-section {
+      padding: 48px 0;
+    }
+
+    .news-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .section-header--row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: 92px 16px 56px;
+      min-height: 420px;
+    }
+
+    .nav-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .overview-sidebar {
+      grid-template-columns: 1fr;
+    }
+
+    .section-inner {
+      padding: 0 16px;
+    }
+  }
+</style>

@@ -1,0 +1,324 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import InfoBox from '../../components/wiki/InfoBox.astro';
+import JsonLd from '../../components/seo/JsonLd.astro';
+import { generateCanonical, SITE_URL } from '../../utils/seo';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const entries = await getCollection('radio');
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+};
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const data = entry.data;
+
+const canonicalUrl = generateCanonical(`/radio/${entry.id}`);
+const pageTitle = `${data.title} - GTA Radio Station | GTA6 Wikis`;
+
+const gameLabels: Record<string, string> = {
+  'gta6': 'GTA 6',
+  'gta-vice-city': 'GTA Vice City',
+  'gta5': 'GTA 5',
+};
+const gameLabel = gameLabels[data.game] ?? data.game;
+
+const infoFields = [
+  { label: 'Station Name', value: data.title },
+  { label: 'Game', value: gameLabel },
+  { label: 'Genre', value: data.genre },
+  ...(data.dj ? [{ label: 'DJ', value: data.dj }] : []),
+  ...(data.djVoiceActor ? [{ label: 'Voice Actor', value: data.djVoiceActor }] : []),
+  ...(data.songs ? [{ label: 'Tracks', value: String(data.songs.length) }] : []),
+];
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={data.description}
+  image={data.image}
+  canonicalUrl={canonicalUrl}
+  type="article"
+>
+  <JsonLd
+    type="Article"
+    data={{
+      headline: pageTitle,
+      description: data.description,
+      image: data.image.startsWith('http') ? data.image : `${SITE_URL}${data.image}`,
+      datePublished: data.datePublished.toISOString(),
+      dateModified: (data.dateModified ?? data.datePublished).toISOString(),
+      url: canonicalUrl,
+    }}
+  />
+
+  <div class="detail-page">
+    <div class="detail-page__container">
+      <Breadcrumb
+        items={[
+          { label: 'Radio Stations', href: '/radio/' },
+          { label: data.title },
+        ]}
+      />
+
+      <article class="detail-page__article">
+        <h1 class="detail-page__title">{data.title}</h1>
+
+        <div class="detail-page__body">
+          <!-- InfoBox floated right -->
+          <InfoBox
+            title={data.title}
+            image={data.image}
+            imageAlt={data.imageAlt}
+            fields={infoFields}
+          />
+
+          <!-- Songs tracklist table -->
+          {data.songs && data.songs.length > 0 && (
+            <div class="tracklist-section">
+              <h2 class="tracklist-section__heading">Tracklist</h2>
+              <div class="tracklist-table-wrap">
+                <table class="tracklist-table" role="table" aria-label={`${data.title} tracklist`}>
+                  <thead>
+                    <tr>
+                      <th class="tracklist-table__th tracklist-table__th--num" scope="col">#</th>
+                      <th class="tracklist-table__th" scope="col">Title</th>
+                      <th class="tracklist-table__th" scope="col">Artist</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.songs.map((song: { title: string; artist: string }, index: number) => (
+                      <tr class="tracklist-table__row">
+                        <td class="tracklist-table__td tracklist-table__td--num">{index + 1}</td>
+                        <td class="tracklist-table__td tracklist-table__td--title">{song.title}</td>
+                        <td class="tracklist-table__td tracklist-table__td--artist">{song.artist}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
+
+          <!-- Main content -->
+          <div class="detail-page__content prose">
+            <Content />
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .detail-page {
+    padding: 0 0 3rem;
+  }
+
+  .detail-page__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .detail-page__title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 1rem 0 1.5rem;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+  }
+
+  .detail-page__body {
+    position: relative;
+  }
+
+  /* Tracklist */
+  .tracklist-section {
+    margin: 0 0 1.5rem;
+  }
+
+  .tracklist-section__heading {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color-primary);
+    display: inline-block;
+    letter-spacing: 0.02em;
+  }
+
+  .tracklist-table-wrap {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border-default);
+  }
+
+  .tracklist-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .tracklist-table__th {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-default);
+    white-space: nowrap;
+  }
+
+  .tracklist-table__th--num {
+    width: 3rem;
+    text-align: center;
+  }
+
+  .tracklist-table__row {
+    border-bottom: 1px solid var(--border-default);
+    transition: background 0.15s;
+  }
+
+  .tracklist-table__row:last-child {
+    border-bottom: none;
+  }
+
+  .tracklist-table__row:hover {
+    background: var(--bg-surface);
+  }
+
+  .tracklist-table__td {
+    padding: 8px 14px;
+    color: var(--text-secondary);
+    vertical-align: middle;
+  }
+
+  .tracklist-table__td--num {
+    color: var(--text-muted);
+    font-size: 0.8125rem;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .tracklist-table__td--title {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .tracklist-table__td--artist {
+    color: var(--text-secondary);
+  }
+
+  /* Prose styles */
+  .detail-page__content :global(h2) {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 2rem 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color-primary);
+    letter-spacing: 0.02em;
+    scroll-margin-top: 80px;
+  }
+
+  .detail-page__content :global(h3) {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 1.5rem 0 0.5rem;
+    scroll-margin-top: 80px;
+  }
+
+  .detail-page__content :global(h4) {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 1.25rem 0 0.5rem;
+    scroll-margin-top: 80px;
+  }
+
+  .detail-page__content :global(p) {
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin: 0 0 1rem;
+  }
+
+  .detail-page__content :global(ul),
+  .detail-page__content :global(ol) {
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin: 0 0 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .detail-page__content :global(li) {
+    margin-bottom: 0.25rem;
+  }
+
+  .detail-page__content :global(strong) {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .detail-page__content :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: opacity 0.2s;
+  }
+
+  .detail-page__content :global(a:hover) {
+    opacity: 0.8;
+  }
+
+  .detail-page__content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    display: block;
+  }
+
+  .detail-page__content :global(th) {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-weight: 600;
+    padding: 10px 14px;
+    text-align: left;
+    border: 1px solid var(--border-default);
+  }
+
+  .detail-page__content :global(td) {
+    padding: 8px 14px;
+    border: 1px solid var(--border-default);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+
+  .detail-page__content :global(tr:nth-child(even) td) {
+    background: var(--bg-surface);
+  }
+
+  @media (max-width: 640px) {
+    .detail-page__container {
+      padding: 0 1rem;
+    }
+  }
+</style>

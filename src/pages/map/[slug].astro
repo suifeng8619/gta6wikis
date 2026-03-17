@@ -1,0 +1,293 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import InfoBox from '../../components/wiki/InfoBox.astro';
+import JsonLd from '../../components/seo/JsonLd.astro';
+import { generateCanonical, SITE_URL } from '../../utils/seo';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const entries = await getCollection('locations');
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+};
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const data = entry.data;
+
+const canonicalUrl = generateCanonical(`/map/${entry.id}`);
+const pageTitle = `${data.title} - GTA 6 Location | GTA6 Wikis`;
+
+const regionLabels: Record<string, string> = {
+  'vice-city': 'Vice City',
+  'leonida-state': 'Leonida State',
+  'leonida-keys': 'Leonida Keys',
+  'other': 'Other',
+};
+const regionLabel = regionLabels[data.region] ?? data.region;
+
+const infoFields = [
+  { label: 'Region', value: regionLabel },
+  ...(data.district ? [{ label: 'District', value: data.district }] : []),
+  { label: 'Area Type', value: data.area },
+  { label: 'Real World Counterpart', value: data.realWorldCounterpart },
+  { label: 'Atmosphere', value: data.atmosphere },
+];
+
+// Normalize image path
+const imageUrl = data.image.startsWith('/') ? data.image : `/${data.image}`;
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={data.description}
+  image={imageUrl}
+  canonicalUrl={canonicalUrl}
+  type="article"
+>
+  <JsonLd
+    type="Article"
+    data={{
+      headline: pageTitle,
+      description: data.description,
+      image: data.image.startsWith('http') ? data.image : `${SITE_URL}${imageUrl}`,
+      datePublished: data.datePublished.toISOString(),
+      dateModified: (data.dateModified ?? data.datePublished).toISOString(),
+      url: canonicalUrl,
+    }}
+  />
+
+  <div class="detail-page">
+    <div class="detail-page__container">
+      <Breadcrumb
+        items={[
+          { label: 'Map', href: '/map/' },
+          { label: data.title },
+        ]}
+      />
+
+      <article class="detail-page__article">
+        <h1 class="detail-page__title">{data.title}</h1>
+
+        <div class="detail-page__body">
+          <!-- InfoBox floated right -->
+          <InfoBox
+            title={data.title}
+            image={imageUrl}
+            imageAlt={data.imageAlt}
+            fields={infoFields}
+          />
+
+          <!-- Landmarks list -->
+          {data.landmarks && data.landmarks.length > 0 && (
+            <div class="location-list">
+              <h2 class="location-list__heading">Landmarks</h2>
+              <ul class="location-list__items" role="list">
+                {data.landmarks.map((landmark: string) => (
+                  <li class="location-list__item">
+                    <span class="location-list__bullet" aria-hidden="true">&#9654;</span>
+                    {landmark}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <!-- Activities list -->
+          {data.activities && data.activities.length > 0 && (
+            <div class="location-list">
+              <h2 class="location-list__heading">Activities</h2>
+              <ul class="location-list__items" role="list">
+                {data.activities.map((activity: string) => (
+                  <li class="location-list__item">
+                    <span class="location-list__bullet" aria-hidden="true">&#9654;</span>
+                    {activity}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <!-- Main content -->
+          <div class="detail-page__content prose">
+            <Content />
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .detail-page {
+    padding: 0 0 3rem;
+  }
+
+  .detail-page__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .detail-page__title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 1rem 0 1.5rem;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+  }
+
+  .detail-page__body {
+    position: relative;
+  }
+
+  /* Landmarks & Activities */
+  .location-list {
+    margin: 0 0 1.5rem;
+    padding: 1.25rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+  }
+
+  .location-list__heading {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .location-list__items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .location-list__item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .location-list__bullet {
+    color: var(--color-primary);
+    font-size: 0.6rem;
+    flex-shrink: 0;
+    position: relative;
+    top: -1px;
+  }
+
+  /* Prose styles */
+  .detail-page__content :global(h2) {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 2rem 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color-primary);
+    letter-spacing: 0.02em;
+    scroll-margin-top: 80px;
+  }
+
+  .detail-page__content :global(h3) {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 1.5rem 0 0.5rem;
+    scroll-margin-top: 80px;
+  }
+
+  .detail-page__content :global(h4) {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 1.25rem 0 0.5rem;
+    scroll-margin-top: 80px;
+  }
+
+  .detail-page__content :global(p) {
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin: 0 0 1rem;
+  }
+
+  .detail-page__content :global(ul),
+  .detail-page__content :global(ol) {
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin: 0 0 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .detail-page__content :global(li) {
+    margin-bottom: 0.25rem;
+  }
+
+  .detail-page__content :global(strong) {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .detail-page__content :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: opacity 0.2s;
+  }
+
+  .detail-page__content :global(a:hover) {
+    opacity: 0.8;
+  }
+
+  .detail-page__content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    display: block;
+  }
+
+  .detail-page__content :global(th) {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-weight: 600;
+    padding: 10px 14px;
+    text-align: left;
+    border: 1px solid var(--border-default);
+  }
+
+  .detail-page__content :global(td) {
+    padding: 8px 14px;
+    border: 1px solid var(--border-default);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+
+  .detail-page__content :global(tr:nth-child(even) td) {
+    background: var(--bg-surface);
+  }
+
+  @media (max-width: 640px) {
+    .detail-page__container {
+      padding: 0 1rem;
+    }
+  }
+</style>

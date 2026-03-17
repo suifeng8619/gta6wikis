@@ -1,0 +1,357 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+
+const allStations = await getCollection('radio');
+allStations.sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const gta6Stations = allStations.filter((s) => s.data.game === 'gta6');
+const vcStations = allStations.filter((s) => s.data.game === 'gta-vice-city');
+const gta5Stations = allStations.filter((s) => s.data.game === 'gta5');
+
+const pageTitle = 'GTA 6 Radio Stations - Complete Station List | GTA6 Wikis';
+const pageDescription =
+  'All radio stations in GTA 6 and the GTA series — genres, DJs, and track listings for Grand Theft Auto VI and classic GTA games.';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="page-container">
+    <Breadcrumb items={[{ label: 'Radio Stations' }]} />
+
+    <header class="page-header">
+      <h1 class="page-title">Radio Stations</h1>
+      <p class="page-subtitle">
+        Every radio station across the GTA series — from GTA 6 to GTA Vice City to GTA 5.
+      </p>
+      <div class="page-stats">
+        <span class="stat-badge">{allStations.length} Stations Total</span>
+        <span class="stat-badge stat-badge--primary">{gta6Stations.length} in GTA 6</span>
+        <span class="stat-badge">{vcStations.length} in Vice City</span>
+        <span class="stat-badge">{gta5Stations.length} in GTA 5</span>
+      </div>
+    </header>
+
+    {gta6Stations.length > 0 && (
+      <section class="radio-section">
+        <h2 class="section-title">
+          <span class="section-accent section-accent--gta6">GTA 6</span>
+        </h2>
+        <div class="card-grid">
+          {gta6Stations.map((station) => (
+            <a href={`/radio/${station.id}/`} class="radio-card radio-card--gta6">
+              <div class="radio-card__signal" aria-hidden="true">
+                <span class="signal-bar" />
+                <span class="signal-bar" />
+                <span class="signal-bar" />
+                <span class="signal-bar" />
+              </div>
+              <div class="radio-card__body">
+                <h3 class="radio-card__name">{station.data.title}</h3>
+                <p class="radio-card__genre">{station.data.genre}</p>
+                {station.data.dj && (
+                  <p class="radio-card__dj">
+                    <span class="dj-label">DJ:</span> {station.data.dj}
+                  </p>
+                )}
+                <p class="radio-card__desc">{station.data.description}</p>
+                {station.data.songs && station.data.songs.length > 0 && (
+                  <p class="radio-card__tracks">{station.data.songs.length} tracks</p>
+                )}
+              </div>
+              <div class="radio-card__game-tag">GTA 6</div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {vcStations.length > 0 && (
+      <section class="radio-section">
+        <h2 class="section-title">
+          <span class="section-accent section-accent--vc">GTA Vice City</span>
+        </h2>
+        <div class="card-grid">
+          {vcStations.map((station) => (
+            <a href={`/radio/${station.id}/`} class="radio-card radio-card--vc">
+              <div class="radio-card__signal" aria-hidden="true">
+                <span class="signal-bar" />
+                <span class="signal-bar" />
+                <span class="signal-bar" />
+                <span class="signal-bar" />
+              </div>
+              <div class="radio-card__body">
+                <h3 class="radio-card__name">{station.data.title}</h3>
+                <p class="radio-card__genre">{station.data.genre}</p>
+                {station.data.dj && (
+                  <p class="radio-card__dj">
+                    <span class="dj-label">DJ:</span> {station.data.dj}
+                  </p>
+                )}
+                <p class="radio-card__desc">{station.data.description}</p>
+                {station.data.songs && station.data.songs.length > 0 && (
+                  <p class="radio-card__tracks">{station.data.songs.length} tracks</p>
+                )}
+              </div>
+              <div class="radio-card__game-tag radio-card__game-tag--vc">Vice City</div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {gta5Stations.length > 0 && (
+      <section class="radio-section">
+        <h2 class="section-title">
+          <span class="section-accent section-accent--gta5">GTA 5</span>
+        </h2>
+        <div class="card-grid">
+          {gta5Stations.map((station) => (
+            <a href={`/radio/${station.id}/`} class="radio-card radio-card--gta5">
+              <div class="radio-card__signal" aria-hidden="true">
+                <span class="signal-bar" />
+                <span class="signal-bar" />
+                <span class="signal-bar" />
+                <span class="signal-bar" />
+              </div>
+              <div class="radio-card__body">
+                <h3 class="radio-card__name">{station.data.title}</h3>
+                <p class="radio-card__genre">{station.data.genre}</p>
+                {station.data.dj && (
+                  <p class="radio-card__dj">
+                    <span class="dj-label">DJ:</span> {station.data.dj}
+                  </p>
+                )}
+                <p class="radio-card__desc">{station.data.description}</p>
+                {station.data.songs && station.data.songs.length > 0 && (
+                  <p class="radio-card__tracks">{station.data.songs.length} tracks</p>
+                )}
+              </div>
+              <div class="radio-card__game-tag radio-card__game-tag--gta5">GTA 5</div>
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  .page-header {
+    padding: 32px 0 40px;
+    border-bottom: 1px solid var(--border-default);
+    margin-bottom: 48px;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    color: var(--text-primary);
+    margin: 0 0 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin: 0 0 20px;
+    max-width: 600px;
+  }
+
+  .page-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .stat-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-default);
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .stat-badge--primary {
+    background: rgba(255, 94, 77, 0.1);
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .radio-section {
+    margin-bottom: 56px;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-default);
+  }
+
+  .section-accent {
+    color: var(--color-primary);
+  }
+
+  .section-accent--gta6 {
+    color: var(--color-primary);
+  }
+
+  .section-accent--vc {
+    color: var(--color-secondary-dark);
+  }
+
+  .section-accent--gta5 {
+    color: var(--color-accent-warm);
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+
+  .radio-card {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .radio-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 94, 77, 0.12);
+  }
+
+  .radio-card__signal {
+    display: flex;
+    align-items: flex-end;
+    gap: 2px;
+    padding: 14px 10px;
+    min-width: 48px;
+    height: 100%;
+    background: var(--bg-tertiary);
+    flex-shrink: 0;
+  }
+
+  .signal-bar {
+    display: block;
+    width: 5px;
+    border-radius: 2px 2px 0 0;
+    background: var(--color-primary);
+    opacity: 0.4;
+  }
+
+  .signal-bar:nth-child(1) { height: 6px; }
+  .signal-bar:nth-child(2) { height: 10px; }
+  .signal-bar:nth-child(3) { height: 15px; }
+  .signal-bar:nth-child(4) { height: 20px; }
+
+  .radio-card--gta6 .signal-bar { background: var(--color-primary); }
+  .radio-card--vc .signal-bar { background: var(--color-secondary-dark); }
+  .radio-card--gta5 .signal-bar { background: var(--color-accent-warm); }
+
+  .radio-card__body {
+    padding: 14px 14px 40px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .radio-card__name {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 4px;
+  }
+
+  .radio-card__genre {
+    font-size: 0.8125rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    margin: 0 0 4px;
+  }
+
+  .radio-card--vc .radio-card__genre { color: var(--color-secondary-dark); }
+  .radio-card--gta5 .radio-card__genre { color: var(--color-accent-warm); }
+
+  .radio-card__dj {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0 0 8px;
+  }
+
+  .dj-label {
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .radio-card__desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .radio-card__tracks {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin: 8px 0 0;
+  }
+
+  .radio-card__game-tag {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 0.625rem;
+    font-weight: 700;
+    padding: 2px 6px;
+    background: var(--color-primary);
+    color: #fff;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .radio-card__game-tag--vc {
+    background: var(--color-secondary-dark);
+  }
+
+  .radio-card__game-tag--gta5 {
+    background: var(--color-accent-warm);
+  }
+
+  @media (max-width: 480px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

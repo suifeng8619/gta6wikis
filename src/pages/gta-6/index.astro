@@ -1,0 +1,578 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import AlertBox from '../../components/wiki/AlertBox.astro';
+---
+
+<BaseLayout
+  title="GTA 6 - Everything We Know | GTA6 Wikis"
+  description="The complete GTA 6 overview — release date, platforms, story, gameplay, characters, setting, and development history. Everything confirmed about Grand Theft Auto VI."
+  canonicalUrl="https://gta6wikis.com/gta-6/"
+>
+  <div class="page-wrapper">
+    <div class="container">
+      <Breadcrumb items={[{ label: 'GTA 6', href: '/gta-6/' }]} />
+    </div>
+
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero__eyebrow">Grand Theft Auto VI</div>
+        <h1 class="hero__title" id="hero-title">GTA 6</h1>
+        <p class="hero__subtitle">Everything We Know</p>
+        <div class="hero__meta">
+          <div class="hero__badge">
+            <span class="hero__badge-label">Release Date</span>
+            <span class="hero__badge-value">November 19, 2026</span>
+          </div>
+          <div class="hero__badge">
+            <span class="hero__badge-label">Platforms</span>
+            <span class="hero__badge-value">PS5 &amp; Xbox Series X|S</span>
+          </div>
+          <div class="hero__badge">
+            <span class="hero__badge-label">Developer</span>
+            <span class="hero__badge-value">Rockstar Games</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container content-grid">
+      <!-- Quick Nav -->
+      <nav class="quick-nav" aria-label="Page sections">
+        <h2 class="quick-nav__title">On This Page</h2>
+        <ul class="quick-nav__list">
+          <li><a href="#story">Story</a></li>
+          <li><a href="#gameplay">Gameplay</a></li>
+          <li><a href="#setting">Setting</a></li>
+          <li><a href="#characters">Characters</a></li>
+          <li><a href="#development">Development</a></li>
+        </ul>
+      </nav>
+
+      <div class="main-content">
+
+        <!-- Story -->
+        <section id="story" class="section" aria-labelledby="story-heading">
+          <h2 class="section__title" id="story-heading">Story</h2>
+          <p>GTA 6 follows two protagonists — Lucia Caminos and Jason Duval — in a Bonnie-and-Clyde style criminal partnership set across the fictional state of Leonida. Lucia, a Latina woman and the first female protagonist in the mainline GTA series, is introduced wearing an ankle monitor after being released from prison. She dreams of a better life — the same life her mother always pursued.</p>
+          <p>Jason Duval, a former military man turned drug runner and occasional robber, grew up surrounded by criminals and joined the army to escape his past. He now lives in the Leonida Keys and works for local dealers and a figure named Brian Heder. The two become criminal partners and lovers, embarking on escalating crimes across Vice City and Leonida.</p>
+          <AlertBox type="info" title="First Female Protagonist">
+            Lucia Caminos marks a historic milestone as the first playable female character in the mainline Grand Theft Auto series.
+          </AlertBox>
+          <p>The story is structured across five chapters. Players can switch between Lucia and Jason during certain missions, and each character brings unique skills and perspectives to the narrative.</p>
+        </section>
+
+        <!-- Gameplay -->
+        <section id="gameplay" class="section" aria-labelledby="gameplay-heading">
+          <h2 class="section__title" id="gameplay-heading">Gameplay</h2>
+          <p>GTA 6 represents a significant evolution across all core systems. The driving engine responds to weather conditions — rain, mud, and flooded roads affect vehicle grip and handling. Tires react differently to wet roads, mud, and off-road terrain, and vehicle customization choices such as larger wheels directly influence the feel of the ride.</p>
+          <p>Combat introduces a revised weapon wheel with limited storage (unlike GTA V's unlimited supply), expanded vehicle shooting options from car windows and truck beds, and a physics-driven melee system. Jason can throw NPCs through car windows; environmental objects like lampposts and benches become weapons.</p>
+          <p>Missions support multiple approaches — direct confrontation, stealth, or a combination. Over 100 main missions are expected alongside a wealth of side missions, dynamic random events, and police chases. Players can seamlessly switch between Jason and Lucia, with each character carrying different abilities and skill trees.</p>
+          <div class="cta-link">
+            <a href="/gta-6/gameplay/" class="btn">Full Gameplay Details &rarr;</a>
+          </div>
+        </section>
+
+        <!-- Setting -->
+        <section id="setting" class="section" aria-labelledby="setting-heading">
+          <h2 class="section__title" id="setting-heading">Setting — Leonida &amp; Vice City</h2>
+          <p>The game is set in the fictional state of Leonida, inspired by Florida. The name references Spanish explorer Juan Ponce de León, who led the first European expedition to Florida in 1513. The main city is Vice City — a Miami-inspired metropolis first seen in the 2001 game — now rebuilt on modern hardware with an estimated map size approximately 2.5 times larger than GTA V.</p>
+          <div class="locations-grid">
+            <div class="location-card">
+              <h3 class="location-card__name">Vice City</h3>
+              <p class="location-card__desc">The main city, based on Miami. Features Art Deco hotels, Ocean Drive, nightclubs, and dense urban districts.</p>
+            </div>
+            <div class="location-card">
+              <h3 class="location-card__name">Leonida Keys</h3>
+              <p class="location-card__desc">An island chain south of the main city. Jason's home base at the start of the story.</p>
+            </div>
+            <div class="location-card">
+              <h3 class="location-card__name">Grassrivers</h3>
+              <p class="location-card__desc">A rural region with swampland and Everglades-style terrain.</p>
+            </div>
+            <div class="location-card">
+              <h3 class="location-card__name">Port Gellhorn</h3>
+              <p class="location-card__desc">An industrial harbor area outside the main city.</p>
+            </div>
+            <div class="location-card">
+              <h3 class="location-card__name">Ambrosia</h3>
+              <p class="location-card__desc">An industrial rural area serving as the base for the Final Chapter biker gang.</p>
+            </div>
+            <div class="location-card">
+              <h3 class="location-card__name">Mount Kalaga</h3>
+              <p class="location-card__desc">A mountain landmark in the national park region of Leonida.</p>
+            </div>
+          </div>
+          <p>Approximately 70% of buildings can be entered with detailed interiors, compared to roughly 30% in GTA V.</p>
+        </section>
+
+        <!-- Characters -->
+        <section id="characters" class="section" aria-labelledby="characters-heading">
+          <h2 class="section__title" id="characters-heading">Characters</h2>
+          <div class="character-cards">
+            <article class="character-card" aria-labelledby="lucia-name">
+              <div class="character-card__header">
+                <h3 class="character-card__name" id="lucia-name">Lucia Caminos</h3>
+                <span class="character-card__tag">Protagonist</span>
+              </div>
+              <p>A Latina woman and the first female protagonist in the GTA franchise. She was taught to fight by her father from a young age, was incarcerated due to family troubles, and is first seen wearing an ankle monitor after parole. She seeks the better life her mother always dreamed of.</p>
+              <a href="/characters/lucia-caminos/" class="character-card__link">View full profile &rarr;</a>
+            </article>
+            <article class="character-card" aria-labelledby="jason-name">
+              <div class="character-card__header">
+                <h3 class="character-card__name" id="jason-name">Jason Duval</h3>
+                <span class="character-card__tag">Protagonist</span>
+              </div>
+              <p>A former military man whose tattoos reflect his infantry background. He grew up surrounded by criminals, joined the army to escape, and now works as a drug runner and occasional robber in the Leonida Keys. He and Lucia become partners in crime and in life.</p>
+              <a href="/characters/jason-duval/" class="character-card__link">View full profile &rarr;</a>
+            </article>
+          </div>
+        </section>
+
+        <!-- Development -->
+        <section id="development" class="section" aria-labelledby="development-heading">
+          <h2 class="section__title" id="development-heading">Development</h2>
+          <p>GTA 6 is the largest project in Rockstar Games history. Development spans 11 Rockstar studios worldwide with over 7,500 contributors. Former Rockstar artist David O'Reilly confirmed he worked on the project from 2018 to 2023, starting after Red Dead Redemption 2 wrapped. Full production began in earnest in 2020.</p>
+          <p>Take-Two Interactive confirmed that more than $1 billion was invested over a five-year period, with analyst estimates placing the total development and marketing budget above $2 billion — making it the most expensive video game ever produced.</p>
+          <div class="dev-stats">
+            <div class="dev-stat">
+              <span class="dev-stat__number">7,500+</span>
+              <span class="dev-stat__label">Developers</span>
+            </div>
+            <div class="dev-stat">
+              <span class="dev-stat__number">11</span>
+              <span class="dev-stat__label">Rockstar Studios</span>
+            </div>
+            <div class="dev-stat">
+              <span class="dev-stat__number">$2B+</span>
+              <span class="dev-stat__label">Est. Budget</span>
+            </div>
+            <div class="dev-stat">
+              <span class="dev-stat__number">8-12 yrs</span>
+              <span class="dev-stat__label">Dev Cycle</span>
+            </div>
+          </div>
+          <p>Lead development is handled by Rockstar North (Edinburgh), with Rockstar India contributing the largest single headcount at 1,615 personnel handling animation, environment design, and QA. The project is directed by Rob Nelson, who previously directed Red Dead Redemption 2.</p>
+          <AlertBox type="warning" title="2022 Leak">
+            In September 2022, 90 video clips from an unfinished build of GTA 6 were leaked online by Arion Kurtaj (alias teapotuberhacker), a member of the LAPSUS$ hacking group. Rockstar confirmed the intrusion but stated development would continue as planned. Kurtaj was convicted on 12 counts and sentenced to indefinite detention in a secure hospital.
+          </AlertBox>
+        </section>
+
+      </div>
+    </div>
+
+    <!-- Page links -->
+    <section class="related-pages" aria-labelledby="related-heading">
+      <div class="container">
+        <h2 class="related-pages__title" id="related-heading">Explore GTA 6</h2>
+        <div class="related-grid">
+          <a href="/gta-6/release-date/" class="related-card">
+            <span class="related-card__title">Release Date</span>
+            <span class="related-card__desc">November 19, 2026 — timeline, delays, platforms</span>
+          </a>
+          <a href="/gta-6/trailers/" class="related-card">
+            <span class="related-card__title">Trailers</span>
+            <span class="related-card__desc">Trailer 1 &amp; 2 — analysis, records, confirmed details</span>
+          </a>
+          <a href="/gta-6/gameplay/" class="related-card">
+            <span class="related-card__title">Gameplay</span>
+            <span class="related-card__desc">Driving, combat, stealth, dual protagonists</span>
+          </a>
+          <a href="/gta-6/buying-guide/" class="related-card">
+            <span class="related-card__title">Buying Guide</span>
+            <span class="related-card__desc">Editions, prices, platforms, pre-order info</span>
+          </a>
+          <a href="/gta-6/faq/" class="related-card">
+            <span class="related-card__title">FAQ</span>
+            <span class="related-card__desc">Answers to the most common GTA 6 questions</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-wrapper {
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    border-bottom: 1px solid var(--border-color);
+    padding: 3rem 0 2.5rem;
+    text-align: center;
+  }
+
+  .hero__eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+
+  .hero__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    line-height: 1;
+    color: var(--text-primary);
+    margin: 0 0 0.25rem;
+    letter-spacing: 0.02em;
+  }
+
+  .hero__subtitle {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin: 0 0 2rem;
+  }
+
+  .hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .hero__badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 0.75rem 1.25rem;
+    min-width: 160px;
+  }
+
+  .hero__badge-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+  }
+
+  .hero__badge-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* Content grid */
+  .content-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+    align-items: start;
+  }
+
+  /* Quick Nav */
+  .quick-nav {
+    position: sticky;
+    top: 80px;
+  }
+
+  .quick-nav__title {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 0 0 0.75rem;
+    font-weight: 600;
+  }
+
+  .quick-nav__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .quick-nav__list a {
+    display: block;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 6px;
+    border-left: 2px solid transparent;
+    transition: all 0.15s ease;
+  }
+
+  .quick-nav__list a:hover {
+    color: var(--color-accent);
+    border-left-color: var(--color-accent);
+    background: rgba(255, 94, 77, 0.06);
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 3rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .section:last-child {
+    border-bottom: none;
+  }
+
+  .section__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+    color: var(--text-primary);
+    margin: 0 0 1rem;
+  }
+
+  .section p {
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
+  /* Locations grid */
+  .locations-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .location-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+  }
+
+  .location-card__name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin: 0 0 0.4rem;
+  }
+
+  .location-card__desc {
+    font-size: 0.825rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Character cards */
+  .character-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin: 1rem 0;
+  }
+
+  .character-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .character-card__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .character-card__name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .character-card__tag {
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: rgba(255, 94, 77, 0.12);
+    color: var(--color-accent);
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+
+  .character-card p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 1rem;
+  }
+
+  .character-card__link {
+    font-size: 0.825rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .character-card__link:hover {
+    text-decoration: underline;
+  }
+
+  /* Dev stats */
+  .dev-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .dev-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    min-width: 120px;
+    flex: 1;
+  }
+
+  .dev-stat__number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    color: var(--color-accent);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .dev-stat__label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+  }
+
+  /* CTA link */
+  .cta-link {
+    margin-top: 1rem;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.6rem 1.25rem;
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: opacity 0.15s ease;
+  }
+
+  .btn:hover {
+    opacity: 0.88;
+  }
+
+  /* Related pages */
+  .related-pages {
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 2.5rem 0 3rem;
+  }
+
+  .related-pages__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.75rem;
+    letter-spacing: 0.04em;
+    color: var(--text-primary);
+    margin: 0 0 1.5rem;
+    text-align: center;
+  }
+
+  .related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 1rem;
+  }
+
+  .related-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 1.1rem 1.25rem;
+    text-decoration: none;
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .related-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-2px);
+  }
+
+  .related-card__title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .related-card__desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .quick-nav {
+      position: static;
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+    }
+
+    .quick-nav__list {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    .hero__meta {
+      gap: 0.75rem;
+    }
+
+    .hero__badge {
+      min-width: 130px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .dev-stats {
+      gap: 0.75rem;
+    }
+
+    .dev-stat {
+      min-width: 100px;
+    }
+  }
+</style>

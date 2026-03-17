@@ -1,0 +1,303 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import InfoBox from '../../components/wiki/InfoBox.astro';
+import JsonLd from '../../components/seo/JsonLd.astro';
+import { generateCanonical, SITE_URL } from '../../utils/seo';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const entries = await getCollection('vehicles');
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+};
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const data = entry.data;
+
+const canonicalUrl = generateCanonical(`/vehicles/${entry.id}`);
+const pageTitle = `${data.title} - GTA 6 Vehicle | GTA6 Wikis`;
+
+const typeLabel = data.type.charAt(0).toUpperCase() + data.type.slice(1).replace('-', ' ');
+
+const infoFields = [
+  { label: 'Type', value: typeLabel },
+  { label: 'Manufacturer', value: data.manufacturer },
+  { label: 'Real World Counterpart', value: data.realWorldCounterpart },
+  { label: 'First Appearance', value: data.firstAppearance },
+  { label: 'Customizable', value: data.customizable ? 'Yes' : 'No' },
+];
+
+// Stats that exist
+const stats: Array<{ label: string; value: number; color: string }> = [];
+if (data.speed !== undefined) stats.push({ label: 'Speed', value: data.speed, color: '#FF5E4D' });
+if (data.acceleration !== undefined) stats.push({ label: 'Acceleration', value: data.acceleration, color: '#FF8C42' });
+if (data.handling !== undefined) stats.push({ label: 'Handling', value: data.handling, color: '#FFB84D' });
+if (data.braking !== undefined) stats.push({ label: 'Braking', value: data.braking, color: '#E85D4A' });
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={data.description}
+  image={data.image}
+  canonicalUrl={canonicalUrl}
+  type="article"
+>
+  <JsonLd
+    type="Article"
+    data={{
+      headline: pageTitle,
+      description: data.description,
+      image: data.image.startsWith('http') ? data.image : `${SITE_URL}${data.image}`,
+      datePublished: data.datePublished.toISOString(),
+      dateModified: (data.dateModified ?? data.datePublished).toISOString(),
+      url: canonicalUrl,
+    }}
+  />
+
+  <div class="detail-page">
+    <div class="detail-page__container">
+      <Breadcrumb
+        items={[
+          { label: 'Vehicles', href: '/vehicles/' },
+          { label: data.title },
+        ]}
+      />
+
+      <article class="detail-page__article">
+        <h1 class="detail-page__title">{data.title}</h1>
+
+        <div class="detail-page__body">
+          <!-- InfoBox floated right -->
+          <InfoBox
+            title={data.title}
+            image={data.image}
+            imageAlt={data.imageAlt}
+            fields={infoFields}
+          />
+
+          <!-- Stats bars -->
+          {stats.length > 0 && (
+            <div class="stats-section">
+              <h2 class="stats-section__heading">Performance Stats</h2>
+              <div class="stats-bars">
+                {stats.map((stat) => (
+                  <div class="stat-bar">
+                    <div class="stat-bar__header">
+                      <span class="stat-bar__label">{stat.label}</span>
+                      <span class="stat-bar__value">{stat.value}/100</span>
+                    </div>
+                    <div class="stat-bar__track" role="progressbar" aria-valuenow={stat.value} aria-valuemin={0} aria-valuemax={100} aria-label={`${stat.label}: ${stat.value} out of 100`}>
+                      <div
+                        class="stat-bar__fill"
+                        style={`width: ${stat.value}%; background-color: ${stat.color};`}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <!-- Main content -->
+          <div class="detail-page__content prose">
+            <Content />
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .detail-page {
+    padding: 0 0 3rem;
+  }
+
+  .detail-page__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .detail-page__title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 1rem 0 1.5rem;
+    line-height: 1.2;
+    letter-spacing: 0.02em;
+  }
+
+  .detail-page__body {
+    position: relative;
+  }
+
+  /* Stats bars */
+  .stats-section {
+    margin: 0 0 1.5rem;
+    padding: 1.25rem;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    clear: none;
+  }
+
+  .stats-section__heading {
+    font-family: var(--font-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .stats-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .stat-bar__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+
+  .stat-bar__label {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .stat-bar__value {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .stat-bar__track {
+    height: 8px;
+    background: var(--bg-tertiary);
+    border-radius: 9999px;
+    overflow: hidden;
+  }
+
+  .stat-bar__fill {
+    height: 100%;
+    border-radius: 9999px;
+    transition: width 0.6s ease;
+  }
+
+  /* Prose styles */
+  .detail-page__content :global(h2) {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 2rem 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color-primary);
+    letter-spacing: 0.02em;
+    scroll-margin-top: 80px;
+  }
+
+  .detail-page__content :global(h3) {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 1.5rem 0 0.5rem;
+    scroll-margin-top: 80px;
+  }
+
+  .detail-page__content :global(h4) {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 1.25rem 0 0.5rem;
+    scroll-margin-top: 80px;
+  }
+
+  .detail-page__content :global(p) {
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin: 0 0 1rem;
+  }
+
+  .detail-page__content :global(ul),
+  .detail-page__content :global(ol) {
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin: 0 0 1rem;
+    padding-left: 1.5rem;
+  }
+
+  .detail-page__content :global(li) {
+    margin-bottom: 0.25rem;
+  }
+
+  .detail-page__content :global(strong) {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .detail-page__content :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: opacity 0.2s;
+  }
+
+  .detail-page__content :global(a:hover) {
+    opacity: 0.8;
+  }
+
+  .detail-page__content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    overflow-x: auto;
+    display: block;
+  }
+
+  .detail-page__content :global(th) {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    font-weight: 600;
+    padding: 10px 14px;
+    text-align: left;
+    border: 1px solid var(--border-default);
+  }
+
+  .detail-page__content :global(td) {
+    padding: 8px 14px;
+    border: 1px solid var(--border-default);
+    color: var(--text-secondary);
+    vertical-align: top;
+  }
+
+  .detail-page__content :global(tr:nth-child(even) td) {
+    background: var(--bg-surface);
+  }
+
+  @media (max-width: 640px) {
+    .detail-page__container {
+      padding: 0 1rem;
+    }
+
+    .stats-section {
+      margin-right: 0;
+    }
+  }
+</style>

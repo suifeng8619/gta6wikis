@@ -1,0 +1,384 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+
+const allSeries = await getCollection('series');
+
+// Sort by releaseDate descending (newest first)
+allSeries.sort((a, b) => {
+  const dateA = new Date(a.data.releaseDate).getTime();
+  const dateB = new Date(b.data.releaseDate).getTime();
+  return dateB - dateA;
+});
+
+function getReleaseYear(dateStr: string): string {
+  return new Date(dateStr).getFullYear().toString();
+}
+
+const pageTitle = 'GTA Series - Complete Game History | GTA6 Wikis';
+const pageDescription =
+  'Complete history of the Grand Theft Auto series — every mainline GTA game from GTA III to GTA VI with release dates, platforms, and Metacritic scores.';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <div class="page-container">
+    <Breadcrumb items={[{ label: 'GTA Series' }]} />
+
+    <header class="page-header">
+      <h1 class="page-title">GTA Series</h1>
+      <p class="page-subtitle">
+        The complete history of Grand Theft Auto — from the streets of Liberty City to Vice City's Leonida.
+      </p>
+      <div class="page-stats">
+        <span class="stat-badge">{allSeries.length} Games</span>
+      </div>
+    </header>
+
+    <div class="series-list">
+      {allSeries.map((game, index) => {
+        const year = getReleaseYear(game.data.releaseDate);
+        const isLatest = index === 0;
+        return (
+          <a href={`/series/${game.id}/`} class={`series-card ${isLatest ? 'series-card--latest' : ''}`}>
+            {isLatest && <div class="latest-ribbon">Latest</div>}
+            <div class="series-card__year-col">
+              <span class="series-year">{year}</span>
+            </div>
+            <div class="series-card__thumb">
+              <span class="thumb-placeholder" aria-hidden="true">GTA</span>
+            </div>
+            <div class="series-card__body">
+              <h3 class="series-card__title">{game.data.title}</h3>
+              <p class="series-card__setting">{game.data.setting}</p>
+              <p class="series-card__desc">{game.data.description}</p>
+              <div class="series-card__meta">
+                <span class="meta-item">
+                  <span class="meta-label">Protagonist</span>
+                  <span class="meta-value">{game.data.protagonist}</span>
+                </span>
+                <span class="meta-item">
+                  <span class="meta-label">City</span>
+                  <span class="meta-value">{game.data.city}</span>
+                </span>
+                <span class="meta-item">
+                  <span class="meta-label">Developer</span>
+                  <span class="meta-value">{game.data.developer}</span>
+                </span>
+              </div>
+              <div class="series-card__footer">
+                <div class="platforms">
+                  {game.data.platforms.slice(0, 4).map((p) => (
+                    <span class="platform-tag">{p}</span>
+                  ))}
+                  {game.data.platforms.length > 4 && (
+                    <span class="platform-tag platform-tag--more">+{game.data.platforms.length - 4}</span>
+                  )}
+                </div>
+                {game.data.metacriticScore !== undefined && (
+                  <div class={`metacritic ${game.data.metacriticScore >= 90 ? 'metacritic--green' : game.data.metacriticScore >= 75 ? 'metacritic--yellow' : 'metacritic--red'}`}>
+                    <span class="metacritic__score">{game.data.metacriticScore}</span>
+                    <span class="metacritic__label">Metacritic</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  .page-header {
+    padding: 32px 0 40px;
+    border-bottom: 1px solid var(--border-default);
+    margin-bottom: 48px;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    color: var(--text-primary);
+    margin: 0 0 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin: 0 0 20px;
+    max-width: 600px;
+  }
+
+  .page-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .stat-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-default);
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .series-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .series-card {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+    gap: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .series-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 94, 77, 0.12);
+  }
+
+  .series-card--latest {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 1px var(--color-primary);
+  }
+
+  .latest-ribbon {
+    position: absolute;
+    top: 12px;
+    right: -8px;
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 0.6875rem;
+    font-weight: 800;
+    padding: 3px 12px 3px 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: 3px 0 0 3px;
+    z-index: 1;
+  }
+
+  .series-card__year-col {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    min-width: 64px;
+    background: var(--bg-tertiary);
+    border-right: 1px solid var(--border-default);
+    padding: 16px 8px;
+  }
+
+  .series-year {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    color: var(--text-secondary);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    letter-spacing: 0.04em;
+  }
+
+  .series-card__thumb {
+    width: 120px;
+    min-width: 120px;
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid var(--border-default);
+  }
+
+  .thumb-placeholder {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    color: var(--text-muted);
+    opacity: 0.3;
+    letter-spacing: 0.06em;
+  }
+
+  .series-card__body {
+    padding: 18px 20px;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .series-card__title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .series-card__setting {
+    font-size: 0.8125rem;
+    color: var(--color-primary);
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .series-card__desc {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .series-card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 4px 0;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .meta-label {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .meta-value {
+    font-size: 0.8125rem;
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .series-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+
+  .platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .platform-tag {
+    font-size: 0.6875rem;
+    padding: 2px 7px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-default);
+    border-radius: 4px;
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+
+  .platform-tag--more {
+    background: var(--bg-tertiary);
+    border-color: var(--border-strong);
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+
+  .metacritic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 6px;
+    min-width: 52px;
+    flex-shrink: 0;
+  }
+
+  .metacritic--green {
+    background: rgba(26, 122, 58, 0.12);
+    border: 1px solid var(--color-success);
+  }
+
+  .metacritic--yellow {
+    background: rgba(184, 90, 0, 0.1);
+    border: 1px solid var(--color-warning);
+  }
+
+  .metacritic--red {
+    background: rgba(192, 21, 15, 0.1);
+    border: 1px solid var(--color-error);
+  }
+
+  .metacritic__score {
+    font-size: 1.125rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+
+  .metacritic--green .metacritic__score { color: var(--color-success); }
+  .metacritic--yellow .metacritic__score { color: var(--color-warning); }
+  .metacritic--red .metacritic__score { color: var(--color-error); }
+
+  .metacritic__label {
+    font-size: 0.5625rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-top: 1px;
+  }
+
+  @media (max-width: 640px) {
+    .series-card__thumb {
+      display: none;
+    }
+
+    .series-card__year-col {
+      width: 48px;
+      min-width: 48px;
+    }
+
+    .series-year {
+      font-size: 0.875rem;
+    }
+
+    .series-card__body {
+      padding: 14px 14px;
+    }
+
+    .series-card__meta {
+      gap: 10px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .series-card__year-col {
+      display: none;
+    }
+  }
+</style>

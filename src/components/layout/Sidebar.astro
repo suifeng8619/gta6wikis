@@ -1,0 +1,331 @@
+---
+interface NavItem {
+  label: string;
+  href: string;
+  children?: NavItem[];
+}
+
+interface Props {
+  currentPage?: string;
+  category?: string;
+  navItems?: NavItem[];
+}
+
+const {
+  currentPage = '',
+  category = '',
+  navItems = [],
+} = Astro.props;
+
+// Default nav items by category if none provided
+const defaultNavByCategory: Record<string, NavItem[]> = {
+  characters: [
+    { label: 'All Characters', href: '/characters/' },
+    { label: 'Lucia Caminos', href: '/characters/lucia/' },
+    { label: 'Jason', href: '/characters/jason/' },
+    { label: 'Protagonists', href: '/characters/protagonists/' },
+    { label: 'Supporting Cast', href: '/characters/supporting/' },
+    { label: 'Antagonists', href: '/characters/antagonists/' },
+  ],
+  vehicles: [
+    { label: 'All Vehicles', href: '/vehicles/' },
+    { label: 'Cars', href: '/vehicles/cars/' },
+    { label: 'Trucks', href: '/vehicles/trucks/' },
+    { label: 'Motorcycles', href: '/vehicles/motorcycles/' },
+    { label: 'Boats', href: '/vehicles/boats/' },
+    { label: 'Aircraft', href: '/vehicles/aircraft/' },
+  ],
+  weapons: [
+    { label: 'All Weapons', href: '/weapons/' },
+    { label: 'Pistols', href: '/weapons/pistols/' },
+    { label: 'Rifles', href: '/weapons/rifles/' },
+    { label: 'Shotguns', href: '/weapons/shotguns/' },
+    { label: 'Melee', href: '/weapons/melee/' },
+    { label: 'Explosives', href: '/weapons/explosives/' },
+  ],
+  map: [
+    { label: 'Overview', href: '/map/' },
+    { label: 'Vice City', href: '/map/vice-city/' },
+    { label: 'Leonida', href: '/map/leonida/' },
+    { label: 'Beaches', href: '/map/beaches/' },
+    { label: 'Points of Interest', href: '/map/points-of-interest/' },
+  ],
+  radio: [
+    { label: 'All Stations', href: '/radio/' },
+    { label: 'Vice FM', href: '/radio/vice-fm/' },
+    { label: 'Wave 103', href: '/radio/wave-103/' },
+    { label: 'Flash FM', href: '/radio/flash-fm/' },
+  ],
+  guides: [
+    { label: 'Getting Started', href: '/guides/' },
+    { label: 'Main Story', href: '/guides/main-story/' },
+    { label: 'Side Missions', href: '/guides/side-missions/' },
+    { label: 'Tips & Tricks', href: '/guides/tips/' },
+    { label: 'Achievements', href: '/guides/achievements/' },
+  ],
+};
+
+const resolvedItems = navItems.length > 0
+  ? navItems
+  : (category && defaultNavByCategory[category.toLowerCase()]) || [];
+
+const currentPath = currentPage || Astro.url.pathname;
+---
+
+<aside class="sidebar" aria-label="Section navigation">
+  <div class="sidebar__inner">
+    {category && (
+      <div class="sidebar__category-badge">
+        <span class="sidebar__category-label">{category}</span>
+      </div>
+    )}
+
+    <button
+      class="sidebar__toggle"
+      aria-expanded="true"
+      aria-controls="sidebar-nav"
+      type="button"
+      id="sidebar-toggle"
+    >
+      <span class="sidebar__toggle-label">Navigation</span>
+      <svg
+        class="sidebar__toggle-icon"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <polyline points="18 15 12 9 6 15" />
+      </svg>
+    </button>
+
+    <nav id="sidebar-nav" class="sidebar__nav" aria-label={`${category || 'Page'} navigation`}>
+      {resolvedItems.length > 0 ? (
+        <ul class="sidebar__list" role="list">
+          {resolvedItems.map((item) => (
+            <li class="sidebar__item">
+              <a
+                href={item.href}
+                class={`sidebar__link${currentPath === item.href || currentPath.startsWith(item.href + '?') ? ' sidebar__link--active' : ''}`}
+                aria-current={currentPath === item.href ? 'page' : undefined}
+              >
+                {currentPath === item.href && (
+                  <span class="sidebar__active-indicator" aria-hidden="true" />
+                )}
+                {item.label}
+              </a>
+              {item.children && item.children.length > 0 && (
+                <ul class="sidebar__sublist" role="list">
+                  {item.children.map((child) => (
+                    <li>
+                      <a
+                        href={child.href}
+                        class={`sidebar__sublink${currentPath === child.href ? ' sidebar__sublink--active' : ''}`}
+                        aria-current={currentPath === child.href ? 'page' : undefined}
+                      >
+                        {child.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="sidebar__empty">No navigation items.</p>
+      )}
+    </nav>
+  </div>
+</aside>
+
+<style>
+  .sidebar {
+    width: 260px;
+    flex-shrink: 0;
+  }
+
+  .sidebar__inner {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-default);
+    border-radius: 12px;
+    overflow: hidden;
+    position: sticky;
+    top: 80px;
+  }
+
+  /* Category badge */
+  .sidebar__category-badge {
+    padding: 16px 16px 0;
+  }
+
+  .sidebar__category-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #FF5E4D;
+    background: rgba(255, 94, 77, 0.1);
+    border: 1px solid rgba(255, 94, 77, 0.2);
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+
+  /* Toggle button */
+  .sidebar__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 14px 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .sidebar__toggle-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+
+  .sidebar__toggle-icon {
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .sidebar__toggle[aria-expanded="false"] .sidebar__toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  /* Nav */
+  .sidebar__nav {
+    padding: 8px;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  .sidebar__nav.is-collapsed {
+    max-height: 0;
+    padding: 0 8px;
+  }
+
+  /* List */
+  .sidebar__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sidebar__item {
+    position: relative;
+  }
+
+  .sidebar__link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease, background 0.2s ease;
+    position: relative;
+  }
+
+  .sidebar__link:hover {
+    color: #FF5E4D;
+    background: rgba(255, 94, 77, 0.08);
+  }
+
+  .sidebar__link--active {
+    color: #FF5E4D;
+    background: rgba(255, 94, 77, 0.12);
+    font-weight: 500;
+  }
+
+  .sidebar__active-indicator {
+    display: block;
+    width: 3px;
+    height: 16px;
+    background: linear-gradient(180deg, #FF5E4D, #FFB84D);
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+
+  /* Sublist */
+  .sidebar__sublist {
+    list-style: none;
+    margin: 2px 0 0;
+    padding: 0 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .sidebar__sublink {
+    display: block;
+    padding: 7px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease, background 0.2s ease;
+  }
+
+  .sidebar__sublink:hover {
+    color: #FF5E4D;
+    background: rgba(255, 94, 77, 0.06);
+  }
+
+  .sidebar__sublink--active {
+    color: #FF5E4D;
+    background: rgba(255, 94, 77, 0.08);
+    font-weight: 500;
+  }
+
+  /* Empty state */
+  .sidebar__empty {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 12px;
+    margin: 0;
+  }
+
+  /* Responsive: collapse to drawer on mobile */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 100%;
+    }
+
+    .sidebar__inner {
+      position: static;
+    }
+  }
+</style>
+
+<script>
+  const sidebarToggle = document.getElementById('sidebar-toggle');
+  const sidebarNav = document.getElementById('sidebar-nav');
+
+  sidebarToggle?.addEventListener('click', () => {
+    const isExpanded = sidebarToggle.getAttribute('aria-expanded') === 'true';
+    sidebarToggle.setAttribute('aria-expanded', String(!isExpanded));
+    sidebarNav?.classList.toggle('is-collapsed', isExpanded);
+  });
+</script>

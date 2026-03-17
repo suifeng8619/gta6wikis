@@ -1,0 +1,198 @@
+---
+/**
+ * RelatedPages.astro — 相关页面推荐
+ *
+ * Usage:
+ * <RelatedPages
+ *   pages={[
+ *     { title: "Jason Duval", href: "/wiki/characters/jason", image: "/images/jason.webp", category: "角色" },
+ *     { title: "Lucia", href: "/wiki/characters/lucia", image: "/images/lucia.webp", category: "角色" },
+ *     { title: "枪械大全", href: "/wiki/weapons", image: "/images/weapons.webp", category: "武器" },
+ *   ]}
+ * />
+ */
+
+interface Page {
+  title: string;
+  href: string;
+  image?: string;
+  category?: string;
+}
+
+interface Props {
+  pages: Page[];
+  heading?: string;
+}
+
+const { pages, heading = '相关页面' } = Astro.props;
+---
+
+<section class="related-pages" aria-labelledby="related-pages-heading">
+  <h2 class="related-pages__heading" id="related-pages-heading">{heading}</h2>
+  <ul class="related-pages__grid" role="list">
+    {pages.map((page) => (
+      <li class="related-pages__item">
+        <a href={page.href} class="related-pages__card" aria-label={page.title}>
+          <div class="related-pages__image-wrap">
+            {page.image
+              ? (
+                <img
+                  src={page.image}
+                  alt={page.title}
+                  class="related-pages__image"
+                  loading="lazy"
+                  decoding="async"
+                />
+              )
+              : (
+                <div class="related-pages__image-placeholder" aria-hidden="true">
+                  <span>GTA6</span>
+                </div>
+              )
+            }
+            {page.category && (
+              <span class="related-pages__category-badge" aria-label={`分类: ${page.category}`}>
+                {page.category}
+              </span>
+            )}
+          </div>
+          <div class="related-pages__info">
+            <span class="related-pages__title">{page.title}</span>
+          </div>
+        </a>
+      </li>
+    ))}
+  </ul>
+</section>
+
+<style>
+  .related-pages {
+    margin: 2rem 0;
+  }
+
+  .related-pages__heading {
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 1rem 0;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--color-primary);
+    display: inline-block;
+  }
+
+  .related-pages__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .related-pages__card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-default);
+    background: var(--bg-surface);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .related-pages__card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(26, 15, 12, 0.14);
+    border-color: var(--color-primary);
+  }
+
+  :global(.dark) .related-pages__card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.50);
+  }
+
+  .related-pages__image-wrap {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: var(--bg-tertiary);
+  }
+
+  .related-pages__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease;
+  }
+
+  .related-pages__card:hover .related-pages__image {
+    transform: scale(1.05);
+  }
+
+  /* 无图时的占位符 */
+  .related-pages__image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #FF5E4D 0%, #FFB84D 100%);
+  }
+
+  .related-pages__image-placeholder span {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+  }
+
+  /* 分类角标 */
+  .related-pages__category-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    background: var(--color-primary);
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  .related-pages__info {
+    padding: 10px 12px;
+  }
+
+  .related-pages__title {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+    transition: color 0.2s;
+  }
+
+  .related-pages__card:hover .related-pages__title {
+    color: var(--color-primary);
+  }
+
+  /* 2列：中等屏幕 */
+  @media (max-width: 768px) {
+    .related-pages__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+  }
+
+  /* 1列：小屏幕 */
+  @media (max-width: 480px) {
+    .related-pages__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

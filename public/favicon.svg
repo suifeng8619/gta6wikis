@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF5E4D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFB84D;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background rounded rect -->
+  <rect width="128" height="128" rx="24" ry="24" fill="#1A0F0C"/>
+  <!-- VI text -->
+  <text
+    x="64"
+    y="88"
+    font-family="'Impact', 'Arial Black', sans-serif"
+    font-size="68"
+    font-weight="900"
+    text-anchor="middle"
+    fill="url(#grad)"
+    letter-spacing="-2"
+  >VI</text>
+</svg>

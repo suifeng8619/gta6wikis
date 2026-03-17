@@ -1,0 +1,305 @@
+---
+import BaseLayout from '../components/layout/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Search | GTA6 Wikis"
+  description="Search GTA 6 Wikis for characters, map locations, vehicles, weapons, and guides."
+  canonicalUrl=""
+  noindex={true}
+>
+
+  <section class="search-page">
+    <div class="search-hero">
+      <h1 class="search-title">Search GTA6 Wikis</h1>
+      <p class="search-subtitle">Find anything — characters, vehicles, weapons, guides</p>
+    </div>
+
+    <div class="search-container">
+      <!-- Pagefind UI CSS -->
+      <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+
+      <div id="search" class="pagefind-wrapper"></div>
+
+      <!-- Pagefind UI JS -->
+      <script src="/pagefind/pagefind-ui.js" is:inline></script>
+      <script is:inline>
+        window.addEventListener('DOMContentLoaded', () => {
+          new PagefindUI({
+            element: "#search",
+            showSubResults: true,
+            showImages: false,
+            excerptLength: 20,
+            resetStyles: false,
+          });
+        });
+      </script>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* === Search Page Layout === */
+  .search-page {
+    min-height: calc(100vh - 200px);
+    padding: 3rem 1rem 5rem;
+  }
+
+  .search-hero {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+
+  .search-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--text-primary);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .search-subtitle {
+    color: var(--text-muted);
+    font-size: 1rem;
+  }
+
+  .search-container {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .pagefind-wrapper {
+    width: 100%;
+  }
+
+  /* ============================================
+     Pagefind UI 样式覆盖 — 适配设计系统
+     禁止蓝色/紫色 (Hue 180°-320°)
+     ============================================ */
+
+  /* CSS custom properties that Pagefind uses */
+  #search {
+    --pagefind-ui-scale: 1;
+    --pagefind-ui-primary: #FF5E4D;
+    --pagefind-ui-text: var(--text-primary);
+    --pagefind-ui-background: var(--bg-surface);
+    --pagefind-ui-border: var(--border-default);
+    --pagefind-ui-tag: var(--bg-tertiary);
+    --pagefind-ui-border-width: 1px;
+    --pagefind-ui-border-radius: 8px;
+    --pagefind-ui-image-border-radius: 6px;
+    --pagefind-ui-image-box-ratio: 3 / 2;
+    --pagefind-ui-font: var(--font-body);
+  }
+
+  /* Search input */
+  :global(.pagefind-ui__search-input) {
+    width: 100% !important;
+    padding: 0.875rem 1.25rem !important;
+    font-size: 1.05rem !important;
+    font-family: var(--font-body) !important;
+    background-color: var(--bg-surface) !important;
+    color: var(--text-primary) !important;
+    border: 1.5px solid var(--border-default) !important;
+    border-radius: 10px !important;
+    outline: none !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+    box-shadow: none !important;
+  }
+
+  :global(.pagefind-ui__search-input:focus) {
+    border-color: #FF5E4D !important;
+    box-shadow: 0 0 0 3px rgba(255, 94, 77, 0.18) !important;
+  }
+
+  :global(.pagefind-ui__search-input::placeholder) {
+    color: var(--text-muted) !important;
+  }
+
+  /* Search button (clear / search) */
+  :global(.pagefind-ui__search-clear) {
+    color: var(--text-muted) !important;
+    background: transparent !important;
+  }
+
+  :global(.pagefind-ui__search-clear:hover) {
+    color: #FF5E4D !important;
+  }
+
+  /* Result list */
+  :global(.pagefind-ui__results) {
+    margin-top: 1.5rem !important;
+    list-style: none !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  /* Individual result card */
+  :global(.pagefind-ui__result) {
+    background-color: var(--bg-surface) !important;
+    border: 1px solid var(--border-default) !important;
+    border-radius: 10px !important;
+    padding: 1.25rem 1.5rem !important;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+  }
+
+  :global(.pagefind-ui__result:hover) {
+    border-color: #FF5E4D !important;
+    box-shadow: 0 2px 12px rgba(255, 94, 77, 0.12) !important;
+  }
+
+  /* Result title */
+  :global(.pagefind-ui__result-title) {
+    font-family: var(--font-heading) !important;
+    font-size: 1.05rem !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.35rem !important;
+  }
+
+  :global(.pagefind-ui__result-title a) {
+    color: var(--text-primary) !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease !important;
+  }
+
+  :global(.pagefind-ui__result-title a:hover) {
+    color: #FF5E4D !important;
+  }
+
+  /* Result excerpt */
+  :global(.pagefind-ui__result-excerpt) {
+    color: var(--text-secondary) !important;
+    font-size: 0.9rem !important;
+    line-height: 1.6 !important;
+  }
+
+  /* Highlighted match text */
+  :global(.pagefind-ui__result-excerpt mark),
+  :global(mark) {
+    background-color: rgba(255, 94, 77, 0.18) !important;
+    color: #E03E2D !important;
+    border-radius: 3px !important;
+    padding: 0 2px !important;
+  }
+
+  .dark :global(mark) {
+    background-color: rgba(255, 94, 77, 0.25) !important;
+    color: #FF8A7A !important;
+  }
+
+  /* Result URL / breadcrumb */
+  :global(.pagefind-ui__result-link) {
+    color: var(--text-muted) !important;
+    font-size: 0.8rem !important;
+    text-decoration: none !important;
+    display: block !important;
+    margin-bottom: 0.4rem !important;
+    word-break: break-all !important;
+  }
+
+  /* Nested sub-results */
+  :global(.pagefind-ui__result-nested) {
+    margin-top: 0.6rem !important;
+    padding-top: 0.6rem !important;
+    border-top: 1px solid var(--border-default) !important;
+  }
+
+  :global(.pagefind-ui__result-nested a) {
+    color: var(--text-secondary) !important;
+    font-size: 0.88rem !important;
+  }
+
+  :global(.pagefind-ui__result-nested a:hover) {
+    color: #FF5E4D !important;
+  }
+
+  /* "Load more" button */
+  :global(.pagefind-ui__button) {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0.65rem 1.75rem !important;
+    margin-top: 1.5rem !important;
+    background: #FF5E4D !important;
+    color: #ffffff !important;
+    font-family: var(--font-body) !important;
+    font-weight: 600 !important;
+    font-size: 0.95rem !important;
+    border: none !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: background 0.2s ease !important;
+  }
+
+  :global(.pagefind-ui__button:hover) {
+    background: #E03E2D !important;
+  }
+
+  /* Message text (no results, loading…) */
+  :global(.pagefind-ui__message) {
+    color: var(--text-muted) !important;
+    font-size: 0.95rem !important;
+    margin-top: 1rem !important;
+  }
+
+  /* Tag badges */
+  :global(.pagefind-ui__filter-panel) {
+    margin-top: 1rem !important;
+  }
+
+  :global(.pagefind-ui__filter-name) {
+    color: var(--text-secondary) !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+  }
+
+  :global(.pagefind-ui__filter-value) {
+    background-color: var(--bg-tertiary) !important;
+    color: var(--text-secondary) !important;
+    border: 1px solid var(--border-default) !important;
+    border-radius: 5px !important;
+    font-size: 0.82rem !important;
+  }
+
+  :global(.pagefind-ui__filter-value:has(input:checked)),
+  :global(.pagefind-ui__filter-value--active) {
+    background-color: rgba(255, 94, 77, 0.12) !important;
+    border-color: #FF5E4D !important;
+    color: #E03E2D !important;
+  }
+
+  /* Dark mode overrides */
+  .dark :global(.pagefind-ui__search-input) {
+    background-color: var(--bg-secondary) !important;
+    border-color: var(--border-default) !important;
+    color: var(--text-primary) !important;
+  }
+
+  .dark :global(.pagefind-ui__result) {
+    background-color: var(--bg-secondary) !important;
+  }
+
+  .dark :global(.pagefind-ui__result-title a) {
+    color: var(--text-primary) !important;
+  }
+
+  .dark :global(.pagefind-ui__filter-value) {
+    background-color: var(--bg-tertiary) !important;
+    color: var(--text-secondary) !important;
+  }
+
+  /* Suppress any remaining blue/purple that Pagefind injects */
+  :global(.pagefind-ui *) {
+    outline-color: #FF5E4D !important;
+    accent-color: #FF5E4D !important;
+  }
+
+  :global(.pagefind-ui a:focus-visible),
+  :global(.pagefind-ui button:focus-visible),
+  :global(.pagefind-ui input:focus-visible) {
+    outline: 2px solid #FF5E4D !important;
+    outline-offset: 2px !important;
+  }
+</style>

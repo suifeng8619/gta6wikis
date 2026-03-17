@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+/* ============================================
+   GTA6 Wikis Design System - CSS Variables
+   禁止蓝色/紫色 (Hue 180°-320°)
+   ============================================ */
+
+@theme {
+  /* === Primary: Vice Coral === */
+  --color-primary: #FF5E4D;
+  --color-primary-dark: #E03E2D;
+  --color-primary-light: #FF8A7A;
+
+  /* === Secondary: Golden Hour === */
+  --color-secondary: #FFB84D;
+  --color-secondary-dark: #E09820;
+  --color-secondary-light: #FFD280;
+
+  /* === Accent: Neon Green === */
+  --color-accent: #39FF7A;
+  --color-accent-alt: #FF2D78;
+  --color-accent-warm: #FF7A2D;
+
+  /* === Semantic States (NO BLUE) === */
+  --color-success: #1A7A3A;
+  --color-success-bg: #E8F7EE;
+  --color-warning: #B85A00;
+  --color-warning-bg: #FFF3E0;
+  --color-error: #C0150F;
+  --color-error-bg: #FFECEB;
+  --color-info: #00786A;
+  --color-info-bg: #E0F5F2;
+  --color-tip: #8A6200;
+  --color-tip-bg: #FFF8E0;
+
+  /* === Font Families === */
+  --font-display: 'Bebas Neue', 'Impact', 'Arial Black', sans-serif;
+  --font-heading: 'Inter', 'DM Sans', 'Helvetica Neue', sans-serif;
+  --font-body: 'Inter', 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+/* === Light Mode (default) === */
+:root {
+  --bg-primary: #FFF8F5;
+  --bg-secondary: #FFF0E8;
+  --bg-tertiary: #FFE8DF;
+  --bg-surface: #FFFFFF;
+  --bg-overlay: rgba(255, 240, 232, 0.92);
+  --border-default: #E8D5CC;
+  --border-strong: #C9A898;
+  --text-primary: #1A0F0C;
+  --text-secondary: #5C3D35;
+  --text-muted: #8C6058;
+  --text-inverse: #FFFFFF;
+
+  --gradient-sunset: linear-gradient(135deg, #FF2D78 0%, #FF5E4D 30%, #FF7A2D 60%, #FFB84D 100%);
+  --gradient-golden: linear-gradient(135deg, #FF7A2D 0%, #FFB84D 50%, #FFD280 100%);
+}
+
+/* === Dark Mode === */
+.dark {
+  --bg-primary: #0F0A08;
+  --bg-secondary: #1A100C;
+  --bg-tertiary: #251510;
+  --bg-surface: #1F1208;
+  --bg-overlay: rgba(15, 10, 8, 0.90);
+  --border-default: #3D2018;
+  --border-strong: #6B3020;
+  --text-primary: #FFF0E8;
+  --text-secondary: #D4A898;
+  --text-muted: #8C5A50;
+  --text-inverse: #0F0A08;
+
+  --color-success: #39FF7A;
+  --color-success-bg: #0A2A14;
+  --color-warning: #FFB84D;
+  --color-warning-bg: #2A1800;
+  --color-error: #FF5E4D;
+  --color-error-bg: #2A0A08;
+  --color-info: #40E0C8;
+  --color-info-bg: #002A24;
+  --color-tip: #FFD280;
+  --color-tip-bg: #2A2000;
+}
+
+/* === Base Styles === */
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+}
+
+/* === Scrollbar (Dark theme) === */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-secondary); }
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }

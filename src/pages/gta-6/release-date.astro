@@ -1,0 +1,559 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+import AlertBox from '../../components/wiki/AlertBox.astro';
+---
+
+<BaseLayout
+  title="GTA 6 Release Date - November 19, 2026 | GTA6 Wikis"
+  description="GTA 6 releases November 19, 2026 on PS5 and Xbox Series X|S. Full release date history, delay timeline, platform details, and FAQ."
+  canonicalUrl="https://gta6wikis.com/gta-6/release-date/"
+>
+  <div class="page-wrapper">
+    <div class="container">
+      <Breadcrumb items={[
+        { label: 'GTA 6', href: '/gta-6/' },
+        { label: 'Release Date' }
+      ]} />
+    </div>
+
+    <!-- Hero / Countdown Display -->
+    <section class="hero" aria-labelledby="rd-hero-title">
+      <div class="container">
+        <h1 class="hero__title" id="rd-hero-title">GTA 6 Release Date</h1>
+        <div class="countdown-display" role="region" aria-label="Release date countdown">
+          <div class="countdown-date">November 19, 2026</div>
+          <div class="countdown-sub">Thursday &mdash; PS5 &amp; Xbox Series X|S</div>
+          <div id="countdown-timer" class="countdown-timer" aria-live="polite">
+            <div class="countdown-unit">
+              <span class="countdown-unit__num" id="cd-days">--</span>
+              <span class="countdown-unit__label">Days</span>
+            </div>
+            <span class="countdown-separator" aria-hidden="true">:</span>
+            <div class="countdown-unit">
+              <span class="countdown-unit__num" id="cd-hours">--</span>
+              <span class="countdown-unit__label">Hours</span>
+            </div>
+            <span class="countdown-separator" aria-hidden="true">:</span>
+            <div class="countdown-unit">
+              <span class="countdown-unit__num" id="cd-mins">--</span>
+              <span class="countdown-unit__label">Mins</span>
+            </div>
+            <span class="countdown-separator" aria-hidden="true">:</span>
+            <div class="countdown-unit">
+              <span class="countdown-unit__num" id="cd-secs">--</span>
+              <span class="countdown-unit__label">Secs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="container main-content">
+
+      <!-- Timeline -->
+      <section id="timeline" class="section" aria-labelledby="timeline-heading">
+        <h2 class="section__title" id="timeline-heading">Release Date History</h2>
+        <p>GTA 6 has undergone two official release date changes since its first announcement. Here is the complete timeline of announcements and delays.</p>
+        <div class="timeline" role="list">
+          <div class="timeline__item" role="listitem">
+            <div class="timeline__marker timeline__marker--past" aria-hidden="true"></div>
+            <div class="timeline__content">
+              <time class="timeline__date" datetime="2023-12-04">December 4, 2023</time>
+              <h3 class="timeline__event">Trailer 1 Released — Fall 2025 Window</h3>
+              <p>Rockstar released the first official trailer for GTA 6, confirming a Fall 2025 release window for PS5 and Xbox Series X|S.</p>
+            </div>
+          </div>
+          <div class="timeline__item" role="listitem">
+            <div class="timeline__marker timeline__marker--past" aria-hidden="true"></div>
+            <div class="timeline__content">
+              <time class="timeline__date" datetime="2025-05">May 2025</time>
+              <h3 class="timeline__event">First Date Confirmed: May 26, 2026</h3>
+              <p>Rockstar confirmed the specific date of May 26, 2026 via the official Newswire, alongside the release of Trailer 2 on May 6, 2025.</p>
+            </div>
+          </div>
+          <div class="timeline__item" role="listitem">
+            <div class="timeline__marker timeline__marker--delay" aria-hidden="true"></div>
+            <div class="timeline__content">
+              <time class="timeline__date" datetime="2025">Late 2025</time>
+              <h3 class="timeline__event">Delay Announced: November 19, 2026</h3>
+              <p>Rockstar announced a second delay, moving the release to November 19, 2026. The official statement read: <q>We are sorry for adding additional time to what we realize has been a long wait, but these extra months will allow us to finish the game with the level of polish you have come to expect.</q></p>
+            </div>
+          </div>
+          <div class="timeline__item" role="listitem">
+            <div class="timeline__marker timeline__marker--confirmed" aria-hidden="true"></div>
+            <div class="timeline__content">
+              <time class="timeline__date" datetime="2026-11-19">November 19, 2026</time>
+              <h3 class="timeline__event">Official Launch Day (Confirmed)</h3>
+              <p>Grand Theft Auto VI launches worldwide on PS5 and Xbox Series X|S.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Platform Table -->
+      <section id="platforms" class="section" aria-labelledby="platforms-heading">
+        <h2 class="section__title" id="platforms-heading">Platform Release Details</h2>
+        <div class="table-wrapper" role="region" aria-label="Platform release details" tabindex="0">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col">Platform</th>
+                <th scope="col">Release Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>PlayStation 5</strong></td>
+                <td>November 19, 2026</td>
+                <td><span class="status status--confirmed">Confirmed</span></td>
+                <td>DualSense adaptive triggers, haptic feedback, 3D audio</td>
+              </tr>
+              <tr>
+                <td><strong>Xbox Series X|S</strong></td>
+                <td>November 19, 2026</td>
+                <td><span class="status status--confirmed">Confirmed</span></td>
+                <td>Series S at 1440p; Series X at 4K</td>
+              </tr>
+              <tr>
+                <td><strong>PC</strong></td>
+                <td>Expected 2027–2028</td>
+                <td><span class="status status--unconfirmed">Not Confirmed</span></td>
+                <td>No official date. Based on GTA V (1.5 yr gap) and RDR2 (1 yr gap) precedent</td>
+              </tr>
+              <tr>
+                <td><strong>PS4 / Xbox One</strong></td>
+                <td>Not supported</td>
+                <td><span class="status status--no">Not Available</span></td>
+                <td>Current-generation only at launch. No backward compatibility planned.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="section" aria-labelledby="faq-heading">
+        <h2 class="section__title" id="faq-heading">Release Date FAQ</h2>
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary class="faq-item__question">When does GTA 6 come out?</summary>
+            <div class="faq-item__answer">
+              <p>GTA 6 officially releases on <strong>Thursday, November 19, 2026</strong> on PlayStation 5 and Xbox Series X|S. This is the confirmed final release date as announced by Rockstar Games on their official Newswire.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-item__question">Why was GTA 6 delayed?</summary>
+            <div class="faq-item__answer">
+              <p>GTA 6 has been delayed twice. The first announced date was a Fall 2025 window, which was then moved to May 26, 2026. A second delay pushed the date to November 19, 2026. Rockstar's official statement cited the need for "extra months to finish the game with the level of polish you have come to expect."</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-item__question">Will GTA 6 come to PC?</summary>
+            <div class="faq-item__answer">
+              <p>No official PC release date has been confirmed. However, Rockstar's history suggests a PC version will follow: GTA V's PC version launched 1.5 years after consoles, and Red Dead Redemption 2 on PC arrived 1 year after the console release. Industry expectation is late 2027 or early 2028.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-item__question">Will GTA 6 be on PS4 or Xbox One?</summary>
+            <div class="faq-item__answer">
+              <p>No. GTA 6 is a current-generation exclusive and will not be available on PS4 or Xbox One. It requires a PlayStation 5 or Xbox Series X|S.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-item__question">Can I pre-order GTA 6 now?</summary>
+            <div class="faq-item__answer">
+              <p>As of March 2026, pre-orders have not been officially opened. Rockstar has not announced when pre-orders will be available. Historically, major titles open pre-orders 3–6 months before launch. Check the PlayStation Store, Xbox Store, and major retailers for updates.</p>
+            </div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-item__question">What time does GTA 6 release on November 19?</summary>
+            <div class="faq-item__answer">
+              <p>Rockstar has not yet confirmed a specific launch time. Typically, digital releases go live at midnight local time or a set global time (e.g., midnight Eastern Time). Check your regional PlayStation Store or Xbox Store as the date approaches.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  function updateCountdown() {
+    const releaseDate = new Date('2026-11-19T00:00:00');
+    const now = new Date();
+    const diff = releaseDate.getTime() - now.getTime();
+
+    const daysEl = document.getElementById('cd-days');
+    const hoursEl = document.getElementById('cd-hours');
+    const minsEl = document.getElementById('cd-mins');
+    const secsEl = document.getElementById('cd-secs');
+
+    if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
+
+    if (diff <= 0) {
+      daysEl.textContent = '0';
+      hoursEl.textContent = '0';
+      minsEl.textContent = '0';
+      secsEl.textContent = '0';
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+    daysEl.textContent = String(days);
+    hoursEl.textContent = String(hours).padStart(2, '0');
+    minsEl.textContent = String(mins).padStart(2, '0');
+    secsEl.textContent = String(secs).padStart(2, '0');
+  }
+
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>
+
+<style>
+  .page-wrapper {
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(160deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    border-bottom: 1px solid var(--border-color);
+    padding: 2.5rem 0;
+    text-align: center;
+  }
+
+  .hero__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    color: var(--text-primary);
+    margin: 0 0 1.5rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* Countdown */
+  .countdown-display {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .countdown-date {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    color: var(--color-accent);
+    letter-spacing: 0.04em;
+    line-height: 1;
+  }
+
+  .countdown-sub {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+  }
+
+  .countdown-timer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1.25rem 2rem;
+  }
+
+  .countdown-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 64px;
+  }
+
+  .countdown-unit__num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.75rem;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .countdown-unit__label {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+
+  .countdown-separator {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: var(--text-muted);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  /* Main content */
+  .main-content {
+    padding: 2.5rem 0 3rem;
+  }
+
+  /* Sections */
+  .section {
+    margin-bottom: 3rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .section:last-child {
+    border-bottom: none;
+  }
+
+  .section__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.875rem;
+    letter-spacing: 0.04em;
+    color: var(--text-primary);
+    margin: 0 0 1rem;
+  }
+
+  .section p {
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+
+  /* Timeline */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 1.5rem;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--border-color);
+  }
+
+  .timeline__item {
+    display: flex;
+    gap: 1.25rem;
+    padding-bottom: 2rem;
+    position: relative;
+  }
+
+  .timeline__marker {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+    border: 2px solid;
+    position: relative;
+    z-index: 1;
+  }
+
+  .timeline__marker--past {
+    background: var(--bg-secondary);
+    border-color: var(--text-muted);
+  }
+
+  .timeline__marker--delay {
+    background: rgba(255, 160, 0, 0.15);
+    border-color: var(--color-warning);
+  }
+
+  .timeline__marker--confirmed {
+    background: rgba(255, 94, 77, 0.15);
+    border-color: var(--color-accent);
+  }
+
+  .timeline__content {
+    flex: 1;
+    padding-bottom: 0.5rem;
+  }
+
+  .timeline__date {
+    display: block;
+    font-size: 0.775rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+  }
+
+  .timeline__event {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0 0 0.5rem;
+  }
+
+  .timeline__content p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* Table */
+  .table-wrapper {
+    overflow-x: auto;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+  }
+
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .data-table th {
+    background: var(--bg-secondary);
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .data-table td {
+    padding: 0.875rem 1rem;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+  }
+
+  .data-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .data-table td strong {
+    color: var(--text-primary);
+  }
+
+  .status {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .status--confirmed {
+    background: rgba(52, 211, 153, 0.15);
+    color: #34d399;
+  }
+
+  .status--unconfirmed {
+    background: rgba(255, 160, 0, 0.15);
+    color: var(--color-warning);
+  }
+
+  .status--no {
+    background: var(--bg-secondary);
+    color: var(--text-muted);
+  }
+
+  /* FAQ */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .faq-item[open] {
+    border-color: var(--color-accent);
+  }
+
+  .faq-item__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .faq-item__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item__question::after {
+    content: '+';
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    margin-left: 1rem;
+    line-height: 1;
+  }
+
+  .faq-item[open] .faq-item__question::after {
+    content: '−';
+    color: var(--color-accent);
+  }
+
+  .faq-item__answer {
+    padding: 0 1.25rem 1rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .faq-item__answer p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin: 0.75rem 0 0;
+  }
+
+  @media (max-width: 600px) {
+    .countdown-timer {
+      padding: 1rem 1.25rem;
+      gap: 0.35rem;
+    }
+
+    .countdown-unit {
+      min-width: 50px;
+    }
+
+    .countdown-unit__num {
+      font-size: 2.25rem;
+    }
+  }
+</style>

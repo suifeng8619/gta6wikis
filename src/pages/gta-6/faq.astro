@@ -1,0 +1,354 @@
+---
+import BaseLayout from '../../components/layout/BaseLayout.astro';
+import Breadcrumb from '../../components/layout/Breadcrumb.astro';
+
+interface FaqItem {
+  q: string;
+  a: string;
+}
+
+const faqs: FaqItem[] = [
+  {
+    q: "When does GTA 6 come out?",
+    a: "GTA 6 officially releases on Thursday, November 19, 2026 on PlayStation 5 and Xbox Series X|S. This is the confirmed final date as announced by Rockstar Games on their official Newswire. The game has been delayed twice — originally targeting Fall 2025, then moved to May 26, 2026, and finally to November 19, 2026."
+  },
+  {
+    q: "What platforms is GTA 6 coming to?",
+    a: "GTA 6 launches on PlayStation 5 and Xbox Series X|S on November 19, 2026. A PC version has not been officially confirmed. Based on Rockstar's history (GTA V had a 1.5-year PC delay, Red Dead Redemption 2 had a 1-year delay), the PC version is expected in late 2027 or early 2028. PS4 and Xbox One are NOT supported."
+  },
+  {
+    q: "How much does GTA 6 cost?",
+    a: "Official pricing has not been confirmed by Rockstar. Industry estimates: Standard Edition at $69.99–$70 USD / £69.99 GBP, Deluxe Edition at $89.99–$100 USD / £89.99 GBP, and a Collector's/Ultimate Edition at $109.99–$150+ USD / £109.99 GBP. All prices are industry analysis and not official Rockstar figures."
+  },
+  {
+    q: "Can I pre-order GTA 6?",
+    a: "As of March 2026, pre-orders have not been officially opened. Rockstar has not announced a date for when pre-orders will begin. Historically, major titles open pre-orders 3–6 months before launch. When available, pre-orders will be on the PlayStation Store, Xbox Store, Steam (for PC), and physical retailers."
+  },
+  {
+    q: "Where is GTA 6 set?",
+    a: "GTA 6 is set in the fictional state of Leonida, based on Florida. The main city is Vice City, inspired by Miami. The game world includes Vice City's downtown, Ocean Drive, Leonida Keys (island chain), Grassrivers (rural swamp area), Port Gellhorn, Ambrosia (biker gang territory), and Mount Kalaga National Park. The map is estimated to be approximately 2.5 times larger than GTA V."
+  },
+  {
+    q: "Who are the main characters in GTA 6?",
+    a: "GTA 6 has two playable protagonists: Lucia Caminos, a Latina woman and the first female protagonist in the mainline GTA franchise, and Jason Duval, a former military man turned criminal. Their full names were revealed in Trailer 2 (May 6, 2025). They are a Bonnie-and-Clyde style couple who become partners in crime across Leonida."
+  },
+  {
+    q: "Is GTA 6 the first GTA with a female protagonist?",
+    a: "Yes. Lucia Caminos is the first playable female character in the mainline Grand Theft Auto series. GTA V had female characters in side content, but never a female playable protagonist in the main story."
+  },
+  {
+    q: "How big is the GTA 6 map?",
+    a: "The map is estimated to be approximately 2.5 times larger than GTA V's map, with an expected size of around 125 square kilometers. Approximately 70% of buildings have detailed interiors that can be entered, compared to roughly 30% in GTA V. Official map dimensions will be confirmed at or before launch."
+  },
+  {
+    q: "Does GTA 6 have multiplayer / GTA Online?",
+    a: "Yes. GTA 6 ships with GTA Online 2 (also called GTA Online Generation 2). It launches with the main game, not as a separate release. It is a completely new online experience — not an extension of GTA 5's GTA Online. GTA 5 Online progress, money, and properties cannot be transferred to GTA Online 2."
+  },
+  {
+    q: "Will GTA 6 come to PC?",
+    a: "No official PC release date has been confirmed by Rockstar. However, Rockstar has released PC versions of all recent major titles: GTA V (PC launched 1.5 years after consoles) and Red Dead Redemption 2 (PC launched 1 year after consoles). Industry expectation is late 2027 or early 2028 for the GTA 6 PC version."
+  },
+  {
+    q: "Does GTA 6 support ray tracing?",
+    a: "Yes. From the trailers, GTA 6 uses full diffuse ray-traced global illumination affecting every light source. Ray-traced reflections are visible on car windshields, dashboard mirrors, side windows, and transparent surfaces. The engine is Rockstar's RAGE 9. Note: the trailer footage appears to run at approximately 30fps in fidelity mode."
+  },
+  {
+    q: "What resolution and frame rate will GTA 6 run at?",
+    a: "On PlayStation 5 and Xbox Series X: Performance Mode at 4K 60fps, and Fidelity Mode at 4K 30fps with full ray tracing. Xbox Series S: approximately 1440p at 60fps with reduced graphical settings. PC version (when released) is expected to support 120+ fps depending on hardware."
+  },
+  {
+    q: "How much storage space does GTA 6 need?",
+    a: "The initial install size is estimated at 150–180GB. With patches and DLC, at least 200GB of available storage is recommended. A fast SSD (NVMe preferred) is required for optimal load times on PS5 and Xbox Series X|S."
+  },
+  {
+    q: "Will GTA 6 have a single-player story?",
+    a: "Yes. GTA 6 has a full single-player story mode with over 100 main missions expected, structured across 5 story chapters. There is also a large amount of side missions, dynamic events, and optional content. Single-player DLC is unlikely based on Rockstar's post-GTA V model, but multiplayer DLC is expected."
+  },
+  {
+    q: "What happened with the GTA 6 leak?",
+    a: "In September 2022, 90 video clips from an unfinished build of GTA 6 were leaked to the internet by Arion Kurtaj (alias teapotuberhacker), a member of the international cybercrime group LAPSUS$. Kurtaj breached Rockstar's systems using a phone and Amazon Fire Stick while under police custody. He was convicted on 12 counts and sentenced to indefinite detention in a secure psychiatric hospital. Rockstar confirmed the leak but stated development would continue as planned."
+  },
+  {
+    q: "Is GTA 6 on Xbox Game Pass?",
+    a: "Not confirmed. The likelihood of GTA 6 being on Xbox Game Pass at launch is considered very low given the scale and commercial expectations of the title. Rockstar and Take-Two have not announced any Game Pass plans for GTA 6."
+  },
+  {
+    q: "Does GTA 6 support VR?",
+    a: "No VR support has been announced. Rockstar has no history of VR releases for the GTA franchise, and no VR mode has been confirmed or hinted at for GTA 6."
+  },
+  {
+    q: "Will GTA 5 characters appear in GTA 6?",
+    a: "No official confirmation. The GTA franchise has historically referenced past characters in minor ways (cameos, background mentions) rather than bringing protagonists back. Based on current information, expect GTA 6 to tell an entirely new story with new characters in a separate continuity."
+  },
+  {
+    q: "What edition of GTA 6 should I buy?",
+    a: "Standard Edition: Best for players who want the complete story and GTA Online 2 on a standard budget. Deluxe Edition: Best if you plan to invest in GTA Online 2 and want extra in-game currency and exclusive items. Collector's/Ultimate Edition: Best for committed GTA fans who want physical collectibles, maximum in-game currency, and early GTA Online 2 access. Note: all edition details are industry estimates — Rockstar has not officially confirmed edition contents."
+  },
+  {
+    q: "Does GTA 6 have cheat codes?",
+    a: "Traditional cheat codes have featured in every GTA game. GTA 6 is expected to continue this, though no specific codes have been officially revealed. Cheats will almost certainly only work in single-player mode — using exploits in GTA Online 2 would result in bans."
+  }
+];
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title="GTA 6 FAQ - Frequently Asked Questions | GTA6 Wikis"
+  description="Answers to the most frequently asked questions about GTA 6 — release date, platforms, price, map size, characters, PC version, and more."
+  canonicalUrl="https://gta6wikis.com/gta-6/faq/"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+  <div class="page-wrapper">
+    <div class="container">
+      <Breadcrumb items={[
+        { label: 'GTA 6', href: '/gta-6/' },
+        { label: 'FAQ' }
+      ]} />
+    </div>
+
+    <header class="page-header">
+      <div class="container">
+        <h1 class="page-header__title">GTA 6 FAQ</h1>
+        <p class="page-header__desc">Frequently asked questions about Grand Theft Auto VI — all answers sourced from official announcements, confirmed leaks, and industry reporting.</p>
+        <p class="page-header__count">{faqs.length} questions answered</p>
+      </div>
+    </header>
+
+    <div class="container main-content">
+
+      <!-- Category nav -->
+      <nav class="cat-nav" aria-label="FAQ categories">
+        <a href="#release">Release &amp; Date</a>
+        <a href="#content">Game Content</a>
+        <a href="#technical">Technical</a>
+        <a href="#purchase">Purchasing</a>
+      </nav>
+
+      <div id="release">
+        <h2 class="cat-heading">Release &amp; Availability</h2>
+      </div>
+
+      <div class="faq-list" role="list">
+        {faqs.slice(0, 4).map((item, i) => (
+          <details class="faq-item" role="listitem">
+            <summary class="faq-item__question">{item.q}</summary>
+            <div class="faq-item__answer">
+              <p>{item.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+
+      <div id="content">
+        <h2 class="cat-heading">Game Content &amp; Story</h2>
+      </div>
+
+      <div class="faq-list" role="list">
+        {faqs.slice(4, 11).map((item) => (
+          <details class="faq-item" role="listitem">
+            <summary class="faq-item__question">{item.q}</summary>
+            <div class="faq-item__answer">
+              <p>{item.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+
+      <div id="technical">
+        <h2 class="cat-heading">Technical &amp; Platform</h2>
+      </div>
+
+      <div class="faq-list" role="list">
+        {faqs.slice(11, 16).map((item) => (
+          <details class="faq-item" role="listitem">
+            <summary class="faq-item__question">{item.q}</summary>
+            <div class="faq-item__answer">
+              <p>{item.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+
+      <div id="purchase">
+        <h2 class="cat-heading">Purchasing &amp; Editions</h2>
+      </div>
+
+      <div class="faq-list" role="list">
+        {faqs.slice(16).map((item) => (
+          <details class="faq-item" role="listitem">
+            <summary class="faq-item__question">{item.q}</summary>
+            <div class="faq-item__answer">
+              <p>{item.a}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-wrapper {
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .page-header {
+    background: linear-gradient(160deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    border-bottom: 1px solid var(--border-color);
+    padding: 2.5rem 0;
+  }
+
+  .page-header__title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    color: var(--text-primary);
+    margin: 0 0 0.5rem;
+    letter-spacing: 0.04em;
+  }
+
+  .page-header__desc {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    margin: 0 0 0.5rem;
+    max-width: 640px;
+  }
+
+  .page-header__count {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+  }
+
+  .main-content {
+    padding: 2rem 0 3rem;
+  }
+
+  /* Category nav */
+  .cat-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .cat-nav a {
+    font-size: 0.825rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 0.35rem 0.875rem;
+    border-radius: 20px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    transition: all 0.15s ease;
+  }
+
+  .cat-nav a:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  /* Category headings */
+  .cat-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.04em;
+    color: var(--text-primary);
+    margin: 2rem 0 0.875rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--color-accent);
+    display: inline-block;
+  }
+
+  /* FAQ list */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: border-color 0.15s ease;
+  }
+
+  .faq-item[open] {
+    border-color: var(--color-accent);
+  }
+
+  .faq-item__question {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    line-height: 1.5;
+  }
+
+  .faq-item__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item__question::after {
+    content: '+';
+    font-size: 1.4rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 0.1rem;
+  }
+
+  .faq-item[open] > .faq-item__question::after {
+    content: '−';
+    color: var(--color-accent);
+  }
+
+  .faq-item__answer {
+    padding: 0 1.25rem 1rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .faq-item__answer p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin: 0.75rem 0 0;
+  }
+
+  @media (max-width: 480px) {
+    .faq-item__question {
+      font-size: 0.875rem;
+    }
+  }
+</style>

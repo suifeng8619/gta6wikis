@@ -1,0 +1,126 @@
+---
+/**
+ * AlertBox.astro — 提示框
+ *
+ * Usage:
+ * <AlertBox type="info" title="注意">这是一条信息提示。</AlertBox>
+ * <AlertBox type="warning" title="警告">请在任务中小心。</AlertBox>
+ * <AlertBox type="tip">这是一个攻略技巧。</AlertBox>
+ * <AlertBox type="error" title="错误">操作失败。</AlertBox>
+ */
+
+type AlertType = 'info' | 'warning' | 'tip' | 'error';
+
+interface Props {
+  type?: AlertType;
+  title?: string;
+}
+
+const { type = 'info', title } = Astro.props;
+
+const config: Record<AlertType, { icon: string; label: string }> = {
+  info:    { icon: 'ℹ',  label: '信息' },
+  warning: { icon: '⚠',  label: '警告' },
+  tip:     { icon: '💡', label: '技巧' },
+  error:   { icon: '✕',  label: '错误' },
+};
+
+const { icon, label } = config[type];
+const ariaLabel = title ?? label;
+---
+
+<div
+  class={`alert-box alert-box--${type}`}
+  role="note"
+  aria-label={ariaLabel}
+>
+  <div class="alert-box__icon" aria-hidden="true">{icon}</div>
+  <div class="alert-box__content">
+    {title && <strong class="alert-box__title">{title}</strong>}
+    <div class="alert-box__body">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style>
+  .alert-box {
+    display: flex;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 8px;
+    border-left: 4px solid;
+    margin: 1rem 0;
+    align-items: flex-start;
+  }
+
+  .alert-box__icon {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+  }
+
+  .alert-box__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .alert-box__title {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 0.01em;
+  }
+
+  .alert-box__body {
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+
+  .alert-box__body :global(p) {
+    margin: 0;
+  }
+
+  /* info — 暖青色，不用蓝色 */
+  .alert-box--info {
+    background: var(--color-info-bg);
+    border-color: var(--color-info);
+    color: var(--text-primary);
+  }
+  .alert-box--info .alert-box__title {
+    color: var(--color-info);
+  }
+
+  /* warning — 琥珀色 */
+  .alert-box--warning {
+    background: var(--color-warning-bg);
+    border-color: var(--color-warning);
+    color: var(--text-primary);
+  }
+  .alert-box--warning .alert-box__title {
+    color: var(--color-warning);
+  }
+
+  /* tip — 金色 */
+  .alert-box--tip {
+    background: var(--color-tip-bg);
+    border-color: var(--color-tip);
+    color: var(--text-primary);
+  }
+  .alert-box--tip .alert-box__title {
+    color: var(--color-tip);
+  }
+
+  /* error — 深红色 */
+  .alert-box--error {
+    background: var(--color-error-bg);
+    border-color: var(--color-error);
+    color: var(--text-primary);
+  }
+  .alert-box--error .alert-box__title {
+    color: var(--color-error);
+  }
+</style>

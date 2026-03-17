@@ -1,0 +1,143 @@
+---
+/**
+ * CategoryNav.astro — 分类标签导航
+ *
+ * Usage:
+ * <CategoryNav
+ *   current="武器"
+ *   categories={[
+ *     { name: "全部", href: "/wiki", count: 120 },
+ *     { name: "武器", href: "/wiki/weapons", count: 45 },
+ *     { name: "载具", href: "/wiki/vehicles", count: 38 },
+ *     { name: "角色", href: "/wiki/characters", count: 22 },
+ *   ]}
+ * />
+ */
+
+interface Category {
+  name: string;
+  href: string;
+  count?: number;
+}
+
+interface Props {
+  categories: Category[];
+  current?: string;
+  label?: string;
+}
+
+const { categories, current, label = '分类导航' } = Astro.props;
+---
+
+<nav class="category-nav" aria-label={label}>
+  <ul class="category-nav__list" role="list">
+    {categories.map((cat) => {
+      const isActive = cat.name === current;
+      return (
+        <li class="category-nav__item">
+          <a
+            href={cat.href}
+            class={`category-nav__link ${isActive ? 'category-nav__link--active' : ''}`}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            <span class="category-nav__name">{cat.name}</span>
+            {cat.count !== undefined && (
+              <span class="category-nav__count" aria-label={`${cat.count} 个条目`}>
+                {cat.count}
+              </span>
+            )}
+          </a>
+        </li>
+      );
+    })}
+  </ul>
+</nav>
+
+<style>
+  .category-nav {
+    width: 100%;
+  }
+
+  .category-nav__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .category-nav__item {
+    flex-shrink: 0;
+  }
+
+  .category-nav__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--border-default);
+    color: var(--text-secondary);
+    background: transparent;
+    transition: all 0.18s ease;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .category-nav__link:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+    background: rgba(255, 94, 77, 0.06);
+  }
+
+  .category-nav__link--active {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #FFFFFF !important;
+    font-weight: 600;
+  }
+
+  .category-nav__link--active:hover {
+    background: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+  }
+
+  .category-nav__count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 9999px;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    background: rgba(0, 0, 0, 0.12);
+    line-height: 1;
+  }
+
+  .category-nav__link--active .category-nav__count {
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  /* 横向滚动（超窄屏） */
+  @media (max-width: 480px) {
+    .category-nav__list {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .category-nav__list::-webkit-scrollbar {
+      height: 3px;
+    }
+    .category-nav__list::-webkit-scrollbar-thumb {
+      background: var(--border-strong);
+      border-radius: 2px;
+    }
+  }
+</style>
