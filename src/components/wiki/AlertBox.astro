@@ -9,6 +9,8 @@
  * <AlertBox type="error" title="错误">操作失败。</AlertBox>
  */
 
+import Icon from '../ui/Icon.astro';
+
 type AlertType = 'info' | 'warning' | 'tip' | 'error';
 
 interface Props {
@@ -19,10 +21,10 @@ interface Props {
 const { type = 'info', title } = Astro.props;
 
 const config: Record<AlertType, { icon: string; label: string }> = {
-  info:    { icon: 'ℹ',  label: '信息' },
-  warning: { icon: '⚠',  label: '警告' },
-  tip:     { icon: '💡', label: '技巧' },
-  error:   { icon: '✕',  label: '错误' },
+  info:    { icon: 'info',    label: '信息' },
+  warning: { icon: 'warning', label: '警告' },
+  tip:     { icon: 'tip',     label: '技巧' },
+  error:   { icon: 'error',   label: '错误' },
 };
 
 const { icon, label } = config[type];
@@ -34,7 +36,7 @@ const ariaLabel = title ?? label;
   role="note"
   aria-label={ariaLabel}
 >
-  <div class="alert-box__icon" aria-hidden="true">{icon}</div>
+  <div class="alert-box__icon" aria-hidden="true"><Icon name={icon} size={18} /></div>
   <div class="alert-box__content">
     {title && <strong class="alert-box__title">{title}</strong>}
     <div class="alert-box__body">
@@ -55,11 +57,13 @@ const ariaLabel = title ?? label;
   }
 
   .alert-box__icon {
-    font-size: 1.1rem;
-    line-height: 1.5;
+    width: 18px;
+    height: 18px;
     flex-shrink: 0;
-    width: 20px;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
   }
 
   .alert-box__content {

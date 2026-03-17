@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../components/layout/BaseLayout.astro';
 import Breadcrumb from '../../components/layout/Breadcrumb.astro';
 import CategoryNav from '../../components/wiki/CategoryNav.astro';
+import Icon from '../../components/ui/Icon.astro';
 
 const allWeapons = await getCollection('weapons');
 allWeapons.sort((a, b) => a.data.title.localeCompare(b.data.title));
@@ -23,16 +24,16 @@ const typeLabels: Record<string, string> = {
 };
 
 const typeIcons: Record<string, string> = {
-  pistol: '🔫',
-  smg: '🔫',
-  'assault-rifle': '🔫',
-  shotgun: '🔫',
-  'sniper-rifle': '🔭',
-  lmg: '🔫',
-  melee: '🗡️',
-  throwable: '💥',
-  heavy: '💣',
-  special: '⚡',
+  pistol: 'pistol',
+  smg: 'smg',
+  'assault-rifle': 'assault-rifle',
+  shotgun: 'shotgun',
+  'sniper-rifle': 'sniper-rifle',
+  lmg: 'lmg',
+  melee: 'melee',
+  throwable: 'throwable',
+  heavy: 'heavy',
+  special: 'special',
 };
 
 const categoryCounts: Record<string, number> = {};
@@ -106,7 +107,7 @@ const pageDescription =
         <a href={`/weapons/${weapon.id}/`} class="weapon-card">
           <div class="weapon-card__icon-wrap">
             <span class="weapon-icon" aria-hidden="true">
-              {typeIcons[weapon.data.type] ?? '🔫'}
+              <Icon name={typeIcons[weapon.data.type] ?? 'weapons'} size={28} />
             </span>
             <span class="type-badge">{typeLabels[weapon.data.type] ?? weapon.data.type}</span>
           </div>
@@ -259,8 +260,12 @@ const pageDescription =
   }
 
   .weapon-icon {
-    font-size: 1.75rem;
-    line-height: 1;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary, #FF5E4D);
   }
 
   .type-badge {
