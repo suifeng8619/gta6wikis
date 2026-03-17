@@ -1,16 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1A100C;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#39FF7A;stop-opacity:1"/>
+      <stop offset="0%" style="stop-color:#FFB84D"/>
+      <stop offset="100%" style="stop-color:#FF5E4D"/>
     </linearGradient>
-    <linearGradient id="overlay" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#000;stop-opacity:0"/>
-      <stop offset="100%" style="stop-color:#000;stop-opacity:0.5"/>
-    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0"/>
+    </radialGradient>
   </defs>
-  <rect width="400" height="400" fill="url(#bg)"/>
-  <rect width="400" height="400" fill="url(#overlay)"/>
-  <text x="200" y="190" text-anchor="middle" fill="white" font-family="Inter,system-ui,sans-serif" font-size="50" font-weight="700" opacity="0.95">Rebel Radio</text>
-  <text x="200" y="225" text-anchor="middle" fill="white" font-family="Inter,system-ui,sans-serif" font-size="28" font-weight="400" opacity="0.7">Radio Station</text>
+  <rect width="300" height="300" fill="url(#bg)"/>
+  <circle cx="150" cy="150" r="120" fill="url(#glow)"/>
+  <rect x="0" y="0" width="300" height="300" fill="#1A100C" opacity="0.4"/>
+  <text x="150" y="130" font-family="system-ui,-apple-system,sans-serif" font-size="18" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">REBEL RADIO</text>
+  <text x="150" y="165" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle" opacity="0.6">Country / Outlaw</text>
+  <line x1="100" y1="185" x2="200" y2="185" stroke="#FFB84D" stroke-width="2" opacity="0.5"/>
+  <text x="150" y="210" font-family="system-ui,-apple-system,sans-serif" font-size="10" fill="#FFFFFF" text-anchor="middle" opacity="0.3">VICE CITY RADIO</text>
 </svg>

@@ -1,16 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1A100C;stop-opacity:1"/>
-      <stop offset="100%" style="stop-color:#FFB84D;stop-opacity:1"/>
+      <stop offset="0%" style="stop-color:#1A100C"/>
+      <stop offset="50%" style="stop-color:#2D1A14"/>
+      <stop offset="100%" style="stop-color:#1A100C"/>
     </linearGradient>
-    <linearGradient id="overlay" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" style="stop-color:#000;stop-opacity:0"/>
-      <stop offset="100%" style="stop-color:#000;stop-opacity:0.5"/>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF5E4D"/>
+      <stop offset="100%" style="stop-color:#FFB84D"/>
     </linearGradient>
   </defs>
   <rect width="600" height="400" fill="url(#bg)"/>
-  <rect width="600" height="400" fill="url(#overlay)"/>
-  <text x="300" y="190" text-anchor="middle" fill="white" font-family="Inter,system-ui,sans-serif" font-size="50" font-weight="700" opacity="0.95">Ambulance</text>
-  <text x="300" y="225" text-anchor="middle" fill="white" font-family="Inter,system-ui,sans-serif" font-size="28" font-weight="400" opacity="0.7">GTA 6 Vehicle</text>
+  <rect x="0" y="380" width="600" height="20" fill="url(#accent)" opacity="0.3"/>
+  <rect x="0" y="0" width="600" height="4" fill="url(#accent)" opacity="0.5"/>
+  <text x="300" y="180" font-family="system-ui,-apple-system,sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle" opacity="0.95">Ambulance</text>
+  <text x="300" y="220" font-family="system-ui,-apple-system,sans-serif" font-size="14" fill="#FF5E4D" text-anchor="middle" opacity="0.7">Emergency</text>
+  <text x="300" y="260" font-family="system-ui,-apple-system,sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle" opacity="0.3">GTA VI</text>
 </svg>
