@@ -2,7 +2,7 @@
 title: "Rebel Radio"
 game: "gta5"
 genre: "Country Music"
-image: "/images/radio/rebel-radio.jpg"
+image: "/images/radio/rebel-radio.svg"
 imageAlt: "Rebel Radio station logo from GTA 5"
 description: "Rebel Radio is GTA 5's country music station featuring classic American country tracks, ideal for cruising through Blaine County."
 keywords:

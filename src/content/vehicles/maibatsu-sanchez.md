@@ -5,7 +5,7 @@ manufacturer: "Maibatsu"
 realWorldCounterpart: "Honda XR / CRF"
 customizable: true
 firstAppearance: "GTA 6 Trailer 1"
-image: "/images/vehicles/maibatsu-sanchez.webp"
+image: "/images/vehicles/maibatsu-sanchez.svg"
 imageAlt: "Maibatsu Sanchez dirt bike in GTA 6"
 description: "The Maibatsu Sanchez is a lightweight dirt bike based on the Honda XR series, confirmed in GTA 6's first trailer."
 keywords:

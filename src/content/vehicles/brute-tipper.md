@@ -5,7 +5,7 @@ manufacturer: "Brute"
 realWorldCounterpart: "Dump truck"
 customizable: false
 firstAppearance: "GTA 6"
-image: "/images/vehicles/brute-tipper.webp"
+image: "/images/vehicles/brute-tipper.svg"
 imageAlt: "Brute Tipper dump truck in GTA 6"
 description: "The Brute Tipper is a commercial dump truck returning in GTA 6 as part of Leonida's construction fleet."
 keywords:

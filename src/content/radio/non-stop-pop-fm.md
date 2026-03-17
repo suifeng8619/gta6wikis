@@ -2,7 +2,7 @@
 title: "Non-Stop-Pop FM"
 game: "gta5"
 genre: "Pop Music"
-image: "/images/radio/non-stop-pop-fm.jpg"
+image: "/images/radio/non-stop-pop-fm.svg"
 imageAlt: "Non-Stop-Pop FM radio station logo from GTA 5"
 description: "Non-Stop-Pop FM is GTA 5's mainstream pop station featuring chart-topping pop hits and danceable tracks from popular artists."
 keywords:

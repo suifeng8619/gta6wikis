@@ -29,7 +29,7 @@ songs:
     artist: "Kool & The Gang"
   - title: "Last Night a DJ Saved My Life"
     artist: "Indeep"
-image: "/images/radio/fever-105.jpg"
+image: "/images/radio/fever-105.svg"
 imageAlt: "Fever 105 radio station logo from GTA Vice City"
 description: "Fever 105 is Vice City's funk and soul station hosted by Oliver Ladykiller Biscuit, featuring 17 disco, soul, and R&B classics."
 keywords:

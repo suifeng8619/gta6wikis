@@ -5,7 +5,7 @@ manufacturer: "Unknown"
 realWorldCounterpart: "Amphibious float plane"
 customizable: false
 firstAppearance: "GTA 6 Trailer 1"
-image: "/images/vehicles/seaplane.webp"
+image: "/images/vehicles/seaplane.svg"
 imageAlt: "Seaplane amphibious aircraft in GTA 6"
 description: "The Seaplane is an amphibious float plane that can land on water and runways, confirmed in GTA 6."
 keywords:

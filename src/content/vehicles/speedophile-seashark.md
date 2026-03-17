@@ -5,7 +5,7 @@ manufacturer: "Speedophile"
 realWorldCounterpart: "Sea-Doo RXT"
 customizable: true
 firstAppearance: "GTA 6 Trailer 2"
-image: "/images/vehicles/speedophile-seashark.webp"
+image: "/images/vehicles/speedophile-seashark.svg"
 imageAlt: "Speedophile Seashark jet ski in GTA 6"
 description: "The Speedophile Seashark is a personal watercraft based on the Sea-Doo RXT, confirmed in GTA 6's second trailer."
 keywords:

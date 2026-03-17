@@ -2,7 +2,7 @@
 title: "K-Chat"
 game: "gta-vice-city"
 genre: "Talk Show / Entertainment"
-image: "/images/radio/k-chat.jpg"
+image: "/images/radio/k-chat.svg"
 imageAlt: "K-Chat radio station logo from GTA Vice City"
 description: "K-Chat is Vice City's interactive talk show station featuring jokes, gossip, and entertainment discussions on the AM band."
 keywords:

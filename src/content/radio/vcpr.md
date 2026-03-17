@@ -4,7 +4,7 @@ game: "gta-vice-city"
 genre: "Public Broadcasting / Talk Radio"
 dj: "Maurice Chavez"
 djVoiceActor: "Philip Anthony-Rodriguez"
-image: "/images/radio/vcpr.jpg"
+image: "/images/radio/vcpr.svg"
 imageAlt: "VCPR radio station logo from GTA Vice City"
 description: "VCPR is Vice City's public broadcast station hosted by Maurice Chavez, featuring the satirical talk show Pressing Issues."
 keywords:

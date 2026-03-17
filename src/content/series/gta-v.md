@@ -16,7 +16,7 @@ setting: "Los Santos and Blaine County (Los Angeles), 2013"
 city: "Los Santos"
 metacriticScore: 97
 salesData: "Over 220 million copies total (as of 2025), third best-selling video game of all time"
-image: "/images/series/gta-v.jpg"
+image: "/images/series/gta-v.svg"
 imageAlt: "Grand Theft Auto V game cover art"
 description: "GTA V is the best-selling GTA game with 220M+ copies sold, featuring three protagonists and the revolutionary heist system."
 keywords:

@@ -2,7 +2,7 @@
 title: "West Coast Classics"
 game: "gta5"
 genre: "West Coast Hip-Hop / 90s Rap"
-image: "/images/radio/west-coast-classics.jpg"
+image: "/images/radio/west-coast-classics.svg"
 imageAlt: "West Coast Classics radio station logo from GTA 5"
 description: "West Coast Classics is GTA 5's 90s West Coast hip-hop station, featuring classic gangsta rap from the golden era of the genre."
 keywords:

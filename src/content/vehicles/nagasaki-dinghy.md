@@ -5,7 +5,7 @@ manufacturer: "Nagasaki"
 realWorldCounterpart: "Inflatable dinghy"
 customizable: false
 firstAppearance: "GTA 6"
-image: "/images/vehicles/nagasaki-dinghy.webp"
+image: "/images/vehicles/nagasaki-dinghy.svg"
 imageAlt: "Nagasaki Dinghy inflatable boat in GTA 6"
 description: "The Nagasaki Dinghy is a small inflatable boat suited for coastal operations and quick water escapes in GTA 6."
 keywords:

@@ -5,7 +5,7 @@ manufacturer: "Buckingham"
 realWorldCounterpart: "Robinson R66 / Bell 206L LongRanger"
 customizable: true
 firstAppearance: "GTA 6 Screenshots"
-image: "/images/vehicles/buckingham-maverick.webp"
+image: "/images/vehicles/buckingham-maverick.svg"
 imageAlt: "Buckingham Maverick helicopter in GTA 6"
 description: "The Buckingham Maverick is a versatile civilian helicopter based on the Bell 206L, a GTA classic returning in GTA 6."
 keywords:

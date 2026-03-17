@@ -5,7 +5,7 @@ manufacturer: "Unknown"
 realWorldCounterpart: "Main battle tank"
 customizable: false
 firstAppearance: "GTA 6"
-image: "/images/vehicles/rhino-tank.webp"
+image: "/images/vehicles/rhino-tank.svg"
 imageAlt: "Rhino Tank military vehicle in GTA 6"
 description: "The Rhino Tank is the iconic GTA series main battle tank, expected to return in GTA 6 with devastating firepower."
 keywords:

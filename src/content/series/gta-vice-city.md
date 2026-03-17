@@ -11,7 +11,7 @@ protagonist: "Tommy Vercetti"
 setting: "Vice City (Miami), 1986"
 city: "Vice City"
 metacriticScore: 94
-image: "/images/series/gta-vice-city.jpg"
+image: "/images/series/gta-vice-city.svg"
 imageAlt: "Grand Theft Auto Vice City game cover art"
 description: "GTA Vice City is the 1986-set Miami crime epic starring Tommy Vercetti, directly relevant to GTA 6 which returns to Vice City."
 keywords:

@@ -3,7 +3,7 @@ title: "FlyLo FM"
 game: "gta5"
 genre: "Electronic / Experimental Hip-Hop"
 dj: "Flying Lotus"
-image: "/images/radio/flylo-fm.jpg"
+image: "/images/radio/flylo-fm.svg"
 imageAlt: "FlyLo FM radio station logo from GTA 5"
 description: "FlyLo FM is GTA 5's experimental electronic station curated by producer Flying Lotus, blending hip-hop and electronic music."
 keywords:

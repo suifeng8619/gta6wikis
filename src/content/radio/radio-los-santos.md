@@ -2,7 +2,7 @@
 title: "Radio Los Santos"
 game: "gta5"
 genre: "Hip-Hop / Rap"
-image: "/images/radio/radio-los-santos.jpg"
+image: "/images/radio/radio-los-santos.svg"
 imageAlt: "Radio Los Santos station logo from GTA 5"
 description: "Radio Los Santos is GTA 5's main hip-hop station featuring modern rap and hip-hop tracks from contemporary artists."
 keywords:

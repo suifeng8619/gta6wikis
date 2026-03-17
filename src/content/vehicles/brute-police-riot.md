@@ -5,7 +5,7 @@ manufacturer: "Brute"
 realWorldCounterpart: "Lenco BEAR"
 customizable: false
 firstAppearance: "GTA 6 Trailer 1"
-image: "/images/vehicles/brute-police-riot.webp"
+image: "/images/vehicles/brute-police-riot.svg"
 imageAlt: "Brute Police Riot armored vehicle in GTA 6"
 description: "The Brute Police Riot is a heavy armored law enforcement vehicle based on the Lenco BEAR, confirmed in GTA 6."
 keywords:

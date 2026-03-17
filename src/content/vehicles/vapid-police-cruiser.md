@@ -5,7 +5,7 @@ manufacturer: "Vapid"
 realWorldCounterpart: "Ford Police Interceptor Utility"
 customizable: false
 firstAppearance: "GTA 6 Trailer 1"
-image: "/images/vehicles/vapid-police-cruiser.webp"
+image: "/images/vehicles/vapid-police-cruiser.svg"
 imageAlt: "Vapid Police Cruiser in GTA 6"
 description: "The Vapid Police Cruiser is the standard police patrol car based on the Ford Interceptor, confirmed in GTA 6."
 keywords:

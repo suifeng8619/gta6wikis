@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF7A2D;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#FFB84D;stop-opacity:1"/>
+    </linearGradient>
+    <linearGradient id="overlay" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#000;stop-opacity:0"/>
+      <stop offset="100%" style="stop-color:#000;stop-opacity:0.5"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect width="800" height="450" fill="url(#overlay)"/>
+  <text x="400" y="215" text-anchor="middle" fill="white" font-family="Inter,system-ui,sans-serif" font-size="56" font-weight="700" opacity="0.95">Port Gellhorn</text>
+  <text x="400" y="250" text-anchor="middle" fill="white" font-family="Inter,system-ui,sans-serif" font-size="32" font-weight="400" opacity="0.7">Leonida, Vice City</text>
+</svg>

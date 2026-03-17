@@ -5,7 +5,7 @@ manufacturer: "Vapid"
 realWorldCounterpart: "Ford lifeguard truck"
 customizable: false
 firstAppearance: "GTA 6 Trailer 1"
-image: "/images/vehicles/vapid-lifeguard.webp"
+image: "/images/vehicles/vapid-lifeguard.svg"
 imageAlt: "Vapid Lifeguard truck on Vice Beach in GTA 6"
 description: "The Vapid Lifeguard is a beach rescue truck seen patrolling Vice Beach in GTA 6's first official trailer."
 keywords:

@@ -12,7 +12,7 @@ setting: "Liberty City, 2001"
 city: "Liberty City"
 metacriticScore: 97
 salesData: "Over 14.5 million copies across all platforms"
-image: "/images/series/gta-iii.jpg"
+image: "/images/series/gta-iii.svg"
 imageAlt: "Grand Theft Auto III game cover art"
 description: "GTA III is the first fully 3D game in the series, released in 2001, establishing the open-world crime game template on PlayStation 2."
 keywords:

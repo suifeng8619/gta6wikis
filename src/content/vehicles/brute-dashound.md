@@ -5,7 +5,7 @@ manufacturer: "Brute"
 realWorldCounterpart: "MCI Renaissance E series (Greyhound)"
 customizable: false
 firstAppearance: "GTA 6 Trailer 1"
-image: "/images/vehicles/brute-dashound.webp"
+image: "/images/vehicles/brute-dashound.svg"
 imageAlt: "Brute Dashound coach bus in GTA 6"
 description: "The Brute Dashound is a long-distance coach bus based on the Greyhound, confirmed in GTA 6's first trailer."
 keywords:

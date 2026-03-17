@@ -5,7 +5,7 @@ manufacturer: "Brute"
 realWorldCounterpart: "New Flyer Xcelsior"
 customizable: false
 firstAppearance: "GTA 6 Trailer 2"
-image: "/images/vehicles/brute-bus.webp"
+image: "/images/vehicles/brute-bus.svg"
 imageAlt: "Brute Bus public transit in GTA 6"
 description: "The Brute Bus is the standard city public transit bus, seen in Vice City's streets in GTA 6's second trailer."
 keywords:

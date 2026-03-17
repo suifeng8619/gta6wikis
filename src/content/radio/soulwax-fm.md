@@ -3,7 +3,7 @@ title: "Soulwax FM"
 game: "gta5"
 genre: "Electronic / House"
 dj: "Soulwax"
-image: "/images/radio/soulwax-fm.jpg"
+image: "/images/radio/soulwax-fm.svg"
 imageAlt: "Soulwax FM radio station logo from GTA 5"
 description: "Soulwax FM is GTA 5's electronic station curated by Belgian band Soulwax, featuring house and electronic dance music."
 keywords:

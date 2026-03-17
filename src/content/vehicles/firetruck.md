@@ -5,7 +5,7 @@ manufacturer: "Brute"
 realWorldCounterpart: "American fire engine"
 customizable: false
 firstAppearance: "GTA 6"
-image: "/images/vehicles/firetruck.webp"
+image: "/images/vehicles/firetruck.svg"
 imageAlt: "Fire Truck in GTA 6"
 description: "The Fire Truck is a heavy-duty fire engine returning in GTA 6, equipped with water cannons for firefighting."
 keywords:

@@ -3,7 +3,7 @@ title: "Radio Espantoso"
 game: "gta-vice-city"
 genre: "Latin Jazz / Salsa / Mambo"
 dj: "Pepe"
-image: "/images/radio/radio-espantoso.jpg"
+image: "/images/radio/radio-espantoso.svg"
 imageAlt: "Radio Espantoso station logo from GTA Vice City"
 description: "Radio Espantoso is Vice City's Latin music station hosted by Pepe, featuring 16 tracks of Cuban jazz, mambo, and salsa music."
 keywords:

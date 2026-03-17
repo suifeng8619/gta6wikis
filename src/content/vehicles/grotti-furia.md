@@ -5,7 +5,7 @@ manufacturer: "Grotti"
 realWorldCounterpart: "Ferrari 488 Pista / SF90 Stradale / Pininfarina Battista"
 customizable: true
 firstAppearance: "GTA 6 Trailer 1"
-image: "/images/vehicles/grotti-furia.webp"
+image: "/images/vehicles/grotti-furia.svg"
 imageAlt: "Grotti Furia supercar in GTA 6"
 description: "The Grotti Furia is a hybrid supercar blending Ferrari 488 Pista, SF90 Stradale, and Battista design elements in GTA 6."
 keywords:

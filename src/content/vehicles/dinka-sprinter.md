@@ -5,7 +5,7 @@ manufacturer: "Dinka"
 realWorldCounterpart: "Sport speedboat"
 customizable: true
 firstAppearance: "GTA 6"
-image: "/images/vehicles/dinka-sprinter.webp"
+image: "/images/vehicles/dinka-sprinter.svg"
 imageAlt: "Dinka Sprinter speedboat in GTA 6"
 description: "The Dinka Sprinter is a mid-range sport speedboat returning in GTA 6 for Vice City's coastal waters."
 keywords:
