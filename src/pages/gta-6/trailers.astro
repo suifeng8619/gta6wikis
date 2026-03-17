@@ -2,6 +2,7 @@
 import BaseLayout from '../../components/layout/BaseLayout.astro';
 import Breadcrumb from '../../components/layout/Breadcrumb.astro';
 import AlertBox from '../../components/wiki/AlertBox.astro';
+import YouTubeEmbed from '../../components/ui/YouTubeEmbed.astro';
 ---
 
 <BaseLayout
@@ -38,19 +39,11 @@ import AlertBox from '../../components/wiki/AlertBox.astro';
           </div>
         </div>
 
-        <!-- YouTube embed placeholder -->
-        <div class="video-embed" role="figure" aria-label="GTA 6 Trailer 1 embed placeholder">
-          <div class="video-embed__placeholder">
-            <div class="video-embed__icon" aria-hidden="true">
-              <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <polygon points="10 8 16 12 10 16 10 8"/>
-              </svg>
-            </div>
-            <p class="video-embed__label">Grand Theft Auto VI — Official Trailer 1</p>
-            <p class="video-embed__note">Watch on <a href="https://www.youtube.com/watch?v=QdBZExpgErs" target="_blank" rel="noopener noreferrer">YouTube</a></p>
-          </div>
-        </div>
+        <!-- YouTube embed — Trailer 1 -->
+        <YouTubeEmbed
+          videoId="QdBZExpgErs"
+          title="Grand Theft Auto VI — Official Trailer 1"
+        />
 
         <!-- Records -->
         <div class="subsection">
@@ -133,19 +126,11 @@ import AlertBox from '../../components/wiki/AlertBox.astro';
           </div>
         </div>
 
-        <!-- YouTube embed placeholder -->
-        <div class="video-embed" role="figure" aria-label="GTA 6 Trailer 2 embed placeholder">
-          <div class="video-embed__placeholder">
-            <div class="video-embed__icon" aria-hidden="true">
-              <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <polygon points="10 8 16 12 10 16 10 8"/>
-              </svg>
-            </div>
-            <p class="video-embed__label">Grand Theft Auto VI — Official Trailer 2</p>
-            <p class="video-embed__note">Watch on <a href="https://www.rockstargames.com/newswire/article/3928aaa9471o3a/grand-theft-auto-vi-watch-trailer-2-now" target="_blank" rel="noopener noreferrer">Rockstar Newswire</a></p>
-          </div>
-        </div>
+        <!-- YouTube embed — Trailer 2 -->
+        <YouTubeEmbed
+          videoId="VQRLujxTm3c"
+          title="Grand Theft Auto VI — Official Trailer 2"
+        />
 
         <!-- Records -->
         <div class="subsection">
@@ -331,52 +316,6 @@ import AlertBox from '../../components/wiki/AlertBox.astro';
 
   .trailer-meta strong {
     color: var(--text-primary);
-  }
-
-  /* Video embed */
-  .video-embed {
-    margin-bottom: 2rem;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--border-color);
-  }
-
-  .video-embed__placeholder {
-    background: var(--bg-secondary);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 4rem 2rem;
-    gap: 1rem;
-    min-height: 240px;
-  }
-
-  .video-embed__icon {
-    color: var(--text-muted);
-  }
-
-  .video-embed__label {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--text-secondary);
-    margin: 0;
-    text-align: center;
-  }
-
-  .video-embed__note {
-    font-size: 0.825rem;
-    color: var(--text-muted);
-    margin: 0;
-  }
-
-  .video-embed__note a {
-    color: var(--color-accent);
-    text-decoration: none;
-  }
-
-  .video-embed__note a:hover {
-    text-decoration: underline;
   }
 
   /* Stats grid */

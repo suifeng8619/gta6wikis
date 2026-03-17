@@ -2,6 +2,7 @@
 import BaseLayout from '../../components/layout/BaseLayout.astro';
 import Breadcrumb from '../../components/layout/Breadcrumb.astro';
 import AlertBox from '../../components/wiki/AlertBox.astro';
+import YouTubeEmbed from '../../components/ui/YouTubeEmbed.astro';
 ---
 
 <BaseLayout
@@ -46,6 +47,7 @@ import AlertBox from '../../components/wiki/AlertBox.astro';
           <li><a href="#gameplay">Gameplay</a></li>
           <li><a href="#setting">Setting</a></li>
           <li><a href="#characters">Characters</a></li>
+          <li><a href="#trailer">Trailer</a></li>
           <li><a href="#development">Development</a></li>
         </ul>
       </nav>
@@ -128,6 +130,16 @@ import AlertBox from '../../components/wiki/AlertBox.astro';
               <a href="/characters/jason-duval/" class="character-card__link">View full profile &rarr;</a>
             </article>
           </div>
+        </section>
+
+        <!-- Official Trailer -->
+        <section id="trailer" class="section" aria-labelledby="trailer-heading">
+          <h2 class="section__title" id="trailer-heading">Official Trailer</h2>
+          <p>Watch the latest official trailer for Grand Theft Auto VI, released May 6, 2025. For a full breakdown of both trailers, see the <a href="/gta-6/trailers/" class="inline-link">Trailers page</a>.</p>
+          <YouTubeEmbed
+            videoId="VQRLujxTm3c"
+            title="Grand Theft Auto VI — Official Trailer 2"
+          />
         </section>
 
         <!-- Development -->
@@ -428,6 +440,17 @@ import AlertBox from '../../components/wiki/AlertBox.astro';
   }
 
   .character-card__link:hover {
+    text-decoration: underline;
+  }
+
+  /* Inline link */
+  .inline-link {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .inline-link:hover {
     text-decoration: underline;
   }
 

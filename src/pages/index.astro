@@ -3,6 +3,7 @@ import BaseLayout from '../components/layout/BaseLayout.astro';
 import Countdown from '../components/wiki/Countdown.astro';
 import JsonLd from '../components/seo/JsonLd.astro';
 import Icon from '../components/ui/Icon.astro';
+import YouTubeEmbed from '../components/ui/YouTubeEmbed.astro';
 
 const pageTitle = 'GTA 6 Wiki | The Complete Grand Theft Auto VI Encyclopedia';
 const pageDesc =
@@ -190,6 +191,30 @@ const newsPlaceholders = [
             </div>
           </a>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       LATEST TRAILER
+  ============================================================ -->
+  <section class="trailer-section" aria-labelledby="trailer-heading">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-label">Official Trailers</div>
+        <h2 id="trailer-heading" class="section-title">Watch the Latest Trailer</h2>
+        <p class="section-subtitle">Grand Theft Auto VI Trailer 2 — released May 6, 2025</p>
+      </div>
+      <YouTubeEmbed
+        videoId="VQRLujxTm3c"
+        title="Grand Theft Auto VI — Official Trailer 2"
+        maxWidth={960}
+      />
+      <div class="trailer-footer">
+        <a href="/gta-6/trailers/" class="trailer-link">
+          Full trailer analysis — Trailer 1 &amp; Trailer 2
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+        </a>
       </div>
     </div>
   </section>
@@ -674,6 +699,37 @@ const newsPlaceholders = [
 
   .nav-card:hover .nav-card__arrow {
     transform: translateX(3px);
+  }
+
+  /* ============================================================
+     TRAILER
+  ============================================================ */
+  .trailer-section {
+    padding: 64px 0;
+    background: var(--bg-primary);
+    border-top: 1px solid var(--border-default);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  .trailer-footer {
+    text-align: center;
+    margin-top: 1.25rem;
+  }
+
+  .trailer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #FF5E4D;
+    text-decoration: none;
+    transition: gap 0.2s ease;
+  }
+
+  .trailer-link:hover {
+    gap: 10px;
+    text-decoration: underline;
   }
 
   /* ============================================================
