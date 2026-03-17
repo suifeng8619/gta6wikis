@@ -5,7 +5,7 @@ manufacturer: "Western Motorcycle Company"
 realWorldCounterpart: "Harley-Davidson (chopper)"
 customizable: true
 firstAppearance: "GTA 6"
-image: "/images/vehicles/western-zombie-chopper.svg"
+image: "/images/vehicles/western-zombie-chopper.webp"
 imageAlt: "Western Zombie Chopper motorcycle in GTA 6"
 description: "The Western Zombie Chopper is a custom chopper motorcycle with Harley-Davidson DNA, confirmed for GTA 6."
 keywords:

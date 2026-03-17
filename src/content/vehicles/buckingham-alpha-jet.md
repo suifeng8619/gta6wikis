@@ -5,7 +5,7 @@ manufacturer: "Buckingham"
 realWorldCounterpart: "Bombardier Learjet"
 customizable: false
 firstAppearance: "GTA 6"
-image: "/images/vehicles/buckingham-alpha-jet.svg"
+image: "/images/vehicles/buckingham-alpha-jet.webp"
 imageAlt: "Buckingham Alpha private jet in GTA 6"
 description: "The Buckingham Alpha is a private business jet based on the Bombardier Learjet, a returning aircraft in GTA 6."
 keywords:

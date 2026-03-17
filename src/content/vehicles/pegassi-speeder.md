@@ -5,7 +5,7 @@ manufacturer: "Pegassi"
 realWorldCounterpart: "Italian luxury speedboat"
 customizable: true
 firstAppearance: "GTA 6 Trailer 1"
-image: "/images/vehicles/pegassi-speeder.svg"
+image: "/images/vehicles/pegassi-speeder.webp"
 imageAlt: "Pegassi Speeder luxury speedboat in GTA 6"
 description: "The Pegassi Speeder is a luxury Italian-style speedboat delivering top-tier water performance in GTA 6."
 keywords:

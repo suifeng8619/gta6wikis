@@ -5,7 +5,7 @@ manufacturer: "LCC"
 realWorldCounterpart: "American cruiser motorcycle"
 customizable: true
 firstAppearance: "GTA 6"
-image: "/images/vehicles/lcc-nightblade.svg"
+image: "/images/vehicles/lcc-nightblade.webp"
 imageAlt: "LCC Nightblade cruiser motorcycle in GTA 6"
 description: "The LCC Nightblade is a dark-themed cruiser motorcycle returning in GTA 6 with a menacing chopper design."
 keywords:

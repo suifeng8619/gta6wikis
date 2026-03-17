@@ -5,7 +5,7 @@ manufacturer: "Unknown"
 realWorldCounterpart: "News broadcast helicopter"
 customizable: false
 firstAppearance: "GTA 6 Trailer 1"
-image: "/images/vehicles/news-helicopter.svg"
+image: "/images/vehicles/news-helicopter.webp"
 imageAlt: "News Helicopter in GTA 6"
 description: "The News Helicopter is a media broadcast chopper seen covering events from the sky in GTA 6's trailer."
 keywords:

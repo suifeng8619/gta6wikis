@@ -5,7 +5,7 @@ manufacturer: "Unknown"
 realWorldCounterpart: "Bell AH-1Z Viper"
 customizable: false
 firstAppearance: "GTA 6"
-image: "/images/vehicles/buzzard-attack-chopper.svg"
+image: "/images/vehicles/buzzard-attack-chopper.webp"
 imageAlt: "Buzzard Attack Chopper in GTA 6"
 description: "The Buzzard Attack Chopper is an armed military helicopter based on the Bell AH-1Z Viper, returning in GTA 6."
 keywords:

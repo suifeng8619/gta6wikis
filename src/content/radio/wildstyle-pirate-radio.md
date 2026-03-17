@@ -25,7 +25,7 @@ songs:
     artist: "Kurtis Blow"
   - title: "Bassline"
     artist: "Mantronix"
-image: "/images/radio/wildstyle-pirate-radio.svg"
+image: "/images/radio/wildstyle-pirate-radio.jpg"
 imageAlt: "Wildstyle Pirate Radio station logo from GTA Vice City"
 description: "Wildstyle Pirate Radio is Vice City's old school hip-hop station hosted by Mr. Magic, featuring 16 pioneering 1980s hip-hop tracks."
 keywords:

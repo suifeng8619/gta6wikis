@@ -3,7 +3,7 @@ title: "East Los FM"
 game: "gta5"
 genre: "Latin American Music"
 dj: "Don Cheto & Camilo Lara"
-image: "/images/radio/east-los-fm.svg"
+image: "/images/radio/east-los-fm.jpg"
 imageAlt: "East Los FM radio station logo from GTA 5"
 description: "East Los FM is GTA 5's Latin music station hosted by Don Cheto and Camilo Lara, featuring Spanish pop, reggaeton, and more."
 keywords:

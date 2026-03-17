@@ -3,7 +3,7 @@ title: "blonded Los Santos 97.8 FM"
 game: "gta5"
 genre: "R&B / Soul / Hip-Hop / Electronic"
 dj: "Frank Ocean"
-image: "/images/radio/blonded-los-santos.svg"
+image: "/images/radio/blonded-los-santos.jpg"
 imageAlt: "blonded Los Santos 97.8 FM radio station logo from GTA 5"
 description: "blonded Los Santos 97.8 FM is GTA 5's R&B station curated by Frank Ocean, featuring contemporary and experimental soul music."
 keywords:

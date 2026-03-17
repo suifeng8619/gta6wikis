@@ -39,7 +39,7 @@ songs:
     artist: "Yes"
   - title: "Wake Me Up Before You Go-Go"
     artist: "Wham!"
-image: "/images/radio/v-rock-vice-city.svg"
+image: "/images/radio/v-rock-vice-city.jpg"
 imageAlt: "V-Rock radio station logo from GTA Vice City"
 description: "V-Rock is Vice City's iconic rock station hosted by Lazlow Jones, featuring 17 tracks of 80s rock, new wave, and electronic music."
 keywords:

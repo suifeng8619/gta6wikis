@@ -25,7 +25,7 @@ songs:
     artist: "Tears for Fears"
   - title: "Tainted Love"
     artist: "Soft Cell"
-image: "/images/radio/wave-103.svg"
+image: "/images/radio/wave-103.jpg"
 imageAlt: "Wave 103 radio station logo from GTA Vice City"
 description: "Wave 103 is Vice City's new wave station hosted by Adam First, the only station to retain its full original 18-track soundtrack."
 keywords:

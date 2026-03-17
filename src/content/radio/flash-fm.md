@@ -16,7 +16,7 @@ songs:
     artist: "Wham!"
   - title: "Total Eclipse of the Heart"
     artist: "Bonnie Tyler"
-image: "/images/radio/flash-fm.svg"
+image: "/images/radio/flash-fm.jpg"
 imageAlt: "Flash FM radio station logo from GTA Vice City"
 description: "Flash FM is Vice City's pop radio station hosted by Toni, featuring 17 iconic 80s pop hits including A-ha, Wham!, and Kenny Loggins."
 keywords:

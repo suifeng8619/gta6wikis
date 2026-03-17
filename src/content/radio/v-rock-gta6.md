@@ -2,7 +2,7 @@
 title: "V-Rock"
 game: "gta6"
 genre: "Rock / Heavy Metal"
-image: "/images/radio/v-rock-gta6.svg"
+image: "/images/radio/v-rock-gta6.jpg"
 imageAlt: "V-Rock radio station logo in GTA 6"
 description: "V-Rock is the only officially confirmed radio station returning in GTA 6, spotted on Jason's T-shirt in gameplay footage."
 keywords:

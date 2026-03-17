@@ -5,7 +5,7 @@ manufacturer: "Western Motorcycle Company"
 realWorldCounterpart: "Harley-Davidson (cruiser)"
 customizable: true
 firstAppearance: "GTA 6 Trailer 1"
-image: "/images/vehicles/western-sovereign.svg"
+image: "/images/vehicles/western-sovereign.webp"
 imageAlt: "Western Sovereign cruiser motorcycle in GTA 6"
 description: "The Western Sovereign is an American cruiser motorcycle based on Harley-Davidson, confirmed in GTA 6's first trailer."
 keywords:

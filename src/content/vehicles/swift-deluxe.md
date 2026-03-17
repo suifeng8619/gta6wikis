@@ -5,7 +5,7 @@ manufacturer: "Buckingham"
 realWorldCounterpart: "Sikorsky S-76"
 customizable: true
 firstAppearance: "GTA 6"
-image: "/images/vehicles/swift-deluxe.svg"
+image: "/images/vehicles/swift-deluxe.webp"
 imageAlt: "Swift Deluxe luxury helicopter in GTA 6"
 description: "The Swift Deluxe is a premium luxury helicopter based on the Sikorsky S-76, returning in GTA 6."
 keywords:

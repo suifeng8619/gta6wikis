@@ -15,7 +15,7 @@ protagonist: "Player-created character"
 setting: "Los Santos and Blaine County (Los Angeles), 2013-present"
 city: "Los Santos"
 salesData: "Over $8 billion total revenue (2013-2025), most profitable multiplayer game ever"
-image: "/images/series/gta-online.svg"
+image: "/images/series/gta-online.jpg"
 imageAlt: "GTA Online promotional art"
 description: "GTA Online is GTA V's multiplayer mode that became a standalone phenomenon, generating over $8 billion in revenue since 2013."
 keywords:

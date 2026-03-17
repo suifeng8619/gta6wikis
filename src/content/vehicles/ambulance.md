@@ -5,7 +5,7 @@ manufacturer: "Vapid"
 realWorldCounterpart: "Ford Transit ambulance"
 customizable: false
 firstAppearance: "GTA 6"
-image: "/images/vehicles/ambulance.svg"
+image: "/images/vehicles/ambulance.webp"
 imageAlt: "Ambulance emergency vehicle in GTA 6"
 description: "The Ambulance is a medical emergency vehicle returning in GTA 6 for paramedic response across Leonida."
 keywords:

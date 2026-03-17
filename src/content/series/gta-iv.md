@@ -12,7 +12,7 @@ setting: "Liberty City (New York), 2008"
 city: "Liberty City"
 metacriticScore: 98
 salesData: "Over 25 million copies across platforms"
-image: "/images/series/gta-iv.svg"
+image: "/images/series/gta-iv.jpg"
 imageAlt: "Grand Theft Auto IV game cover art"
 description: "GTA IV follows Eastern European immigrant Niko Bellic in Liberty City, featuring the revolutionary Euphoria physics engine."
 keywords:

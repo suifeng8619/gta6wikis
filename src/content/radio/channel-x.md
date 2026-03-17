@@ -2,7 +2,7 @@
 title: "Channel X"
 game: "gta5"
 genre: "Punk Rock / Hardcore Punk"
-image: "/images/radio/channel-x.svg"
+image: "/images/radio/channel-x.jpg"
 imageAlt: "Channel X radio station logo from GTA 5"
 description: "Channel X is GTA 5's punk rock station featuring hardcore punk and underground rock with a rebellious, anti-establishment attitude."
 keywords:

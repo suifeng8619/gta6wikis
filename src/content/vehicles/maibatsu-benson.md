@@ -5,7 +5,7 @@ manufacturer: "Maibatsu"
 realWorldCounterpart: "Commercial box truck"
 customizable: false
 firstAppearance: "GTA 6"
-image: "/images/vehicles/maibatsu-benson.svg"
+image: "/images/vehicles/maibatsu-benson.webp"
 imageAlt: "Maibatsu Benson delivery truck in GTA 6"
 description: "The Maibatsu Benson is a medium-duty box truck for commercial deliveries, a returning vehicle in GTA 6."
 keywords:

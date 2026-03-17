@@ -12,7 +12,7 @@ setting: "San Andreas State (California/Nevada), 1992"
 city: "Los Santos, San Fierro, Las Venturas"
 metacriticScore: 95
 salesData: "Over 20 million copies sold"
-image: "/images/series/gta-san-andreas.svg"
+image: "/images/series/gta-san-andreas.jpg"
 imageAlt: "Grand Theft Auto San Andreas game cover art"
 description: "GTA San Andreas expanded the series with RPG elements and three cities, following CJ Johnson through 1992 gang culture in California."
 keywords:

@@ -5,7 +5,7 @@ manufacturer: "Mammoth"
 realWorldCounterpart: "Cessna 172"
 customizable: false
 firstAppearance: "GTA 6 Screenshots"
-image: "/images/vehicles/mammoth-dodo.svg"
+image: "/images/vehicles/mammoth-dodo.webp"
 imageAlt: "Mammoth Dodo small airplane in GTA 6"
 description: "The Mammoth Dodo is the iconic GTA series light aircraft based on the Cessna 172, returning in GTA 6."
 keywords:

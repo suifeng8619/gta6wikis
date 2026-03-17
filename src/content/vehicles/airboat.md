@@ -5,7 +5,7 @@ manufacturer: "Unknown"
 realWorldCounterpart: "Florida swamp airboat"
 customizable: false
 firstAppearance: "GTA 6 Trailer 1"
-image: "/images/vehicles/airboat.svg"
+image: "/images/vehicles/airboat.webp"
 imageAlt: "Swamp airboat in GTA 6"
 description: "The Airboat is a flat-bottomed swamp boat with a rear-mounted propeller, perfect for navigating Leonida's Everglades."
 keywords:

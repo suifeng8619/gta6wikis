@@ -36,7 +36,7 @@ songs:
     artist: "The Assembly"
   - title: "Stone Cold"
     artist: "Rainbow"
-image: "/images/radio/emotion-98-3.svg"
+image: "/images/radio/emotion-98-3.jpg"
 imageAlt: "Emotion 98.3 radio station logo from GTA Vice City"
 description: "Emotion 98.3 is Vice City's romantic radio station hosted by Fernando Martinez, featuring 80s power ballads and soft rock classics."
 keywords:

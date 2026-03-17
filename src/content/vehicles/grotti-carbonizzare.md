@@ -5,7 +5,7 @@ manufacturer: "Grotti"
 realWorldCounterpart: "Ferrari F430"
 customizable: true
 firstAppearance: "GTA 6 Trailer 1"
-image: "/images/vehicles/grotti-carbonizzare.svg"
+image: "/images/vehicles/grotti-carbonizzare.webp"
 imageAlt: "Grotti Carbonizzare sports car in GTA 6"
 description: "The Grotti Carbonizzare is a sleek sports car inspired by the Ferrari F430, confirmed to return in GTA 6."
 keywords:

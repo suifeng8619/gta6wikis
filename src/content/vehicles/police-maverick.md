@@ -5,7 +5,7 @@ manufacturer: "Buckingham"
 realWorldCounterpart: "Robinson R66 (police variant)"
 customizable: false
 firstAppearance: "GTA 6"
-image: "/images/vehicles/police-maverick.svg"
+image: "/images/vehicles/police-maverick.webp"
 imageAlt: "Police Maverick helicopter in GTA 6"
 description: "The Police Maverick is the standard police helicopter used for aerial pursuit and surveillance in GTA 6."
 keywords:
