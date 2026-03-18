@@ -99,32 +99,21 @@ const instanceId = `countdown-${Math.random().toString(36).slice(2, 8)}`;
 
 <style>
   .countdown {
-    background: linear-gradient(135deg, #FF2D78 0%, #FF5E4D 30%, #FF7A2D 60%, #FFB84D 100%);
-    border-radius: 12px;
-    padding: 28px 32px;
+    background: transparent;
+    padding: 16px 0;
     text-align: center;
     color: #FFFFFF;
     position: relative;
-    overflow: hidden;
-  }
-
-  /* 装饰光效 */
-  .countdown::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 20% 50%, rgba(255, 255, 255, 0.12) 0%, transparent 60%);
-    pointer-events: none;
   }
 
   .countdown__label {
     font-family: var(--font-heading);
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     font-weight: 600;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    opacity: 0.9;
-    margin: 0 0 16px 0;
+    opacity: 0.7;
+    margin: 0 0 10px 0;
   }
 
   .countdown__units {
