@@ -62,20 +62,35 @@ const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
+    <!-- DNS prefetch -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="https://i.ytimg.com" />
+    <meta http-equiv="x-dns-prefetch-control" content="on" />
+
     <!-- Google Fonts Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-    <!-- Google Fonts: Inter + Bebas Neue -->
+    <!-- Google Fonts: Inter + Bebas Neue (non-blocking) -->
     <link
       rel="preload"
       as="style"
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+    </noscript>
 
     <!-- Theme detection: run before body paint to prevent flash -->
     <script is:inline>
