@@ -24,10 +24,12 @@ interface Props {
   title: string;
   image?: string;
   imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   fields?: Field[];
 }
 
-const { title, image, imageAlt = title, fields = [] } = Astro.props;
+const { title, image, imageAlt = title, imageWidth = 300, imageHeight = 225, fields = [] } = Astro.props;
 ---
 
 <aside class="infobox" role="complementary" aria-label={`${title} 信息框`}>
@@ -39,6 +41,8 @@ const { title, image, imageAlt = title, fields = [] } = Astro.props;
         class="infobox__image"
         loading="lazy"
         decoding="async"
+        width={imageWidth}
+        height={imageHeight}
       />
     </div>
   )}

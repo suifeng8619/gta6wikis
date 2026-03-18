@@ -107,9 +107,13 @@ const pageDescription =
       )}
     </div>
 
-    <div class="card-grid">
-      {filtered.map((vehicle) => (
-        <a href={`/vehicles/${vehicle.id}/`} class="vehicle-card">
+    <div class="card-grid" id="vehicle-grid">
+      {filtered.map((vehicle, idx) => (
+        <a
+          href={`/vehicles/${vehicle.id}/`}
+          class={`vehicle-card${idx >= 12 ? ' card--hidden' : ''}`}
+          data-card-index={idx}
+        >
           <div class="vehicle-card__thumb">
             <span class="vehicle-icon">&#9652;</span>
             <span class="type-badge">{typeLabels[vehicle.data.type] ?? vehicle.data.type}</span>
@@ -145,6 +149,14 @@ const pageDescription =
       ))}
     </div>
 
+    {filtered.length > 12 && (
+      <div class="load-more-wrap" id="load-more-wrap">
+        <button class="btn-load-more" id="btn-load-more" type="button">
+          Show all {filtered.length} vehicles
+        </button>
+      </div>
+    )}
+
     {filtered.length === 0 && (
       <div class="empty-state">
         <p>No vehicles found for this category.</p>
@@ -155,71 +167,7 @@ const pageDescription =
 </BaseLayout>
 
 <style>
-  .page-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px 60px;
-  }
-
-  .page-header {
-    padding: 32px 0 28px;
-  }
-
-  .page-title {
-    font-family: var(--font-display);
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    color: var(--text-primary);
-    margin: 0 0 12px;
-    letter-spacing: 0.02em;
-  }
-
-  .page-subtitle {
-    font-size: 1rem;
-    color: var(--text-muted);
-    margin: 0;
-    max-width: 600px;
-  }
-
-  .filter-bar {
-    padding: 20px 0;
-    border-top: 1px solid var(--border-default);
-    border-bottom: 1px solid var(--border-default);
-    margin-bottom: 24px;
-  }
-
-  .results-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-
-  .results-count {
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    font-weight: 500;
-  }
-
-  .clear-filter {
-    font-size: 0.8125rem;
-    color: var(--color-primary);
-    text-decoration: none;
-    padding: 2px 8px;
-    border: 1px solid var(--color-primary);
-    border-radius: 4px;
-    transition: all 0.2s ease;
-  }
-
-  .clear-filter:hover {
-    background: var(--color-primary);
-    color: #fff;
-  }
-
-  .card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
-  }
+  /* Page-specific styles only — shared styles are in global.css */
 
   .vehicle-card {
     display: flex;
@@ -253,18 +201,12 @@ const pageDescription =
     color: var(--text-primary);
   }
 
-  .type-badge {
+  /* Override: position type-badge inside thumb */
+  .vehicle-card .type-badge {
     position: absolute;
     top: 10px;
     right: 10px;
-    font-size: 0.6875rem;
-    font-weight: 700;
     padding: 3px 8px;
-    background: var(--color-primary);
-    color: #fff;
-    border-radius: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
   }
 
   .vehicle-card__body {
@@ -300,73 +242,21 @@ const pageDescription =
     flex: 1;
   }
 
-  .stat-bars {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
-  .stat-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .stat-bar__label {
-    font-size: 0.6875rem;
-    color: var(--text-muted);
-    width: 52px;
-    flex-shrink: 0;
-  }
-
-  .stat-bar__track {
-    flex: 1;
-    height: 4px;
-    background: var(--bg-tertiary);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  .stat-bar__fill {
-    height: 100%;
-    background: var(--color-primary);
-    border-radius: 2px;
-    transition: width 0.3s ease;
-  }
-
-  .stat-bar__val {
-    font-size: 0.6875rem;
-    color: var(--text-muted);
-    width: 24px;
-    text-align: right;
-  }
-
-  .empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    color: var(--text-muted);
-  }
-
-  .btn-reset {
-    display: inline-block;
-    margin-top: 16px;
-    padding: 8px 20px;
-    background: var(--color-primary);
-    color: #fff;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 0.875rem;
-    font-weight: 600;
-    transition: background 0.2s ease;
-  }
-
-  .btn-reset:hover {
-    background: var(--color-primary-dark);
-  }
-
   @media (max-width: 480px) {
     .card-grid {
       grid-template-columns: 1fr;
     }
   }
 </style>
+
+<script>
+  const btn = document.getElementById('btn-load-more');
+  const wrap = document.getElementById('load-more-wrap');
+  if (btn && wrap) {
+    btn.addEventListener('click', () => {
+      const hidden = document.querySelectorAll('#vehicle-grid .card--hidden');
+      hidden.forEach((el) => el.classList.remove('card--hidden'));
+      wrap.remove();
+    });
+  }
+</script>

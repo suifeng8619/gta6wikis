@@ -92,6 +92,9 @@ const fullTitle = title.includes(siteName) ? title : `${title} | ${siteName}`;
       />
     </noscript>
 
+    <!-- Page-specific head content (preload hints, etc.) -->
+    <slot name="head" />
+
     <!-- Theme detection: run before body paint to prevent flash -->
     <script is:inline>
       (function () {
